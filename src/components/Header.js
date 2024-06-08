@@ -1,0 +1,50 @@
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { NavLink, Link } from "react-router-dom";
+import "../css/header.css"; // Asegúrate de crear y usar este archivo CSS
+
+const Header = () => {
+  return (
+    <header className="header-container">
+      <div className="logo-container text-center">
+        <Link to="/">
+          <img
+            src="./img/logo.png"
+            alt="Xclusive Store Logo"
+            className="logo"
+          />
+        </Link>
+      </div>
+      <div>
+        <h1 className="text-center" data-texto="Xclusive Store"></h1>
+      </div>
+      <div className="top-nav d-flex justify-content-between align-items-center">
+        <div className="left-links d-flex">
+          <NavLink to="/" className="nav-link">
+            Inicio
+          </NavLink>
+          <NavLink to="/productos" className="nav-link">
+            Productos
+          </NavLink>
+          <NavLink to="/acerca-de" className="nav-link">
+            Acerca de
+          </NavLink>
+          <NavLink to="/carrito" className="nav-link">
+            Carrito
+          </NavLink>
+          <NavLink to="/login" className="nav-link">
+            Login
+          </NavLink>
+        </div>
+        <div className="right-links d-flex align-items-center">
+          <span className="icon-placeholder">
+            <i className="fas fa-shopping-cart"></i>{" "}
+            {/* Icono de carrito de compras */}
+          </span>
+        </div>
+      </div>
+    </header>
+  );
+};
+
+export default Header;

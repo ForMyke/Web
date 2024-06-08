@@ -1,0 +1,53 @@
+.carrito-container {
+  background-color: #fff;
+  color: #000;
+  padding: 20px;
+}
+
+.alert-light {
+  background-color: #f8f9fa;
+  border-color: #f8f9fa;
+  color: #000;
+}
+
+.alert-link {
+  color: #f96302;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+
+.card-text {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.float-right {
+  float: right;
+}
+
+.btn-secondary {
+  background-color: #e0e0e0;
+  color: #000;
+  border-color: #e0e0e0;
+}
+
+.btn-outline-secondary {
+  border-color: #e0e0e0;
+  color: #000;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}

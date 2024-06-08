@@ -1,0 +1,38 @@
+body {
+  background-color: #f8f9fa;
+}
+
+.hero-section {
+  background: linear-gradient(90deg, #ff8c00, #ffa500);
+  color: white;
+}
+
+.card {
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.card-text {
+  font-size: 1rem;
+  color: #6c757d;
+}
+
+.badge {
+  font-size: 1rem;
+  padding: 0.75em 1em;
+}
