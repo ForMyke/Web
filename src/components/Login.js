@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/login.css"; // Asegúrate de crear y usar este archivo CSS
+import "../css/login.css";
 
 const Login = ({ onLogin }) => {
   const handleSubmit = (e) => {
