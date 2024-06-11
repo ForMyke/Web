@@ -1,14 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/login.css"; // Asegúrate de crear y usar este archivo CSS
+import "../css/login.css";
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onLogin) {
-      onLogin();
-    }
+    navigate("/Registro");
   };
 
   return (

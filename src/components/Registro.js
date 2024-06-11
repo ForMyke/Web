@@ -5,21 +5,12 @@ import "../css/registro.css";
 
 const Registro = () => {
   return (
-    <div className="container mt-5 mb-5">
-      <h2 className="text-center">Vamos a hacerte Nike Member.</h2>
+    <div className="container mt-5 mb-4">
+      <h2 className="text-center">Vamos a hacerte un Xclusive member.</h2>
       <p className="text-center">
         Hemos enviado un código a <strong>golomian72@hotmail.com</strong>{" "}
-        <a href="#">Editar</a>
       </p>
       <Form>
-        <Form.Group className="mb-3">
-          <Form.Label>Código*</Form.Label>
-          <Form.Control type="text" placeholder="Código" />
-          <Form.Text className="text-muted">
-            Volver a enviar el código en 23 s
-          </Form.Text>
-        </Form.Group>
-
         <Row className="mb-3">
           <Form.Group as={Col}>
             <Form.Label>Nombre*</Form.Label>
@@ -57,7 +48,7 @@ const Registro = () => {
           <Form.Label>Fecha de nacimiento*</Form.Label>
           <Form.Control type="date" />
           <Form.Text className="text-muted">
-            Consigue una recompensa de Nike Member por tu cumpleaños.
+            Consigue una recompensa de Xclusive Member por tu cumpleaños.
           </Form.Text>
         </Form.Group>
 
