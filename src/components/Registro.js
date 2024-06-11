@@ -5,7 +5,7 @@ import "../css/registro.css";
 
 const Registro = () => {
   return (
-    <div className="container mt-5 mb-5">
+    <div className="container mt-5 mb-4">
       <h2 className="text-center">Vamos a hacerte Nike Member.</h2>
       <p className="text-center">
         Hemos enviado un código a <strong>golomian72@hotmail.com</strong>{" "}
