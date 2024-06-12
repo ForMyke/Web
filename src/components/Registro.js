@@ -8,7 +8,7 @@ const Registro = () => {
     <div className="container mt-5 mb-4">
       <h2 className="text-center">Vamos a hacerte un Xclusive member.</h2>
       <p className="text-center">
-        Hemos enviado un código a <strong>golomian72@hotmail.com</strong>{" "}
+        Bienvenido<strong>Xclusive member</strong>{" "}
       </p>
       <Form>
         <Row className="mb-3">
@@ -22,6 +22,10 @@ const Registro = () => {
             <Form.Control type="text" placeholder="Apellidos" />
           </Form.Group>
         </Row>
+        <Form.Group className="mb-3">
+          <Form.Label>Correo</Form.Label>
+          <Form.Control type="correo" placeholder="Correo" />
+        </Form.Group>
 
         <Form.Group className="mb-3">
           <Form.Label>Contraseña*</Form.Label>
