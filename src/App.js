@@ -3,6 +3,7 @@ import Productos from "./components/Productos";
 import AcercaDe from "./components/AcercaDe";
 import Carrito from "./components/Carrito";
 import Login from "./components/Login";
+import Registro from "./components/Registro";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -19,6 +20,7 @@ const App = () => {
             <Route path="/Productos" element={<Productos />} />
             <Route path="/acerca-de" element={<AcercaDe />} />
             <Route path="/Carrito" element={<Carrito />} />
+            <Route path="/Registro" element={<Registro />} />
             <Route path="/Login" element={<Login />} />
           </Routes>
         </main>

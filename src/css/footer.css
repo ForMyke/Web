@@ -1,0 +1,36 @@
+.footer-container {
+  background-color: #f8f9fa;
+}
+
+.footer-container .row {
+  justify-content: space-between;
+}
+
+.footer-container .col-md-3,
+.footer-container .col-md-2 {
+  margin-bottom: 15px;
+}
+
+.footer-container h5,
+.footer-container h6 {
+  font-weight: bold;
+}
+
+.footer-container p,
+.footer-container a {
+  color: #343a40;
+}
+
+.footer-container a:hover {
+  text-decoration: underline;
+}
+
+.footer-container .btn-dark {
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
+.footer-container .btn-dark:hover {
+  background-color: #23272b;
+  border-color: #1d2124;
+}

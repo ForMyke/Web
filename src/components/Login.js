@@ -1,16 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/login.css"; // Asegúrate de crear y usar este archivo CSS
+import "../css/login.css";
 
-const Login = ({ onLogin }) => {
+const Login = () => {
+  const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (onLogin) {
-      onLogin();
-    }
+    navigate("/Registro");
   };
-
   return (
     <div className="login-container d-flex flex-column justify-content-center align-items-center vh-100">
       <img
@@ -42,17 +40,6 @@ const Login = ({ onLogin }) => {
             id="terms"
             required
           />
-          <label className="form-check-label" htmlFor="terms">
-            Al continuar, acepto la{" "}
-            <a href="#" className="text-decoration-none">
-              Política de privacidad
-            </a>{" "}
-            y los{" "}
-            <a href="#" className="text-decoration-none">
-              Términos de uso
-            </a>{" "}
-            de Xclusive Store.
-          </label>
         </div>
         <button type="submit" className="btn btn-dark btn-block w-100">
           Continuar

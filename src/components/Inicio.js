@@ -29,7 +29,7 @@ const Inicio = () => {
       .get("https://api.npoint.io/3dcbf4a923f9995e08c1")
       .then((response) => {
         const techProducts = response.data.products.filter((product) =>
-          product.category.toLowerCase().includes("smartphones")
+          product.category.toLowerCase().includes("laptops")
         );
         setProducts(techProducts);
       })

@@ -1,11 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/footer.css";
 
 const Footer = () => {
   return (
-    <footer className="bg-light text-dark py-4 mt-auto">
-      <div className="container">
-        <div className="row">
+    <footer className="bg-light text-dark py-4 mt-5">
+      <div className="container justify-content-between">
+        <div className="row justify-content-between">
           <div className="col-md-3 mb-3">
             <h5 className="font-weight-bold">Tienda Xclusive</h5>
             <p>Descubre ofertas exclusivas todos los días</p>
