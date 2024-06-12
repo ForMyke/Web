@@ -9,6 +9,11 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Admin from "./Admin";
 import Inicio from "./components/Inicio";
+//Importaciones de funciones de Admin
+import AdminGraficas from "./componentsAdmin/AdminGraficas";
+import Administradores from "./componentsAdmin/Administradores";
+import AdminProductos from "./componentsAdmin/AdminProductos";
+import AdminUsuarios from "./componentsAdmin/AdminUsuarios";
 
 const AppContent = () => {
   const location = useLocation();
@@ -25,6 +30,11 @@ const AppContent = () => {
           <Route path="/registro" element={<Registro />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
+          {/* Rutas de Admin */}
+          <Route path="/AdminGraficas" element={<AdminGraficas />} />
+          <Route path="/Administradores" element={<Administradores />} />
+          <Route path="/AdminProductos" element={<AdminProductos />} />
+          <Route path="/AdminUsuarios" element={<AdminUsuarios />} />
         </Routes>
       </main>
       {location.pathname !== "/admin" && <Footer />}
