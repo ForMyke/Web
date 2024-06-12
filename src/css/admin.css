@@ -1,0 +1,59 @@
+.admin-dashboard {
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  padding: 10px 0;
+}
+
+.header h1 {
+  font-size: 2rem;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  border: none;
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dee2e6;
+  font-weight: bold;
+}
+
+.card-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  padding: 20px;
+}
+
+.graph-placeholder,
+.settings-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: #6c757d;
+}
+
+.btn-outline-primary {
+  border-color: #007bff;
+  color: #007bff;
+}
+
+.btn-outline-primary:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}

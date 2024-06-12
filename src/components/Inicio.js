@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Carousel, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Carousel, Alert } from "react-bootstrap";
+
 import "../css/inicio.css"; // Asegúrate de crear y usar este archivo CSS
 
 const Inicio = () => {
