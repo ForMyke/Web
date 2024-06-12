@@ -1,9 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button, Col, Row } from "react-bootstrap";
-import "../css/registro.css";
 
-const Registro = () => {
+const Admin = () => {
   return (
     <div className="container mt-5 mb-4">
       <h2 className="text-center">Vamos a hacerte un Xclusive member.</h2>
@@ -78,4 +77,4 @@ const Registro = () => {
   );
 };
 
-export default Registro;
+export default Admin;

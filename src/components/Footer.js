@@ -1,12 +1,13 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/footer.css"; // Asegúrate de crear y usar este archivo CSS
 
 const Footer = () => {
   return (
-    <footer className="bg-light text-dark py-4 mt-auto">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-3 mb-3">
+    <footer className="bg-light text-dark py-4 mt-auto w-100">
+      <div className="container-fluid px-5">
+        <div className="row justify-content-center">
+          <div className="col-md-3 mb-3 ">
             <h5 className="font-weight-bold">Tienda Xclusive</h5>
             <p>Descubre ofertas exclusivas todos los días</p>
             <button className="btn btn-dark">COMPRAR AHORA</button>
