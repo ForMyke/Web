@@ -11,18 +11,16 @@ const Admin = () => {
   };
 
   return (
-    <div className="admin-dashboard container-fluid">
-      <div className="header d-flex justify-content-between align-items-center py-3">
+    <div className="admin-dashboard container-fluid ">
+      <div className="header d-flex justify-content-between align-items-center py-3 mb-5">
         <h1>Admin Dashboard</h1>
         <div className="d-flex">
-          <button className="btn btn-outline-primary me-2">Cartings</button>
-          <button className="btn btn-outline-primary me-2">Prefersions</button>
           <button className="btn btn-primary">Admin</button>
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-md-6 col-lg-4 mb-4">
+      <div className="row justify-content-center ">
+        <div className="col-md-6 col-lg-5 mb-4">
           <div
             className="card shadow-sm clickable-card"
             onClick={() => handleNavigation("/AdminGraficas")}
@@ -30,7 +28,7 @@ const Admin = () => {
             <div className="card-header">Graphs</div>
             <div className="card-body">
               <img
-                src="./path/to/graphs-background.jpg"
+                src="./img/graficas.jpg"
                 alt="Graphs"
                 className="img-fluid"
               />
@@ -38,7 +36,7 @@ const Admin = () => {
           </div>
         </div>
 
-        <div className="col-md-6 col-lg-4 mb-4">
+        <div className="col-md-6 col-lg-5 mb-4">
           <div
             className="card shadow-sm clickable-card"
             onClick={() => handleNavigation("/AdminProductos")}
@@ -46,7 +44,7 @@ const Admin = () => {
             <div className="card-header">Products</div>
             <div className="card-body">
               <img
-                src="./path/to/products-background.jpg"
+                src="./img/productos.jpg"
                 alt="Products"
                 className="img-fluid"
               />
@@ -54,34 +52,26 @@ const Admin = () => {
           </div>
         </div>
 
-        <div className="col-md-6 col-lg-4 mb-4">
+        <div className="col-md-6 col-lg-5 mb-4">
           <div
             className="card shadow-sm clickable-card"
             onClick={() => handleNavigation("/AdminUsuarios")}
           >
             <div className="card-header">Users</div>
             <div className="card-body">
-              <img
-                src="./path/to/users-background.jpg"
-                alt="Users"
-                className="img-fluid"
-              />
+              <img src="./img/usuarios.jpg" alt="Users" className="img-fluid" />
             </div>
           </div>
         </div>
 
-        <div className="col-md-6 col-lg-4 mb-4">
+        <div className="col-md-6 col-lg-5 mb-4">
           <div
             className="card shadow-sm clickable-card"
             onClick={() => handleNavigation("/Administradores")}
           >
             <div className="card-header">Admin</div>
             <div className="card-body">
-              <img
-                src="./path/to/admin-background.jpg"
-                alt="Admin"
-                className="img-fluid"
-              />
+              <img src="./img/admin.jpg" alt="Admin" className="img-fluid" />
             </div>
           </div>
         </div>

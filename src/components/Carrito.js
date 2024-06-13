@@ -4,7 +4,7 @@ import "../css/carrito.css"; // Asegúrate de crear y usar este archivo CSS
 
 const Carrito = () => {
   return (
-    <div className="carrito-container container mt-5">
+    <div className="carrito-container mt-5">
       <div className="row">
         <div className="col-md-8">
           <div className="alert alert-light" role="alert">
