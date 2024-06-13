@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-<<<<<<< HEAD
+
 import "../css/inicio.css";
-=======
 import { Carousel, Alert } from "react-bootstrap";
 import "../css/inicio.css"; // Asegúrate de crear y usar este archivo CSS
->>>>>>> origin/master
 
 const Inicio = () => {
   const [products, setProducts] = useState([]);

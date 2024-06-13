@@ -8,21 +8,17 @@ const Registro = () => {
     <div className="container mt-5 mb-4">
       <h2 className="text-center">Vamos a hacerte un Xclusive member.</h2>
       <p className="text-center">
-<<<<<<< HEAD
         Hemos enviado un código a <strong>golomian72@hotmail.com</strong>
-=======
-        Bienvenido <strong> Xclusive member</strong>{" "}
->>>>>>> origin/master
       </p>
       <Form>
         <Row className="mb-3">
           <Form.Group as={Col}>
-            <Form.Label>Nombre</Form.Label>
+            <Form.Label>Nombre*</Form.Label>
             <Form.Control type="text" placeholder="Nombre" />
           </Form.Group>
 
           <Form.Group as={Col}>
-            <Form.Label>Apellidos</Form.Label>
+            <Form.Label>Apellidos*</Form.Label>
             <Form.Control type="text" placeholder="Apellidos" />
           </Form.Group>
         </Row>
@@ -84,3 +80,6 @@ const Registro = () => {
 };
 
 export default Registro;
+
+
+
