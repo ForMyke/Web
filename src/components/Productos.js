@@ -9,12 +9,14 @@ const Productos = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.npoint.io/3dcbf4a923f9995e08c1")
+      .get("http://localhost/backend/api/products.php")
       .then((response) => {
-        setProducts(response.data.products);
+        console.log(response.data)
+        
+        setProducts(response.data)
       })
       .catch((error) => {
-        console.error("There was an error fetching the products!", error);
+        console.error("Error fetching products:", error);
       });
   }, []);
 
@@ -27,7 +29,7 @@ const Productos = () => {
   );
 
   return (
-    <div className="container my-4 flex-grow-1">
+    <div className="container-fluid my-4 flex-grow-1">
       <h1 className="text-center mb-4">Xclusive Store</h1>
       <div className="mb-4 d-flex justify-content-center">
         <input

@@ -26,12 +26,11 @@ const Inicio = () => {
 
   useEffect(() => {
     axios
-      .get("https://api.npoint.io/3dcbf4a923f9995e08c1")
+      .get("http://localhost/backend/api/products.php")
       .then((response) => {
-        const techProducts = response.data.products.filter((product) =>
-          product.category.toLowerCase().includes("smartphones")
-        );
-        setProducts(techProducts);
+        console.log(response.data)
+        
+        setProducts(response.data)
       })
       .catch((error) => {
         console.error("Error fetching products:", error);

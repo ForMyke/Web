@@ -1,3 +1,5 @@
+create database tienda;
+use tienda;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: tienda
