@@ -8,7 +8,11 @@ const Registro = () => {
     <div className="container mt-5 mb-4">
       <h2 className="text-center">Vamos a hacerte un Xclusive member.</h2>
       <p className="text-center">
+<<<<<<< HEAD
+        Hemos enviado un código a <strong>golomian72@hotmail.com</strong>
+=======
         Bienvenido <strong> Xclusive member</strong>{" "}
+>>>>>>> origin/master
       </p>
       <Form>
         <Row className="mb-3">
@@ -22,9 +26,10 @@ const Registro = () => {
             <Form.Control type="text" placeholder="Apellidos" />
           </Form.Group>
         </Row>
+
         <Form.Group className="mb-3">
-          <Form.Label>Correo</Form.Label>
-          <Form.Control type="correo" placeholder="Correo" />
+          <Form.Label>Correo*</Form.Label>
+          <Form.Control type="email" placeholder="Correo" />
         </Form.Group>
 
         <Form.Group className="mb-3">
@@ -66,7 +71,7 @@ const Registro = () => {
         <Form.Group className="mb-3" controlId="formBasicCheckbox2">
           <Form.Check
             type="checkbox"
-            label="Acepto la Política de privacidad y los Términos de uso de Nike."
+            label="Acepto la Política de privacidad y los Términos de uso de Xclusive Store."
           />
         </Form.Group>
 

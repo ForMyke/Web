@@ -1,6 +1,6 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/carrito.css"; // Asegúrate de crear y usar este archivo CSS
+import "../css/carrito.css";
 
 const Carrito = () => {
   return (

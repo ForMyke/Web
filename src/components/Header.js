@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, Link } from "react-router-dom";
-import "../css/header.css"; // Asegúrate de crear y usar este archivo CSS
+import "../css/header.css";
 
 const Header = () => {
   return (
