@@ -27,7 +27,7 @@ const Productos = () => {
   );
 
   return (
-    <div className="container my-4 flex-grow-1">
+    <div className="productos-container">
       <h1 className="text-center mb-4">Xclusive Store</h1>
       <div className="mb-4 d-flex justify-content-center">
         <input
@@ -40,7 +40,7 @@ const Productos = () => {
       </div>
       <div className="row">
         {filteredProducts.map((product) => (
-          <div className="col-12 col-md-6 col-lg-4" key={product.id}>
+          <div className="col-12 col-sm-6 col-md-4 col-lg-4" key={product.id}>
             <div className="card h-100">
               <img
                 src={product.thumbnail}

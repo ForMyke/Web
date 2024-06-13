@@ -1,7 +1,11 @@
 body {
   background-color: #f8f9fa;
 }
-
+.productos-container {
+  width: 75%;
+  margin: auto;
+  padding: 20px 0;
+}
 .hero-section {
   background: linear-gradient(90deg, #ff8c00, #ffa500);
   color: white;
