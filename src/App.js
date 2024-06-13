@@ -9,6 +9,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Admin from "./Admin";
 import Inicio from "./components/Inicio";
+import Pago from "./components/Pago";
 //Importaciones de funciones de Admin
 import AdminGraficas from "./componentsAdmin/AdminGraficas";
 import Administradores from "./componentsAdmin/Administradores";
@@ -30,6 +31,8 @@ const AppContent = () => {
           <Route path="/registro" element={<Registro />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/pago" element={<Pago />} />
+
           {/* Rutas de Admin */}
           <Route path="/AdminGraficas" element={<AdminGraficas />} />
           <Route path="/Administradores" element={<Administradores />} />

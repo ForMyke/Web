@@ -1,10 +1,16 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-
 import "../css/carrito.css";
 
+//Navegar en el carrito
 const Carrito = () => {
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/Pago");
+  };
+
   return (
     <div className="carrito-container mt-5">
       <div className="alert alert-light" role="alert">
