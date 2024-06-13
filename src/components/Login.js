@@ -1,14 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
-
-const Login = () => {
-  const navigate = useNavigate();
+const Login = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/Registro");
+    if (onLogin) {
+      onLogin();
+    }
   };
+
   return (
     <div className="login-container d-flex flex-column justify-content-center align-items-center vh-100">
       <img
@@ -20,7 +21,7 @@ const Login = () => {
         Introduce tu dirección de correo electrónico para unirte o iniciar
         sesión.
       </h2>
-      <form onSubmit={handleSubmit} className="login-form w-50">
+      <form id="login-form" className="login-form w-50">
         <div className="form-group mt-4 mb-3">
           <label htmlFor="email" className="sr-only">
             Correo electrónico
