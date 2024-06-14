@@ -3,10 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import "../css/carrito.css";
 
-//Navegar en el carrito
 const Carrito = () => {
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const handleComprar = (e) => {
     e.preventDefault();
     navigate("/Pago");
   };
@@ -86,7 +85,12 @@ const Carrito = () => {
               <h4 className="card-text">
                 Total <span className="float-end">$2,798.00</span>
               </h4>
-              <button className="btn btn-dark btn-block mb-2">Comprar</button>
+              <button
+                className="btn btn-dark btn-block mb-2"
+                onClick={handleComprar}
+              >
+                Comprar
+              </button>
               <button className="btn btn-dark btn-block mb-2">Guardar</button>
             </div>
           </div>
