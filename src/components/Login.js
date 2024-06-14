@@ -8,7 +8,7 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/Registro");
+    navigate("/Contraseña");
   };
 
   return (

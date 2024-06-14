@@ -12,17 +12,6 @@ const Carrito = () => {
 
   return (
     <div className="carrito-container mt-5">
-      <div className="alert alert-light" role="alert">
-        <strong>Envío gratuito para miembros.</strong> Hazte miembro de Xclusive
-        Store para disfrutar de envíos rápidos y gratuitos.{" "}
-        <a href="#" className="alert-link">
-          Únete
-        </a>{" "}
-        o{" "}
-        <a href="#" className="alert-link">
-          Iniciar sesión
-        </a>
-      </div>
       <div className="row">
         <div className="col-md-8">
           <h2>Bolsa de compra</h2>
@@ -89,9 +78,8 @@ const Carrito = () => {
                 className="btn btn-dark btn-block mb-2"
                 onClick={handleComprar}
               >
-                Comprar
+                Ir al pago
               </button>
-              <button className="btn btn-dark btn-block mb-2">Guardar</button>
             </div>
           </div>
         </div>
