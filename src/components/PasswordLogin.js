@@ -17,9 +17,8 @@ const PasswordLogin = () => {
 
   return (
     <div className="password-login-container d-flex flex-column align-items-center justify-content-center vh-100">
-      <div className="logo-container mb-4">
-        <img src="./img/nike-logo.png" alt="Nike Logo" className="logo me-2" />
-        <img src="./img/jordan-logo.png" alt="Jordan Logo" className="logo" />
+      <div className="logo mb-4">
+        <img src="./img/logo.png" alt="Xclusive Store" className="logo me-2" />
       </div>
       <h2>¿Cuál es tu contraseña?</h2>
       <p className="mb-3">
@@ -27,7 +26,7 @@ const PasswordLogin = () => {
       </p>
       <Form className="w-50">
         <Form.Group controlId="formPassword" className="mb-3">
-          <Form.Label>Contraseña*</Form.Label>
+          <Form.Label>Contraseña</Form.Label>
           <div className="password-input-container">
             <Form.Control
               type={showPassword ? "text" : "password"}
@@ -40,9 +39,6 @@ const PasswordLogin = () => {
             </span>
           </div>
         </Form.Group>
-        <Form.Text className="mb-3">
-          <a href="#">¿Has olvidado la contraseña?</a>
-        </Form.Text>
         <Button variant="dark" type="submit" className="w-100">
           Iniciar sesión
         </Button>

@@ -10,7 +10,7 @@ import Footer from "./components/Footer";
 import Admin from "./Admin";
 import Inicio from "./components/Inicio";
 import Pago from "./components/Pago";
-import Contraseña from "./components/Contraseña";
+import PasswordLogin from "./components/PasswordLogin";
 //Importaciones de funciones de Admin
 import AdminGraficas from "./componentsAdmin/AdminGraficas";
 import Administradores from "./componentsAdmin/Administradores";
@@ -33,7 +33,7 @@ const AppContent = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/pago" element={<Pago />} />
-          <Route path="/constraseña" element={<Contraseña />} />
+          <Route path="/password" element={<PasswordLogin />} />
 
           {/* Rutas de Admin */}
           <Route path="/AdminGraficas" element={<AdminGraficas />} />
