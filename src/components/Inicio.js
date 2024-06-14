@@ -58,7 +58,7 @@ const Inicio = () => {
           />
           <Carousel.Caption>
             <div className="caption-box">
-              <h3>$20,299.00</h3>
+              <h3>Tecnología 2024</h3>
               <p>Apple Mac M3</p>
             </div>
           </Carousel.Caption>
@@ -71,7 +71,7 @@ const Inicio = () => {
           />
           <Carousel.Caption>
             <div className="caption-box">
-              <h3>Tecnología 2024</h3>
+              <h3>A la vanguardia con las nuevas tecnologías</h3>
               <button className="btn btn-primary">Comprar ahora</button>
             </div>
           </Carousel.Caption>

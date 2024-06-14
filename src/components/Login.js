@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    navigate("/Password");
+
+    // Datos del formulario
+    const formData = {
+      email: email,
+    };
+
+    try {
+      // Enviar datos al servidor PHP
+      const response = await axios.post("Serveeeeeeeer", formData);
+
+      // Manejar la respuesta del servidor
+      if (response.data.success) {
+        navigate("/Admin");
+      } else {
+        alert("Error: " + response.data.message);
+      }
+    } catch (error) {
+      alert("Hubo un problema al iniciar sesión. Inténtalo de nuevo.");
+    }
   };
 
   return (
@@ -33,6 +53,8 @@ const Login = () => {
             id="email"
             placeholder="Correo electrónico"
             required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="form-group form-check mb-3">
