@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button } from "react-bootstrap";
 import "../css/contraseña.css";
@@ -15,6 +16,29 @@ const PasswordLogin = () => {
     setShowPassword(!showPassword);
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = {
+      //Correo colocalo en el Login
+      email: "golomian16@hotmail.com",
+      password: password,
+    };
+
+    try {
+      // Enviar datos al servidor PHP
+      const response = await axios.post("Server_Name", formData);
+
+      if (response.data.success) {
+        window.location.href = "/Admin";
+      } else {
+        alert("Error: " + response.data.message);
+      }
+    } catch (error) {
+      alert("Hubo un problema al iniciar sesión. Inténtalo de nuevo.");
+    }
+  };
+
   return (
     <div className="password-login-container d-flex flex-column align-items-center justify-content-center vh-100">
       <div className="logo mb-4">
@@ -24,7 +48,7 @@ const PasswordLogin = () => {
       <p className="mb-3">
         golomian16@hotmail.com <a href="#">Editar</a>
       </p>
-      <Form className="w-50">
+      <Form onSubmit={handleSubmit} className="w-50">
         <Form.Group controlId="formPassword" className="mb-3">
           <Form.Label>Contraseña</Form.Label>
           <div className="password-input-container">
