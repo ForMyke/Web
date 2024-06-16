@@ -13,6 +13,7 @@ import Inicio from "./components/Inicio";
 import Pago from "./components/Pago";
 import PasswordLogin from "./components/PasswordLogin";
 import ProductDetails from "./components/ProductDetails";
+import Perfil from "./components/Perfil";
 // Importaciones de funciones de Admin
 import AdminGraficas from "./componentsAdmin/AdminGraficas";
 import Administradores from "./componentsAdmin/Administradores";
@@ -37,6 +38,7 @@ const AppContent = ({ products }) => {
             element={<ProductDetails products={products} />}
           />
           <Route path="/acerca-de" element={<AcercaDe />} />
+          <Route path="/perfil" element={<Perfil />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/login" element={<Login />} />

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-
 import "../css/inicio.css";
 import { Carousel, Alert } from "react-bootstrap";
-import "../css/inicio.css"; // Asegúrate de crear y usar este archivo CSS
 
 const Inicio = () => {
   const [products, setProducts] = useState([]);
@@ -26,6 +24,17 @@ const Inicio = () => {
     },
   ]);
 
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const startTime = new Date();
+    const endTime = new Date(
+      startTime.getTime() +
+        7 * 24 * 60 * 60 * 1000 +
+        7 * 60 * 60 * 1000 +
+        30 * 60 * 1000
+    );
+    return endTime - startTime;
+  });
+
   useEffect(() => {
     axios
       .get("https://api.npoint.io/3dcbf4a923f9995e08c1")
@@ -38,7 +47,25 @@ const Inicio = () => {
       .catch((error) => {
         console.error("Error fetching products:", error);
       });
+
+    const intervalId = setInterval(() => {
+      setTimeLeft((prevTimeLeft) => prevTimeLeft - 1000);
+    }, 1000);
+
+    return () => clearInterval(intervalId);
   }, []);
+
+  const formatTime = (milliseconds) => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const seconds = totalSeconds % 60;
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const minutes = totalMinutes % 60;
+    const totalHours = Math.floor(totalMinutes / 60);
+    const hours = totalHours % 24;
+    const days = Math.floor(totalHours / 24);
+
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  };
 
   return (
     <div className="inicio-container">
@@ -46,8 +73,8 @@ const Inicio = () => {
         Envío gratis para miembros en compras mayores a $999
       </Alert>
       <div className="flash-sale bg-dark text-white text-center py-2">
-        <h2 className="mb-0">Flash Sale: -20%</h2>
-        <p className="mb-0">¡No te lo pierdas! 00:02:58:42</p>
+        <h2 className="mb-0">Flash Sale en Tech 15%</h2>
+        <p className="mb-0">¡No te lo pierdas! {formatTime(timeLeft)}</p>
       </div>
       <Carousel>
         <Carousel.Item>
