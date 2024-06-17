@@ -5,7 +5,23 @@ import "../App.css";
 
 const Productos = ({ products }) => {
   const [searchTerm, setSearchTerm] = useState("");
+<<<<<<< HEAD
   const navigate = useNavigate();
+=======
+
+  useEffect(() => {
+    axios
+      .get("http://localhost/backend/api/products.php")
+      .then((response) => {
+        console.log(response.data)
+        
+        setProducts(response.data)
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }, []);
+>>>>>>> origin/back
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -24,7 +40,11 @@ const Productos = ({ products }) => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="productos-container">
+=======
+    <div className="container-fluid my-4 flex-grow-1">
+>>>>>>> origin/back
       <h1 className="text-center mb-4">Xclusive Store</h1>
       <div className="mb-4 d-flex justify-content-center">
         <input

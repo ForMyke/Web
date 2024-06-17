@@ -1,17 +1,14 @@
 import React from "react";
-import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
-const Login = ({ onLogin }) => {
+
+const Login = () => {
+  const navigate = useNavigate();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-    if (onLogin) {
-      onLogin();
-    }
-=======
     navigate("/Admin");
->>>>>>> d8b1eebde2a34e9786b0bbcc114a1fefabb81553
   };
 
   return (
@@ -25,7 +22,7 @@ const Login = ({ onLogin }) => {
         Introduce tu dirección de correo electrónico para unirte o iniciar
         sesión.
       </h2>
-      <form id="login-form" className="login-form w-50">
+      <form onSubmit={handleSubmit} className="login-form w-50">
         <div className="form-group mt-4 mb-3">
           <label htmlFor="email" className="sr-only">
             Correo electrónico
@@ -45,6 +42,17 @@ const Login = ({ onLogin }) => {
             id="terms"
             required
           />
+          <label className="form-check-label" htmlFor="terms">
+            Al continuar, acepto la{" "}
+            <a href="#" className="text-decoration-none">
+              Política de privacidad
+            </a>{" "}
+            y los{" "}
+            <a href="#" className="text-decoration-none">
+              Términos de uso
+            </a>{" "}
+            de Xclusive Store.
+          </label>
         </div>
         <button type="submit" className="btn btn-dark btn-block w-100">
           Continuar

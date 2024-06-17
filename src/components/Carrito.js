@@ -11,7 +11,11 @@ const Carrito = () => {
   };
 
   return (
+<<<<<<< HEAD
     <div className="carrito-container mt-5">
+=======
+    <div className="carrito-container container-fluid container mt-5">
+>>>>>>> origin/back
       <div className="row">
         <div className="col-md-8">
           <h2>Bolsa de compra</h2>
