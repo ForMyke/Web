@@ -98,6 +98,9 @@ const Perfil = ({ user }) => {
         <button className="btn mt-5 btn-outline-dark" onClick={handleLogout}>
           Cerrar Sesión
         </button>
+        <button className="btn mt-5 btn-outline-dark" onClick={handleLogout}>
+          Eliminar Cuenta
+        </button>
       </div>
     </div>
   );

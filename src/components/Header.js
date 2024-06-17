@@ -21,25 +21,25 @@ const Header = () => {
       <div className="top-nav d-flex justify-content-between align-items-center">
         <div className="left-links d-flex">
           <NavLink to="/" className="nav-link">
-            Inicio
-          </NavLink>
-          <NavLink to="/productos" className="nav-link">
-            Productos
+            <i className="fas fa-home"></i>
           </NavLink>
           <NavLink to="/acerca-de" className="nav-link">
             Acerca de
           </NavLink>
-
-          <NavLink to="/login" className="nav-link">
-            Login
-          </NavLink>
         </div>
         <div className="right-links d-flex align-items-center">
+          {" "}
+          <NavLink to="/productos" className="nav-link">
+            <i className="fas fa-box-open"></i>
+          </NavLink>
           <NavLink to="/perfil" className={"nav-link"}>
-            <i className="fas fa-user"></i> {/* Icono de perfil */}
+            <i className="fas fa-user"></i>
           </NavLink>
           <NavLink to="/carrito" className="nav-link">
             <i className="fas fa-shopping-cart"></i>{" "}
+          </NavLink>
+          <NavLink to="/login" className="nav-link">
+            <i className="fas fa-sign-in-alt"></i>
           </NavLink>
         </div>
       </div>

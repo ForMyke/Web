@@ -8,7 +8,7 @@ const Pago = () => {
       <h2 className="text-center mb-4">Proceso de compra</h2>
       <div className="row">
         <div className="col-md-8">
-          <div className="card mb-3">
+          <div className="mb-3">
             <div className="card-body">
               <h4 className="card-title">1 Identificación</h4>
               <p>
@@ -57,7 +57,7 @@ const Pago = () => {
               </form>
             </div>
           </div>
-          <div className="card mb-3">
+          <div className="mb-3">
             <div className="card-body">
               <h4 className="card-title">2 Envío</h4>
               <form>
@@ -117,7 +117,7 @@ const Pago = () => {
               </form>
             </div>
           </div>
-          <div className="card">
+          <div>
             <div className="card-body">
               <h4 className="card-title">3 Pago</h4>
               <form>
@@ -193,7 +193,7 @@ const Pago = () => {
           </div>
         </div>
         <div className="col-md-4">
-          <div className="card">
+          <div>
             <div className="card-body">
               <h4 className="card-title">Resumen de la compra</h4>
               <p>
