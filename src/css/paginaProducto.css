@@ -1,0 +1,33 @@
+.product-details-container {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.product-images .main-image {
+  width: 100%;
+}
+
+.product-images .thumbnail-images img {
+  cursor: pointer;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border: 1px solid #ddd;
+}
+
+.product-tabs .nav-tabs .nav-link.active {
+  background-color: #343a40;
+  color: #fff;
+}
+
+.product-tabs .nav-tabs .nav-link {
+  color: #343a40;
+}
+
+.tab-content {
+  border: 1px solid #ddd;
+  border-top: none;
+  padding: 20px;
+  border-radius: 0 0 8px 8px;
+}

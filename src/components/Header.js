@@ -1,12 +1,16 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, Link } from "react-router-dom";
+<<<<<<< HEAD
 import "../css/header.css";
+=======
+import "../css/header.css"; // Asegúrate de que este archivo importa Font Awesome
+>>>>>>> d8b1eebde2a34e9786b0bbcc114a1fefabb81553
 
 const Header = () => {
   return (
     <header className="header-container">
-      <div className="logo-container text-center">
+      <div className="logo text-center">
         <Link to="/">
           <img
             src="./img/logo.png"
@@ -21,26 +25,26 @@ const Header = () => {
       <div className="top-nav d-flex justify-content-between align-items-center">
         <div className="left-links d-flex">
           <NavLink to="/" className="nav-link">
-            Inicio
-          </NavLink>
-          <NavLink to="/productos" className="nav-link">
-            Productos
+            <i className="fas fa-home"></i>
           </NavLink>
           <NavLink to="/acerca-de" className="nav-link">
             Acerca de
           </NavLink>
-          <NavLink to="/carrito" className="nav-link">
-            Carrito
-          </NavLink>
-          <NavLink to="/login" className="nav-link">
-            Login
-          </NavLink>
         </div>
         <div className="right-links d-flex align-items-center">
-          <span className="icon-placeholder">
+          {" "}
+          <NavLink to="/productos" className="nav-link">
+            <i className="fas fa-box-open"></i>
+          </NavLink>
+          <NavLink to="/perfil" className={"nav-link"}>
+            <i className="fas fa-user"></i>
+          </NavLink>
+          <NavLink to="/carrito" className="nav-link">
             <i className="fas fa-shopping-cart"></i>{" "}
-            {/* Icono de carrito de compras */}
-          </span>
+          </NavLink>
+          <NavLink to="/login" className="nav-link">
+            <i className="fas fa-sign-in-alt"></i>
+          </NavLink>
         </div>
       </div>
     </header>

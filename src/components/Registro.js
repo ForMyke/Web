@@ -110,8 +110,12 @@ const Registro = () => {
     <div className="container mt-5 mb-5">
       <h2 className="text-center">Vamos a hacerte Nike Member.</h2>
       <p className="text-center">
+<<<<<<< HEAD
         Hemos enviado un código a <strong>golomian72@hotmail.com</strong>{" "}
         <a href="#">Editar</a>
+=======
+        Hemos enviado un código a <strong>golomian72@hotmail.com</strong>
+>>>>>>> d8b1eebde2a34e9786b0bbcc114a1fefabb81553
       </p>
       <Form>
         <Form.Group className="mb-3">
@@ -149,7 +153,9 @@ const Registro = () => {
             )}
           </Form.Group>
         </Row>
+
         <Form.Group className="mb-3">
+<<<<<<< HEAD
           <Form.Label>Correo</Form.Label>
           <Form.Control
             onChange={handleChange}
@@ -160,6 +166,10 @@ const Registro = () => {
           {errors.email && (
             <span className="error-message">{errors.email}</span>
           )}
+=======
+          <Form.Label>Correo*</Form.Label>
+          <Form.Control type="email" placeholder="Correo" />
+>>>>>>> d8b1eebde2a34e9786b0bbcc114a1fefabb81553
         </Form.Group>
 
         <Form.Group className="mb-3">
@@ -208,7 +218,37 @@ const Registro = () => {
             <span className="error-message">{errors.nacimiento}</span>
           )}
         </Form.Group>
+        <Row className="mb-3">
+          <Form.Group as={Col}>
+            <Form.Label>Codigo Postal</Form.Label>
+            <Form.Control type="number" placeholder="Codigo Postal" />
+          </Form.Group>
 
+          <Form.Group as={Col}>
+            <Form.Label>Estado</Form.Label>
+            <Form.Control type="text" placeholder="Estado" />
+          </Form.Group>
+          <Form.Group as={Col}>
+            <Form.Label>Municipio o Alcaldia</Form.Label>
+            <Form.Control type="text" placeholder="Municipio" />
+          </Form.Group>
+        </Row>
+        <Row className="mb-3">
+          <Form.Group as={Col}>
+            <Form.Label>Colonia</Form.Label>
+            <Form.Control type="text" placeholder="Colonia" />
+          </Form.Group>
+
+          <Form.Group as={Col}>
+            <Form.Label>Calle</Form.Label>
+            <Form.Control type="text" placeholder="Calle" />
+          </Form.Group>
+
+          <Form.Group as={Col}>
+            <Form.Label>Numero</Form.Label>
+            <Form.Control type="number" placeholder="Numero" />
+          </Form.Group>
+        </Row>
         <Form.Group className="mb-3" controlId="formBasicCheckbox1">
           <Form.Check
             type="checkbox"
@@ -219,10 +259,14 @@ const Registro = () => {
         <Form.Group className="mb-3" controlId="formBasicCheckbox2">
           <Form.Check
             type="checkbox"
+<<<<<<< HEAD
             name="terminos"
             checked={formData.terminos}
             onChange={handleChange}
             label="Acepto la Política de privacidad y los Términos de uso"
+=======
+            label="Acepto la Política de privacidad y los Términos de uso de Xclusive Store."
+>>>>>>> d8b1eebde2a34e9786b0bbcc114a1fefabb81553
           />
           {errors.terminos && (
             <span className="error-message">{errors.terminos}</span>

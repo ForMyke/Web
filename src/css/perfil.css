@@ -1,0 +1,21 @@
+.perfil-container {
+  max-width: 50%;
+  margin: 0 auto;
+}
+
+.card {
+  transition: none;
+  box-shadow: none;
+}
+
+.card:hover {
+  box-shadow: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}

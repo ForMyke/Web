@@ -5,9 +5,13 @@ import "../css/login.css";
 const Login = ({ onLogin }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
+<<<<<<< HEAD
     if (onLogin) {
       onLogin();
     }
+=======
+    navigate("/Admin");
+>>>>>>> d8b1eebde2a34e9786b0bbcc114a1fefabb81553
   };
 
   return (

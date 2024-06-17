@@ -1,22 +1,11 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 
-const Productos = () => {
-  const [products, setProducts] = useState([]);
+const Productos = ({ products }) => {
   const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    axios
-      .get("https://api.npoint.io/3dcbf4a923f9995e08c1")
-      .then((response) => {
-        setProducts(response.data.products);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the products!", error);
-      });
-  }, []);
+  const navigate = useNavigate();
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -26,8 +15,16 @@ const Productos = () => {
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleProductClick = (event) => {
+    const productCard = event.target.closest(".product-card");
+    if (productCard) {
+      const productId = productCard.getAttribute("data-id");
+      navigate(`/productos/${productId}`);
+    }
+  };
+
   return (
-    <div className="container my-4 flex-grow-1">
+    <div className="productos-container">
       <h1 className="text-center mb-4">Xclusive Store</h1>
       <div className="mb-4 d-flex justify-content-center">
         <input
@@ -40,8 +37,13 @@ const Productos = () => {
       </div>
       <div className="row">
         {filteredProducts.map((product) => (
-          <div className="col-12 col-md-6 col-lg-4" key={product.id}>
-            <div className="card h-100">
+          <div className="col-12 col-sm-6 col-md-4 col-lg-4" key={product.id}>
+            <div
+              className="card h-100 product-card"
+              data-id={product.id}
+              onClick={handleProductClick}
+              style={{ cursor: "pointer" }}
+            >
               <img
                 src={product.thumbnail}
                 className="card-img-top"
