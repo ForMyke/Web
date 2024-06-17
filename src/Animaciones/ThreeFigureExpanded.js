@@ -10,7 +10,7 @@ const ThreeFigureExpanded = ({ color }) => {
       75,
       window.innerWidth / window.innerHeight,
       0.1,
-      1000
+      2000
     );
     camera.position.z = 5;
 
@@ -21,8 +21,8 @@ const ThreeFigureExpanded = ({ color }) => {
     }
 
     const geometry = new THREE.BufferGeometry();
-    const numParticles = 1000;
-    const positions = new Float32Array(numParticles * 1);
+    const numParticles = 1500;
+    const positions = new Float32Array(numParticles * 3);
 
     for (let i = 0; i < numParticles * 3; i += 3) {
       positions[i] = (Math.random() * 2 - 1) * 5;
@@ -32,14 +32,14 @@ const ThreeFigureExpanded = ({ color }) => {
 
     geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
 
-    const material = new THREE.PointsMaterial({ color, size: 0.05 });
+    const material = new THREE.PointsMaterial({ color, size: 0.06 });
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
 
     const animate = () => {
       requestAnimationFrame(animate);
       particles.rotation.x += 0.001;
-      particles.rotation.y += 0.001;
+      particles.rotation.y += 0.004;
       renderer.render(scene, camera);
     };
     animate();

@@ -70,7 +70,8 @@ const Inicio = () => {
   return (
     <div className="inicio-container">
       <Alert variant="light" className="text-center mb-0">
-        Envío gratis para miembros en compras mayores a $999
+        En Xclusive Store te garantizamos servicio y atencion, se parte de esta
+        familia
       </Alert>
       <div className="flash-sale bg-dark text-white text-center py-2">
         <h2 className="mb-0">Flash Sale en Tech 15%</h2>
