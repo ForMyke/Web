@@ -28,8 +28,8 @@ const Inicio = () => {
     const startTime = new Date();
     const endTime = new Date(
       startTime.getTime() +
-        7 * 24 * 60 * 60 * 1000 +
-        7 * 60 * 60 * 1000 +
+        24 * 60 * 60 * 1000 +
+        4 * 60 * 60 * 1000 +
         30 * 60 * 1000
     );
     return endTime - startTime;
