@@ -39,16 +39,10 @@ const Inicio = () => {
     axios
       .get("http://localhost/backend/api/products.php")
       .then((response) => {
-<<<<<<< HEAD
         const techProducts = response.data.products.filter((product) =>
           product.category.toLowerCase().includes("laptops")
         );
         setProducts(techProducts);
-=======
-        console.log(response.data)
-        
-        setProducts(response.data)
->>>>>>> origin/back
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
