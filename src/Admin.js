@@ -12,11 +12,9 @@ const Admin = () => {
 
   return (
     <div className="admin-dashboard container-fluid ">
-      <div className="header d-flex justify-content-between align-items-center py-3 mb-5">
-        <h1>Admin Dashboard</h1>
-        <div className="d-flex">
-          <button className="btn btn-primary">Admin</button>
-        </div>
+      <div className="header d-flex justify-content-center align-items-center py-3 mb-5">
+        <h1>Administrador</h1>
+        <div className="d-flex"></div>
       </div>
 
       <div className="row justify-content-center ">
@@ -25,7 +23,7 @@ const Admin = () => {
             className="card shadow-sm clickable-card"
             onClick={() => handleNavigation("/AdminGraficas")}
           >
-            <div className="card-header">Graphs</div>
+            <div className="card-header">Graficos</div>
             <div className="card-body">
               <img
                 src="./img/graficas.jpg"
@@ -41,7 +39,7 @@ const Admin = () => {
             className="card shadow-sm clickable-card"
             onClick={() => handleNavigation("/AdminProductos")}
           >
-            <div className="card-header">Products</div>
+            <div className="card-header">Productos</div>
             <div className="card-body">
               <img
                 src="./img/productos.jpg"
@@ -57,7 +55,7 @@ const Admin = () => {
             className="card shadow-sm clickable-card"
             onClick={() => handleNavigation("/AdminUsuarios")}
           >
-            <div className="card-header">Users</div>
+            <div className="card-header">Usuarios</div>
             <div className="card-body">
               <img src="./img/usuarios.jpg" alt="Users" className="img-fluid" />
             </div>
@@ -69,7 +67,7 @@ const Admin = () => {
             className="card shadow-sm clickable-card"
             onClick={() => handleNavigation("/Administradores")}
           >
-            <div className="card-header">Admin</div>
+            <div className="card-header texto">Admin</div>
             <div className="card-body">
               <img src="./img/admin.jpg" alt="Admin" className="img-fluid" />
             </div>

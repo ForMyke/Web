@@ -19,6 +19,7 @@ import AdminGraficas from "./componentsAdmin/AdminGraficas";
 import Administradores from "./componentsAdmin/Administradores";
 import AdminProductos from "./componentsAdmin/AdminProductos";
 import AdminUsuarios from "./componentsAdmin/AdminUsuarios";
+import ForgotPassword from "./components/ForgotPassword";
 
 const AppContent = ({ products }) => {
   const location = useLocation();
@@ -45,6 +46,7 @@ const AppContent = ({ products }) => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/pago" element={<Pago />} />
           <Route path="/password" element={<PasswordLogin />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           {/* Rutas de Admin */}
           <Route path="/AdminGraficas" element={<AdminGraficas />} />

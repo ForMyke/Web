@@ -3,6 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button } from "react-bootstrap";
 import "../css/contraseña.css";
+import { Link } from "react-router-dom"; // Importar Link de react-router-dom
 
 const PasswordLogin = () => {
   const [password, setPassword] = useState("");
@@ -20,13 +21,11 @@ const PasswordLogin = () => {
     e.preventDefault();
 
     const formData = {
-      //Correo colocalo en el Login
       email: "golomian16@hotmail.com",
       password: password,
     };
 
     try {
-      // Enviar datos al servidor PHP
       const response = await axios.post("Server_Name", formData);
 
       if (response.data.success) {
@@ -63,9 +62,14 @@ const PasswordLogin = () => {
             </span>
           </div>
         </Form.Group>
-        <Button variant="dark" type="submit" className="w-100">
+        <Button variant="dark" type="submit" className="w-100 mb-3">
           Iniciar sesión
         </Button>
+        <div className="text-center">
+          <Link to="/forgot-password" className="text-dark">
+            ¿Olvidaste tu contraseña?
+          </Link>
+        </div>
       </Form>
     </div>
   );

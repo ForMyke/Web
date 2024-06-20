@@ -3,7 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/inicio.css";
 import { Carousel, Alert } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 const Inicio = () => {
   const [products, setProducts] = useState([]);
   const [reviews, setReviews] = useState([
@@ -34,6 +34,8 @@ const Inicio = () => {
     );
     return endTime - startTime;
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -100,7 +102,12 @@ const Inicio = () => {
           <Carousel.Caption>
             <div className="caption-box">
               <h3>A la vanguardia con las nuevas tecnologías</h3>
-              <button className="btn btn-primary">Comprar ahora</button>
+              <button
+                className="btn btn-dark"
+                onClick={() => navigate("/productos")}
+              >
+                Comprar ahora
+              </button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
