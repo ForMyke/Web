@@ -110,8 +110,12 @@ const Registro = () => {
     <div className="container mt-5 mb-5">
       <h2 className="text-center">Vamos a hacerte Nike Member.</h2>
       <p className="text-center">
+<<<<<<< HEAD
         Hemos enviado un código a <strong>golomian72@hotmail.com</strong>{" "}
         <a href="#">Editar</a>
+=======
+        Bienvenido<strong> Xclusive member</strong>{" "}
+>>>>>>> origin/back
       </p>
       <Form>
         <Form.Group className="mb-3">

@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
 
 const Login = () => {
   const navigate = useNavigate();
+  const formRef = useRef(null);
+  const [showPasswordInput, setShowPasswordInput] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/admin");
-  };
+  useEffect(() => {
+    const validation = new JustValidate("#login-form");
+
+    validation
+      .addField("#email", [
+        {
+          rule: "required",
+          errorMessage: "El correo electrónico es obligatorio",
+        },
+        {
+          rule: "email",
+          errorMessage: "El correo electrónico no es válido",
+        },
+      ])
+      .addField("#terms", [
+        {
+          rule: "required",
+          errorMessage: "Debe aceptar los términos y condiciones",
+        },
+      ])
+      .onSuccess((event) => {
+        event.preventDefault();
+        navigate("/Registro");
+      });
+  }, [navigate]);
 
   return (
     <div className="login-container d-flex flex-column justify-content-center align-items-center vh-100">
@@ -22,19 +45,35 @@ const Login = () => {
         Introduce tu dirección de correo electrónico para unirte o iniciar
         sesión.
       </h2>
-      <form onSubmit={handleSubmit} className="login-form w-50">
+      <form id="login-form" className="login-form w-50">
         <div className="form-group mt-4 mb-3">
           <label htmlFor="email" className="sr-only">
             Correo electrónico
           </label>
           <input
             type="email"
+            name="email"
             className="form-control"
             id="email"
             placeholder="Correo electrónico"
             required
           />
         </div>
+        {showPasswordInput && (
+          <div className="form-group mt-4 mb-3">
+            <label htmlFor="password" className="sr-only">
+              Contraseña
+            </label>
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              id="password"
+              placeholder="Contraseña"
+              required
+            />
+          </div>
+        )}
         <div className="form-group form-check mb-3">
           <input
             type="checkbox"
