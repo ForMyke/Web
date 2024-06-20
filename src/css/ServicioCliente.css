@@ -1,0 +1,11 @@
+.card {
+  max-width: 500px;
+}
+
+.vh-100 {
+  min-height: 100vh;
+}
+
+.card p {
+  white-space: pre-wrap;
+}

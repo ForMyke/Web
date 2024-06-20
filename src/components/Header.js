@@ -26,6 +26,9 @@ const Header = () => {
           <NavLink to="/acerca-de" className="nav-link">
             Acerca de
           </NavLink>
+          <NavLink to="/servicioCliente" className="nav-link">
+            Servicio Cliente
+          </NavLink>
         </div>
         <div className="right-links d-flex align-items-center">
           <NavLink to="/productos" className="nav-link">

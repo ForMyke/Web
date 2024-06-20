@@ -3,7 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/inicio.css";
 import { Carousel, Alert } from "react-bootstrap";
-
+import { useNavigate } from "react-router-dom";
 const Inicio = () => {
   const [products, setProducts] = useState([]);
   const [reviews, setReviews] = useState([
@@ -28,12 +28,14 @@ const Inicio = () => {
     const startTime = new Date();
     const endTime = new Date(
       startTime.getTime() +
-        7 * 24 * 60 * 60 * 1000 +
-        7 * 60 * 60 * 1000 +
+        24 * 60 * 60 * 1000 +
+        4 * 60 * 60 * 1000 +
         30 * 60 * 1000
     );
     return endTime - startTime;
   });
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -45,14 +47,8 @@ const Inicio = () => {
         setProducts(techProducts);
       })
       .catch((error) => {
-        console.error("Error fetching products:", error);
+        console.error("Error con los objectos:", error);
       });
-
-    const intervalId = setInterval(() => {
-      setTimeLeft((prevTimeLeft) => prevTimeLeft - 1000);
-    }, 1000);
-
-    return () => clearInterval(intervalId);
   }, []);
 
   const formatTime = (milliseconds) => {
@@ -100,7 +96,12 @@ const Inicio = () => {
           <Carousel.Caption>
             <div className="caption-box">
               <h3>A la vanguardia con las nuevas tecnologías</h3>
-              <button className="btn btn-primary">Comprar ahora</button>
+              <button
+                className="btn btn-dark"
+                onClick={() => navigate("/productos")}
+              >
+                Comprar ahora
+              </button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>

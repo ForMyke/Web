@@ -19,7 +19,8 @@ import AdminGraficas from "./componentsAdmin/AdminGraficas";
 import Administradores from "./componentsAdmin/Administradores";
 import AdminProductos from "./componentsAdmin/AdminProductos";
 import AdminUsuarios from "./componentsAdmin/AdminUsuarios";
-
+import ForgotPassword from "./components/ForgotPassword";
+import ServicioCliente from "./components/ServicioCliente";
 const AppContent = ({ products }) => {
   const location = useLocation();
 
@@ -38,6 +39,7 @@ const AppContent = ({ products }) => {
             element={<ProductDetails products={products} />}
           />
           <Route path="/acerca-de" element={<AcercaDe />} />
+          <Route path="/servicioCliente" element={<ServicioCliente />} />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/carrito" element={<Carrito />} />
           <Route path="/registro" element={<Registro />} />
@@ -45,6 +47,7 @@ const AppContent = ({ products }) => {
           <Route path="/admin" element={<Admin />} />
           <Route path="/pago" element={<Pago />} />
           <Route path="/password" element={<PasswordLogin />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
 
           {/* Rutas de Admin */}
           <Route path="/AdminGraficas" element={<AdminGraficas />} />

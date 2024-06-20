@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/footer.css";
 
 const Footer = () => {
+  const navigate = useNavigate();
+
   return (
     <footer className="bg-light text-dark py-4 mt-auto w-100">
       <div className="container-fluid px-5">
@@ -10,7 +12,12 @@ const Footer = () => {
           <div className="col-md-3 mb-3">
             <h5 className="font-weight-bold">Tienda Xclusive</h5>
             <p>Descubre ofertas exclusivas todos los días</p>
-            <button className="btn btn-dark">COMPRAR AHORA</button>
+            <button
+              className="btn btn-dark"
+              onClick={() => navigate("/productos")}
+            >
+              COMPRAR AHORA
+            </button>
           </div>
           <div className="col-md-2 mb-3">
             <h6 className="font-weight-bold">Compañía</h6>
