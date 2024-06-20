@@ -87,7 +87,7 @@ const Registro = () => {
     <div className="container mt-5 mb-4">
       <h2 className="text-center">Vamos a hacerte un Xclusive member.</h2>
       <p className="text-center">
-        Bienvenido<strong>Xclusive member</strong>{" "}
+        Bienvenido<strong> Xclusive member</strong>{" "}
       </p>
       <Form onSubmit={handleSubmit}>
         <Row className="mb-3">

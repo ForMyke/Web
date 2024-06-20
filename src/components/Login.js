@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
@@ -6,10 +6,12 @@ import JustValidate from "just-validate";
 
 const Login = () => {
   const navigate = useNavigate();
+  const formRef = useRef(null);
+  const [showPasswordInput, setShowPasswordInput] = useState(false);
 
   useEffect(() => {
     const validation = new JustValidate('#login-form');
-    
+
     validation
       .addField('#email', [
         {
@@ -27,9 +29,28 @@ const Login = () => {
           errorMessage: 'Debe aceptar los términos y condiciones',
         },
       ])
-      .onSuccess((event) => {
-        event.preventDefault();
-        navigate("/Registro");
+      .onSuccess(() => {
+        const formData = new FormData(formRef.current);
+        const email = formData.get('email');
+
+        fetch('https://localhost/backend/api/login.php', {
+          method: 'POST',
+          body: JSON.stringify({ email }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.exists) {
+            setShowPasswordInput(true);
+          } else {
+            window.location.href = "./registro?email=" + email;
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
       });
   }, [navigate]);
 
@@ -44,19 +65,35 @@ const Login = () => {
         Introduce tu dirección de correo electrónico para unirte o iniciar
         sesión.
       </h2>
-      <form id="login-form" className="login-form w-50">
+      <form ref={formRef} id="login-form" className="login-form w-50">
         <div className="form-group mt-4 mb-3">
           <label htmlFor="email" className="sr-only">
             Correo electrónico
           </label>
           <input
             type="email"
+            name="email"
             className="form-control"
             id="email"
             placeholder="Correo electrónico"
             required
           />
         </div>
+        {showPasswordInput && (
+          <div className="form-group mt-4 mb-3">
+            <label htmlFor="password" className="sr-only">
+              Contraseña
+            </label>
+            <input
+              type="password"
+              name="password"
+              className="form-control"
+              id="password"
+              placeholder="Contraseña"
+              required
+            />
+          </div>
+        )}
         <div className="form-group form-check mb-3">
           <input
             type="checkbox"
