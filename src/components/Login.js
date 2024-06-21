@@ -29,30 +29,54 @@ const Login = () => {
           errorMessage: 'Debe aceptar los términos y condiciones',
         },
       ])
-      .onSuccess(() => {
+      .onSuccess((event) => {
+        event.preventDefault();
         const formData = new FormData(formRef.current);
         const email = formData.get('email');
-
-        fetch('https://localhost/backend/api/login.php', {
-          method: 'POST',
-          body: JSON.stringify({ email }),
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        })
-        .then(response => response.json())
-        .then(data => {
-          if (data.exists) {
-            setShowPasswordInput(true);
-          } else {
-            window.location.href = "./registro?email=" + email;
-          }
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
+        
+        if (showPasswordInput) {
+          const password = formData.get('password');
+          console.log('Contraseña enviada:', password);
+          fetch('https://localhost/backend/api/contrasena.php', {
+            method: 'POST',
+            body: JSON.stringify({ email, contrasena: password }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              window.location.href = "./registro?email=" + email;
+            } else {
+              alert('Contraseña incorrecta.');
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        } else {
+          fetch('https://localhost/backend/api/login.php', {
+            method: 'POST',
+            body: JSON.stringify({ email }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            if (data.exists) {
+              setShowPasswordInput(true);
+            } else {
+              window.location.href = "./registro?email=" + email;
+            }
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        }
       });
-  }, [navigate]);
+  }, [navigate, showPasswordInput]);
 
   return (
     <div className="login-container d-flex flex-column justify-content-center align-items-center vh-100">
@@ -85,7 +109,7 @@ const Login = () => {
               Contraseña
             </label>
             <input
-              type="password"
+              //type="password"
               name="password"
               className="form-control"
               id="password"
