@@ -6,18 +6,11 @@ header("Content-Type: application/json");
 
 $data = json_decode(file_get_contents("php://input"), true);
 
-if ($data === null) {
-    echo json_encode(['success' => false, 'error' => 'Error al decodificar JSON']);
-    exit;
-}
 
 $email = $data['email'] ?? null;
 $contrasena = $data['contrasena'] ?? null;
 
-if (!$email || !$contrasena) {
-    echo json_encode(['success' => false, 'error' => 'Email o contraseña no proporcionados']);
-    exit;
-}
+
 
 include '../conexion.php';
 
