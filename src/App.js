@@ -26,6 +26,7 @@ import Privacidad from "./components/Privacidad";
 import Seguridad from "./components/Seguridad";
 import LetraChica from "./components/LetraChica";
 import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
+import Contacto from "./components/Contacto";
 const AppContent = ({ products }) => {
   const location = useLocation();
 
@@ -44,6 +45,7 @@ const AppContent = ({ products }) => {
             element={<ProductDetails products={products} />}
           />
           <Route path="/acerca-de" element={<AcercaDe />} />
+          <Route path="/contacto" element={<Contacto />} />
           <Route path="/seguridad" element={<Seguridad />} />
           <Route path="/servicioCliente" element={<ServicioCliente />} />
           <Route
