@@ -35,10 +35,8 @@ const Inicio = () => {
     axios
       .get(`http://localhost/backend/api/products.php?category=${category}`)
       .then((response) => {
-        const techProducts = response.data.products.filter((product) =>
-          product.category.toLowerCase().includes("laptops")
-        );
-        setProducts(techProducts);
+        console.log(response.data);
+        setProducts(response.data);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);
@@ -92,8 +90,8 @@ const Inicio = () => {
           />
           <Carousel.Caption>
             <div className="caption-box">
-              <h3>$20,299.00</h3>
-              <p>Apple Mac M3</p>
+              <h3>Con la menor tecnología</h3>
+              <p>A tu alcance</p>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
@@ -106,7 +104,7 @@ const Inicio = () => {
           <Carousel.Caption>
             <div className="caption-box">
               <h3>Tecnología 2024</h3>
-              <button className="btn btn-primary">Comprar ahora</button>
+              <button className="btn btn-dark">Comprar ahora</button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>

@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
+import JustValidate from "just-validate";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -30,9 +31,52 @@ const Login = () => {
       ])
       .onSuccess((event) => {
         event.preventDefault();
-        navigate("/Registro");
+        const formData = new FormData(formRef.current);
+        const email = formData.get("email");
+
+        if (showPasswordInput) {
+          const password = formData.get("password");
+          console.log("Contraseña enviada:", password);
+          fetch("https://localhost/backend/api/contrasena.php", {
+            method: "POST",
+            body: JSON.stringify({ email, contrasena: password }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                window.location.href = "./registro?email=" + email;
+              } else {
+                alert("Contraseña incorrecta.");
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        } else {
+          fetch("https://localhost/backend/api/login.php", {
+            method: "POST",
+            body: JSON.stringify({ email }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.exists) {
+                setShowPasswordInput(true);
+              } else {
+                window.location.href = "./registro?email=" + email;
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
       });
-  }, [navigate]);
+  }, [navigate, showPasswordInput]);
 
   return (
     <div className="login-container d-flex flex-column justify-content-center align-items-center vh-100">
@@ -45,7 +89,7 @@ const Login = () => {
         Introduce tu dirección de correo electrónico para unirte o iniciar
         sesión.
       </h2>
-      <form id="login-form" className="login-form w-50">
+      <form ref={formRef} id="login-form" className="login-form w-50">
         <div className="form-group mt-4 mb-3">
           <label htmlFor="email" className="sr-only">
             Correo electrónico
@@ -65,7 +109,7 @@ const Login = () => {
               Contraseña
             </label>
             <input
-              type="password"
+              //type="password"
               name="password"
               className="form-control"
               id="password"
