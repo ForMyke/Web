@@ -9,3 +9,8 @@
 ul {
   padding-left: 20px;
 }
+
+.error-message {
+  color: #D92F21;
+  font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+}
