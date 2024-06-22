@@ -31,11 +31,11 @@ const Inicio = () => {
   });
 
   useEffect(() => {
+    const category = "beauty"; // Cambia esto a la categoría que desees
     axios
-      .get("http://localhost/backend/api/products.php")
+      .get(`http://localhost/backend/api/products.php?category=${category}`)
       .then((response) => {
         console.log(response.data);
-
         setProducts(response.data);
       })
       .catch((error) => {

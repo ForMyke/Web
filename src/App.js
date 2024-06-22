@@ -65,18 +65,14 @@ const App = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get(
-          "https://api.npoint.io/3dcbf4a923f9995e08c1"
-        );
-        setProducts(response.data.products);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-
-    fetchProducts();
+    axios
+      .get(`http://localhost/backend/api/products.php`)
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
   }, []);
 
   return (

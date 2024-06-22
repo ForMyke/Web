@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-bootstrap";
 import "../css/paginaProducto.css";
 
-const ProductDetails = ({ products }) => {
+const ProductDetails = ({ products, addToCart }) => {
   const { productId } = useParams();
+  const navigate = useNavigate();
   const product = products?.find(
     (product) => product.id === parseInt(productId)
   );
@@ -13,8 +14,14 @@ const ProductDetails = ({ products }) => {
   const [mainImage, setMainImage] = useState(product?.thumbnail || "");
   const [quantity, setQuantity] = useState(1);
 
+  useEffect(() => {
+    if (product) {
+      setMainImage(product.thumbnail);
+    }
+  }, [product]);
+
   if (!product) {
-    return <div>Producto no encontrado</div>;
+    return <div className="text-center mt-5">Producto no encontrado</div>;
   }
 
   const handleThumbnailClick = (image) => {
@@ -25,6 +32,15 @@ const ProductDetails = ({ products }) => {
     if (value >= 1) {
       setQuantity(value);
     }
+  };
+
+  const handleAddToCart = () => {
+    const productToAdd = {
+      ...product,
+      quantity,
+    };
+    addToCart(productToAdd);
+    navigate("/carrito");
   };
 
   return (
@@ -94,13 +110,9 @@ const ProductDetails = ({ products }) => {
               </button>
             </div>
           </div>
-          <div className="selected-image mt-3">
-            <h5>Imagen Seleccionada:</h5>
-            <div className="border p-3">
-              <img src={mainImage} className="img-fluid" alt={product.title} />
-            </div>
-          </div>
-          <button className="btn btn-dark mt-3">Agregar al carrito</button>
+          <button className="btn btn-dark mt-3" onClick={handleAddToCart}>
+            Agregar al carrito
+          </button>
         </div>
       </div>
       <div className="product-info-tabs mt-5">
@@ -171,15 +183,29 @@ const ProductDetails = ({ products }) => {
             role="tabpanel"
             aria-labelledby="reviews-tab"
           >
-            {/* Colocar reseñas de usuario */}
             <h3>Reseñas</h3>
+            {/* Aquí colocar las reseñas de usuarios */}
+            {product.reviews.map((review, index) => (
+              <div key={index} className="review-item">
+                <p>
+                  <strong>{review.reviewerName}</strong>: {review.comment}
+                </p>
+                <p>
+                  Rating: {review.rating} - {review.date}
+                </p>
+              </div>
+            ))}
           </div>
           <div
             className="tab-pane fade"
             id="shipping"
             role="tabpanel"
             aria-labelledby="shipping-tab"
-          ></div>
+          >
+            <h3>Envío</h3>
+            {/* Aquí colocar información de envío */}
+            <p>{product.shippingInformation}</p>
+          </div>
         </div>
       </div>
     </div>

@@ -19,6 +19,7 @@ $sql = "
         LEFT JOIN reviews_productos rp ON p.id = rp.producto_id
         LEFT JOIN imagenes_productos ip ON p.id = ip.producto_id
 ";
+
 $result = $conn->query($sql);
 
 if ($result === FALSE) {
