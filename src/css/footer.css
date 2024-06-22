@@ -1,8 +1,28 @@
-footer {
-  width: 50%;
+.footer-container {
+  background-color: #333;
+  color: #fff;
+  padding: 20px 0;
 }
 
-.container-fluid {
-  padding-left: 0;
-  padding-right: 0;
+.bottom-nav .nav-link {
+  color: #fff;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.bottom-nav .nav-link:hover {
+  text-decoration: underline;
+}
+
+.social-links .nav-link {
+  color: #fff;
+  margin: 0 10px;
+}
+
+.social-links .nav-link:hover {
+  color: #ddd;
+}
+
+.text-center p {
+  margin: 10px 0 0;
 }

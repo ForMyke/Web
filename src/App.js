@@ -21,6 +21,11 @@ import AdminProductos from "./componentsAdmin/AdminProductos";
 import AdminUsuarios from "./componentsAdmin/AdminUsuarios";
 import ForgotPassword from "./components/ForgotPassword";
 import ServicioCliente from "./components/ServicioCliente";
+//Footer
+import Privacidad from "./components/Privacidad";
+import Seguridad from "./components/Seguridad";
+import LetraChica from "./components/LetraChica";
+import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
 const AppContent = ({ products }) => {
   const location = useLocation();
 
@@ -39,12 +44,19 @@ const AppContent = ({ products }) => {
             element={<ProductDetails products={products} />}
           />
           <Route path="/acerca-de" element={<AcercaDe />} />
+          <Route path="/seguridad" element={<Seguridad />} />
           <Route path="/servicioCliente" element={<ServicioCliente />} />
+          <Route
+            path="/preguntas-frecuentes"
+            element={<PreguntasFrecuentes />}
+          />
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/carrito" element={<Carrito />} />
+          <Route path="/letra-chica" element={<LetraChica />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/privacidad" element={<Privacidad />} />
           <Route path="/pago" element={<Pago />} />
           <Route path="/password" element={<PasswordLogin />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

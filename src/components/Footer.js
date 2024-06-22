@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/footer.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -24,24 +24,15 @@ const Footer = () => {
             <h6 className="font-weight-bold">Compañía</h6>
             <ul className="list-unstyled">
               <li>
-                <a href="/acerca-de" className="text-dark">
+                <NavLink to="/acerca-de" className="text-dark nav-link">
                   Acerca de
-                </a>
+                </NavLink>
               </li>
+
               <li>
-                <a href="/blog" className="text-dark">
-                  Blog
-                </a>
-              </li>
-              <li>
-                <a href="/equipo" className="text-dark">
-                  Equipo
-                </a>
-              </li>
-              <li>
-                <a href="/carreras" className="text-dark">
-                  Carreras
-                </a>
+                <NavLink to="/servicioCliente" className="text-dark nav-link">
+                  Servicio al Cliente
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -49,24 +40,20 @@ const Footer = () => {
             <h6 className="font-weight-bold">Legal</h6>
             <ul className="list-unstyled">
               <li>
-                <a href="/privacidad" className="text-dark">
+                <NavLink to="/privacidad" className="text-dark nav-link">
                   Privacidad
-                </a>
+                </NavLink>
               </li>
+
               <li>
-                <a href="/galletas" className="text-dark">
-                  Galletas
-                </a>
-              </li>
-              <li>
-                <a href="/seguridad" className="text-dark">
+                <NavLink to="/seguridad" className="text-dark nav-link">
                   Seguridad
-                </a>
+                </NavLink>
               </li>
               <li>
-                <a href="/letra-chica" className="text-dark">
+                <NavLink to="/letra-chica" className="text-dark nav-link">
                   Letra chica
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -74,19 +61,18 @@ const Footer = () => {
             <h6 className="font-weight-bold">Ayuda</h6>
             <ul className="list-unstyled">
               <li>
-                <a href="/preguntas-frecuentes" className="text-dark">
+                <NavLink
+                  to="/preguntas-frecuentes"
+                  className="text-dark nav-link"
+                >
                   Preguntas más frecuentes
-                </a>
+                </NavLink>
               </li>
+
               <li>
-                <a href="/naviero" className="text-dark">
-                  Naviero
-                </a>
-              </li>
-              <li>
-                <a href="/contacto" className="text-dark">
+                <NavLink to="/contacto" className="text-dark nav-link">
                   Contacto
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>

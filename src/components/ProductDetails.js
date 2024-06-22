@@ -184,7 +184,6 @@ const ProductDetails = ({ products, addToCart }) => {
             aria-labelledby="reviews-tab"
           >
             <h3>Reseñas</h3>
-            {/* Aquí colocar las reseñas de usuarios */}
             {product.reviews.map((review, index) => (
               <div key={index} className="review-item">
                 <p>
@@ -203,7 +202,6 @@ const ProductDetails = ({ products, addToCart }) => {
             aria-labelledby="shipping-tab"
           >
             <h3>Envío</h3>
-            {/* Aquí colocar información de envío */}
             <p>{product.shippingInformation}</p>
           </div>
         </div>
