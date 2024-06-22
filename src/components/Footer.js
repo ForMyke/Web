@@ -9,8 +9,8 @@ const Footer = () => {
   return (
     <footer className="bg-light text-dark py-4 mt-auto w-100">
       <div className="container-fluid px-5">
-        <div className="row justify-content-center">
-          <div className="col-md-3 mb-3 ">
+        <div className="row justify-content-center text-center text-md-start">
+          <div className="col-12 col-md-3 mb-3">
             <h5 className="font-weight-bold">Tienda Xclusive</h5>
             <p>Descubre ofertas exclusivas todos los días</p>
             <button
@@ -20,7 +20,7 @@ const Footer = () => {
               COMPRAR AHORA
             </button>
           </div>
-          <div className="col-md-2 mb-3">
+          <div className="col-12 col-md-2 mb-3">
             <h6 className="font-weight-bold">Compañía</h6>
             <ul className="list-unstyled">
               <li>
@@ -28,7 +28,6 @@ const Footer = () => {
                   Acerca de
                 </NavLink>
               </li>
-
               <li>
                 <NavLink to="/servicioCliente" className="text-dark nav-link">
                   Servicio al Cliente
@@ -36,7 +35,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-2 mb-3">
+          <div className="col-12 col-md-2 mb-3">
             <h6 className="font-weight-bold">Legal</h6>
             <ul className="list-unstyled">
               <li>
@@ -44,7 +43,6 @@ const Footer = () => {
                   Privacidad
                 </NavLink>
               </li>
-
               <li>
                 <NavLink to="/seguridad" className="text-dark nav-link">
                   Seguridad
@@ -57,7 +55,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-2 mb-3">
+          <div className="col-12 col-md-2 mb-3">
             <h6 className="font-weight-bold">Ayuda</h6>
             <ul className="list-unstyled">
               <li>
@@ -68,7 +66,6 @@ const Footer = () => {
                   Preguntas más frecuentes
                 </NavLink>
               </li>
-
               <li>
                 <NavLink to="/contacto" className="text-dark nav-link">
                   Contacto
@@ -76,7 +73,7 @@ const Footer = () => {
               </li>
             </ul>
           </div>
-          <div className="col-md-3 mb-3">
+          <div className="col-12 col-md-3 mb-3">
             <h6 className="font-weight-bold">Contact us</h6>
             <p>support@xclusivestore.com</p>
             <p>1-800-555-1234</p>

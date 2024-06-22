@@ -13,7 +13,7 @@ const AcercaDe = () => {
       >
         <ThreeFigureExpanded color={0xffffff} />
         <h1 className="centered-text text-white position-absolute">
-          Xclusive Store es solo
+          Bienvenidos a Xclusive Store
         </h1>
       </div>
 
@@ -23,39 +23,41 @@ const AcercaDe = () => {
             <ThreeFigure color={0xffffff} />
           </div>
           <div className="col-lg-6 col-md-12 d-flex flex-column justify-content-center">
-            <h1 className="display-1">CON LA MEJOR TECNOLOGIA</h1>
-            <p className="lead">Si tienes la oportunidad, tómala</p>
+            <h1 className="display-1">Innovación y Tecnología</h1>
+            <p className="lead">
+              En Xclusive Store, nos apasiona ofrecerte lo último en tecnología
+              y productos innovadores. Nuestra misión es brindarte una
+              experiencia de compra única y exclusiva.
+            </p>
           </div>
         </div>
         <div className="row hero-image-text">
           <div className="col-12">
-            <h2>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.
-            </h2>
+            <h2>Quiénes Somos</h2>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book. It has
-              survived not only five centuries, but also the leap into
-              electronic typesetting, remaining essentially unchanged. It was
-              popularised in the 1960s with the release of Letraset sheets
-              containing Lorem Ipsum passages.
+              Xclusive Store es más que una tienda, es un destino donde la
+              tecnología y la innovación se encuentran. Desde nuestra fundación,
+              hemos trabajado incansablemente para traer los productos más
+              exclusivos y de alta calidad a nuestros clientes. Nuestro equipo
+              de expertos está siempre en busca de las últimas tendencias y
+              avances tecnológicos para asegurar que siempre estés a la
+              vanguardia.
             </p>
           </div>
         </div>
-        <h1 className="text-center my-4">Iniciativas</h1>
+        <h1 className="text-center my-4">Nuestras Iniciativas</h1>
         <div className="row initiative-section mb-4">
           <div className="col-lg-6 col-md-12 d-flex justify-content-center align-items-center">
             <ThreeFigure color={0xffffff} />
           </div>
           <div className="col-lg-6 col-md-12 d-flex flex-column justify-content-center">
-            <h2>Getting Kids Active</h2>
+            <h2>Fomentando el Futuro Activo</h2>
             <p>
-              Xclusive Store invests in play and sport for all kids, because an
-              active next generation means a healthier and more equitable
-              future.
+              En Xclusive Store, creemos en la importancia de un futuro activo y
+              saludable. Por eso, invertimos en programas y actividades que
+              promueven el deporte y el juego para todos los niños. Nuestro
+              objetivo es asegurar que la próxima generación crezca en un
+              entorno equitativo y lleno de oportunidades.
             </p>
           </div>
         </div>

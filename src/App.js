@@ -40,10 +40,8 @@ const AppContent = ({ products }) => {
             path="/productos"
             element={<Productos products={products} />}
           />
-          <Route
-            path="/productos/:productId"
-            element={<ProductDetails products={products} />}
-          />
+          <Route path="/productos/:productId" element={<ProductDetails />} />
+
           <Route path="/acerca-de" element={<AcercaDe />} />
           <Route path="/contacto" element={<Contacto />} />
           <Route path="/seguridad" element={<Seguridad />} />
