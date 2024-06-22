@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/inicio.css";
 import { Carousel, Alert } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/inicio.css"; // Asegúrate de crear y usar este archivo CSS
+
 const Inicio = () => {
   const [products, setProducts] = useState([]);
   const [reviews, setReviews] = useState([
@@ -24,18 +24,11 @@ const Inicio = () => {
     },
   ]);
 
+  // Estado del contador para 7 días
   const [timeLeft, setTimeLeft] = useState(() => {
-    const startTime = new Date();
-    const endTime = new Date(
-      startTime.getTime() +
-        24 * 60 * 60 * 1000 +
-        4 * 60 * 60 * 1000 +
-        30 * 60 * 1000
-    );
-    return endTime - startTime;
+    const savedTime = localStorage.getItem("flashSaleTime");
+    return savedTime ? parseInt(savedTime) : 7 * 24 * 60 * 60; // 7 días en segundos
   });
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -46,30 +39,46 @@ const Inicio = () => {
         setProducts(response.data);
       })
       .catch((error) => {
-        console.error("Error con los objectos:", error);
+        console.error("Error fetching products:", error);
       });
   }, []);
 
-  const formatTime = (milliseconds) => {
-    const totalSeconds = Math.floor(milliseconds / 1000);
-    const seconds = totalSeconds % 60;
-    const totalMinutes = Math.floor(totalSeconds / 60);
-    const minutes = totalMinutes % 60;
-    const totalHours = Math.floor(totalMinutes / 60);
-    const hours = totalHours % 24;
-    const days = Math.floor(totalHours / 24);
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      setTimeLeft((prevTimeLeft) => {
+        if (prevTimeLeft <= 0) {
+          clearInterval(countdownInterval);
+          return 0;
+        }
+        const newTimeLeft = prevTimeLeft - 1;
+        localStorage.setItem("flashSaleTime", newTimeLeft);
+        return newTimeLeft;
+      });
+    }, 1000);
 
-    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    // Cleanup interval on component unmount
+    return () => clearInterval(countdownInterval);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const days = Math.floor(seconds / (24 * 3600));
+    const hours = Math.floor((seconds % (24 * 3600)) / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${days.toString().padStart(2, "0")}:${hours
+      .toString()
+      .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   return (
     <div className="inicio-container">
       <Alert variant="light" className="text-center mb-0">
-        En Xclusive Store te garantizamos servicio y atencion, se parte de esta
-        familia
+        Envío gratis para miembros en compras mayores a $999
       </Alert>
       <div className="flash-sale bg-dark text-white text-center py-2">
-        <h2 className="mb-0">Flash Sale en Tech 15%</h2>
+        <h2 className="mb-0">Descuentos en todas nuestras áreas</h2>
         <p className="mb-0">¡No te lo pierdas! {formatTime(timeLeft)}</p>
       </div>
       <Carousel>
@@ -81,7 +90,7 @@ const Inicio = () => {
           />
           <Carousel.Caption>
             <div className="caption-box">
-              <h3>Tecnología 2024</h3>
+              <h3>$20,299.00</h3>
               <p>Apple Mac M3</p>
             </div>
           </Carousel.Caption>
@@ -94,13 +103,8 @@ const Inicio = () => {
           />
           <Carousel.Caption>
             <div className="caption-box">
-              <h3>A la vanguardia con las nuevas tecnologías</h3>
-              <button
-                className="btn btn-dark"
-                onClick={() => navigate("/productos")}
-              >
-                Comprar ahora
-              </button>
+              <h3>Tecnología 2024</h3>
+              <button className="btn btn-primary">Comprar ahora</button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
