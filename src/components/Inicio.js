@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Carousel, Alert } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/inicio.css"; // Asegúrate de crear y usar este archivo CSS
-
+import "../css/inicio.css";
+import { Carousel, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 const Inicio = () => {
   const [products, setProducts] = useState([]);
   const [reviews, setReviews] = useState([
@@ -24,27 +24,53 @@ const Inicio = () => {
     },
   ]);
 
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const startTime = new Date();
+    const endTime = new Date(
+      startTime.getTime() +
+        24 * 60 * 60 * 1000 +
+        4 * 60 * 60 * 1000 +
+        30 * 60 * 1000
+    );
+    return endTime - startTime;
+  });
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     axios
       .get("http://localhost/backend/api/products.php")
       .then((response) => {
-        console.log(response.data)
-        
-        setProducts(response.data)
+        console.log(response.data);
+
+        setProducts(response.data);
       })
       .catch((error) => {
-        console.error("Error fetching products:", error);
+        console.error("Error con los objectos:", error);
       });
   }, []);
+
+  const formatTime = (milliseconds) => {
+    const totalSeconds = Math.floor(milliseconds / 1000);
+    const seconds = totalSeconds % 60;
+    const totalMinutes = Math.floor(totalSeconds / 60);
+    const minutes = totalMinutes % 60;
+    const totalHours = Math.floor(totalMinutes / 60);
+    const hours = totalHours % 24;
+    const days = Math.floor(totalHours / 24);
+
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
+  };
 
   return (
     <div className="inicio-container">
       <Alert variant="light" className="text-center mb-0">
-        Envío gratis para miembros en compras mayores a $999
+        En Xclusive Store te garantizamos servicio y atencion, se parte de esta
+        familia
       </Alert>
       <div className="flash-sale bg-dark text-white text-center py-2">
-        <h2 className="mb-0">Flash Sale: -20%</h2>
-        <p className="mb-0">¡No te lo pierdas! 00:02:58:42</p>
+        <h2 className="mb-0">Flash Sale en Tech 15%</h2>
+        <p className="mb-0">¡No te lo pierdas! {formatTime(timeLeft)}</p>
       </div>
       <Carousel>
         <Carousel.Item>
@@ -55,7 +81,7 @@ const Inicio = () => {
           />
           <Carousel.Caption>
             <div className="caption-box">
-              <h3>$20,299.00</h3>
+              <h3>Tecnología 2024</h3>
               <p>Apple Mac M3</p>
             </div>
           </Carousel.Caption>
@@ -68,8 +94,13 @@ const Inicio = () => {
           />
           <Carousel.Caption>
             <div className="caption-box">
-              <h3>Tecnología 2024</h3>
-              <button className="btn btn-primary">Comprar ahora</button>
+              <h3>A la vanguardia con las nuevas tecnologías</h3>
+              <button
+                className="btn btn-dark"
+                onClick={() => navigate("/productos")}
+              >
+                Comprar ahora
+              </button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
