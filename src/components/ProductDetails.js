@@ -1,24 +1,33 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Carousel } from "react-bootstrap";
 import "../css/paginaProducto.css";
 
-const ProductDetails = ({ products, addToCart }) => {
+const ProductDetails = ({ addToCart }) => {
   const { productId } = useParams();
   const navigate = useNavigate();
-  const product = products?.find(
-    (product) => product.id === parseInt(productId)
-  );
-
-  const [mainImage, setMainImage] = useState(product?.thumbnail || "");
+  const [product, setProduct] = useState(null);
+  const [mainImage, setMainImage] = useState("");
   const [quantity, setQuantity] = useState(1);
 
   useEffect(() => {
-    if (product) {
-      setMainImage(product.thumbnail);
-    }
-  }, [product]);
+    axios
+      .get(`http://localhost/backend/api/products.php?id=${productId}`)
+      .then((response) => {
+        if (response.data.length > 0) {
+          const productData = response.data[0];
+          setProduct(productData);
+          setMainImage(productData.thumbnail);
+        } else {
+          setProduct(null);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching product details:", error);
+      });
+  }, [productId]);
 
   if (!product) {
     return <div className="text-center mt-5">Producto no encontrado</div>;
@@ -49,27 +58,39 @@ const ProductDetails = ({ products, addToCart }) => {
         <div className="col-md-6">
           <div className="product-images">
             <Carousel>
-              {product.images.map((image, index) => (
-                <Carousel.Item key={index}>
+              {product.images && product.images.length > 0 ? (
+                product.images.map((image, index) => (
+                  <Carousel.Item key={index}>
+                    <img
+                      src={image}
+                      className="d-block w-100"
+                      alt={`${product.title} ${index + 1}`}
+                    />
+                  </Carousel.Item>
+                ))
+              ) : (
+                <Carousel.Item>
                   <img
-                    src={image}
+                    src={mainImage}
                     className="d-block w-100"
-                    alt={`${product.title} ${index + 1}`}
+                    alt="No image available"
                   />
                 </Carousel.Item>
-              ))}
+              )}
             </Carousel>
             <div className="product-thumbnails mt-3 d-flex justify-content-around">
-              {product.images.map((image, index) => (
-                <img
-                  key={index}
-                  src={image}
-                  alt={`${product.title} ${index + 1}`}
-                  className="img-thumbnail"
-                  style={{ width: "20%", cursor: "pointer" }}
-                  onClick={() => handleThumbnailClick(image)}
-                />
-              ))}
+              {product.images &&
+                product.images.length > 0 &&
+                product.images.map((image, index) => (
+                  <img
+                    key={index}
+                    src={image}
+                    alt={`${product.title} ${index + 1}`}
+                    className="img-thumbnail"
+                    style={{ width: "20%", cursor: "pointer" }}
+                    onClick={() => handleThumbnailClick(image)}
+                  />
+                ))}
             </div>
           </div>
         </div>
@@ -184,16 +205,20 @@ const ProductDetails = ({ products, addToCart }) => {
             aria-labelledby="reviews-tab"
           >
             <h3>Reseñas</h3>
-            {product.reviews.map((review, index) => (
-              <div key={index} className="review-item">
-                <p>
-                  <strong>{review.reviewerName}</strong>: {review.comment}
-                </p>
-                <p>
-                  Rating: {review.rating} - {review.date}
-                </p>
-              </div>
-            ))}
+            {product.reviews && product.reviews.length > 0 ? (
+              product.reviews.map((review, index) => (
+                <div key={index} className="review-item">
+                  <p>
+                    <strong>{review.reviewerName}</strong>: {review.comment}
+                  </p>
+                  <p>
+                    Rating: {review.rating} - {review.date}
+                  </p>
+                </div>
+              ))
+            ) : (
+              <p>No hay reseñas disponibles</p>
+            )}
           </div>
           <div
             className="tab-pane fade"

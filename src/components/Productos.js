@@ -1,11 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 
-const Productos = ({ products }) => {
+const Productos = () => {
+  const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost/backend/api/products.php")
+      .then((response) => {
+        setProducts(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+      });
+  }, []);
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
