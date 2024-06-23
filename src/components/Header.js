@@ -2,6 +2,8 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, Link } from "react-router-dom";
 import "../css/header.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -46,7 +48,10 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
             <i className="fas fa-sign-in-alt"></i>
           </NavLink>
           <button onClick={toggleDarkMode} className="btn btn-dark-mode-toggle">
-            {isDarkMode ? "Modo Claro" : "Modo Oscuro"}
+            <FontAwesomeIcon
+              icon={isDarkMode ? faSun : faMoon}
+              className="dark-mode-icon"
+            />
           </button>
         </div>
       </div>

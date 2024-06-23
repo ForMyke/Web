@@ -11,7 +11,7 @@
 }
 
 .logo {
-  max-height: 75px;
+  max-height: 70px;
 }
 
 .top-nav {
@@ -37,4 +37,16 @@
 .icon-placeholder {
   font-size: 24px;
   margin-left: 20px;
+}
+
+.btn-dark-mode-toggle {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.btn-dark-mode-toggle:hover {
+  color: #0793ff;
 }

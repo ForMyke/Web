@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../css/paginaProducto.css"; // Asegúrate de crear y usar este archivo CSS
 
-const ProductDetails = ({ addToCart }) => {
+const ProductDetails = ({ addToCart, isDarkMode }) => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
@@ -54,7 +54,9 @@ const ProductDetails = ({ addToCart }) => {
   };
 
   return (
-    <div className="product-details-container container">
+    <div
+      className={`product-details-container container ${isDarkMode ? "dark-mode" : ""}`}
+    >
       <div className="row">
         <div className="col-md-6">
           <div className="product-images">

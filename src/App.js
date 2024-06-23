@@ -29,7 +29,7 @@ import Contacto from "./components/Contacto";
 import { ToastContainer, toast } from "react-toastify";
 import "./css/toast.css";
 import "react-toastify/dist/ReactToastify.css";
-import "./css/darkMode.css";
+import "./css/darkMode.css"; // Importa los estilos del modo oscuro
 
 const AppContent = ({
   products,
@@ -62,7 +62,9 @@ const AppContent = ({
           />
           <Route
             path="/productos/:productId"
-            element={<ProductDetails addToCart={addToCart} />}
+            element={
+              <ProductDetails addToCart={addToCart} isDarkMode={isDarkMode} />
+            }
           />
           <Route path="/acerca-de" element={<AcercaDe />} />
           <Route path="/contacto" element={<Contacto />} />
