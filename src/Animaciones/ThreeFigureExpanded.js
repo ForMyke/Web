@@ -3,6 +3,9 @@ import * as THREE from "three";
 
 const ThreeFigureExpanded = ({ color }) => {
   const mountRef = useRef(null);
+  const rendererRef = useRef(null);
+  const cameraRef = useRef(null);
+  const particlesRef = useRef(null);
 
   useEffect(() => {
     const scene = new THREE.Scene();
@@ -10,7 +13,7 @@ const ThreeFigureExpanded = ({ color }) => {
       75,
       window.innerWidth / window.innerHeight,
       0.1,
-      2000
+      1000
     );
     camera.position.z = 5;
 
@@ -52,6 +55,10 @@ const ThreeFigureExpanded = ({ color }) => {
 
     window.addEventListener("resize", handleResize);
 
+    rendererRef.current = renderer;
+    cameraRef.current = camera;
+    particlesRef.current = particles;
+
     return () => {
       window.removeEventListener("resize", handleResize);
       if (mountRef.current) {
@@ -69,6 +76,7 @@ const ThreeFigureExpanded = ({ color }) => {
         left: 0,
         width: "100%",
         height: "100%",
+        overflow: "hidden", // Oculta el desplazamiento
       }}
     />
   );
