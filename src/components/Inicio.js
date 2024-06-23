@@ -9,7 +9,7 @@ const Inicio = () => {
   const [reviews, setReviews] = useState([
     {
       id: 1,
-      name: "Juan Pérez",
+      name: "Juan López",
       review: "Excelente servicio y productos de alta calidad.",
     },
     {
