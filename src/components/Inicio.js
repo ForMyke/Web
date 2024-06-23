@@ -41,10 +41,9 @@ const Inicio = () => {
     axios
       .get("http://localhost/backend/api/products.php")
       .then((response) => {
-        const techProducts = response.data.products.filter((product) =>
-          product.category.toLowerCase().includes("laptops")
-        );
-        setProducts(techProducts);
+        console.log(response.data);
+
+        setProducts(response.data);
       })
       .catch((error) => {
         console.error("Error con los objectos:", error);

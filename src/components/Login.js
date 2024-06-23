@@ -2,11 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
+import swal from "sweetalert";
+import JustValidate from "just-validate";
 
 const Login = () => {
   const navigate = useNavigate();
   const formRef = useRef(null);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (token) {
+      // Si tenemos un token, redirigimos al usuario a la página principal
+      navigate("../");
+    }
+  }, [token, navigate]);
 
   useEffect(() => {
     const validation = new JustValidate("#login-form");
@@ -30,9 +40,59 @@ const Login = () => {
       ])
       .onSuccess((event) => {
         event.preventDefault();
-        navigate("/Registro");
+        const formData = new FormData(formRef.current);
+        const email = formData.get("email");
+
+        if (showPasswordInput) {
+          const password = formData.get("password");
+          fetch("https://localhost/backend/api/contrasena.php", {
+            method: "POST",
+            body: JSON.stringify({ email, contrasena: password }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.success) {
+                localStorage.setItem("token", data.jwt); // Guarda el token JWT en localStorage
+                navigate("../");
+              } else {
+                swal({
+                  text: "Contraseña incorrecta",
+                  icon: "error",
+                  button: {
+                    text: "Aceptar",
+                    className: "btn btn-dark",
+                  },
+                });
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        } else {
+          fetch("https://localhost/backend/api/login.php", {
+            method: "POST",
+            body: JSON.stringify({ email }),
+            headers: {
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.exists) {
+                setShowPasswordInput(true);
+              } else {
+                navigate("/registro?email=" + email);
+              }
+            })
+            .catch((error) => {
+              console.error("Error:", error);
+            });
+        }
       });
-  }, [navigate]);
+  }, [navigate, showPasswordInput, token]);
 
   return (
     <div className="login-container d-flex flex-column justify-content-center align-items-center vh-100">
