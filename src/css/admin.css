@@ -13,13 +13,6 @@
   cursor: pointer;
 }
 
-.card-body {
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
 .admin-icon {
   width: 250px;
   height: 250px;

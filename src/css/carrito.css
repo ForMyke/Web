@@ -8,14 +8,23 @@
   border-bottom: 1px solid #e0e0e0;
   padding-bottom: 10px;
   margin-bottom: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .card {
   border: none;
+  margin-top: 20px;
 }
 
 .card-title {
   font-weight: bold;
+}
+
+.card-text {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .btn-block {
@@ -25,4 +34,32 @@
 
 .img-thumbnail {
   border: none;
+  max-width: 100px;
+  max-height: 100px;
+  object-fit: cover;
+}
+
+.cart-item-details {
+  flex-grow: 1;
+  margin-left: 20px;
+}
+
+.cart-item-price {
+  margin-left: auto;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.cart-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cart-buttons .btn {
+  margin-top: 5px;
+}
+
+.summary-icon {
+  margin-left: 5px;
 }

@@ -29,8 +29,16 @@ import Contacto from "./components/Contacto";
 import { ToastContainer, toast } from "react-toastify";
 import "./css/toast.css";
 import "react-toastify/dist/ReactToastify.css";
+import "./css/darkMode.css";
 
-const AppContent = ({ products, addToCart, cartItems, setCartItems }) => {
+const AppContent = ({
+  products,
+  addToCart,
+  cartItems,
+  setCartItems,
+  isDarkMode,
+  toggleDarkMode,
+}) => {
   const location = useLocation();
   const isAdminRoute =
     location.pathname.startsWith("/admin") ||
@@ -41,8 +49,10 @@ const AppContent = ({ products, addToCart, cartItems, setCartItems }) => {
     location.pathname.startsWith("/AdminProductos");
 
   return (
-    <div className="app-container">
-      {!isAdminRoute && <Header />}
+    <div className={`app-container ${isDarkMode ? "dark-mode" : ""}`}>
+      {!isAdminRoute && (
+        <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
+      )}
       <main className="flex-grow-1">
         <Routes>
           <Route path="/" element={<Inicio />} />
@@ -92,6 +102,7 @@ const AppContent = ({ products, addToCart, cartItems, setCartItems }) => {
 const App = () => {
   const [products, setProducts] = useState([]);
   const [cartItems, setCartItems] = useState([]);
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   useEffect(() => {
     axios
@@ -138,6 +149,10 @@ const App = () => {
     );
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   return (
     <BrowserRouter>
       <ToastContainer />
@@ -146,6 +161,8 @@ const App = () => {
         addToCart={addToCart}
         cartItems={cartItems}
         setCartItems={setCartItems}
+        isDarkMode={isDarkMode}
+        toggleDarkMode={toggleDarkMode}
       />
     </BrowserRouter>
   );

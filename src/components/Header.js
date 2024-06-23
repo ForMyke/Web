@@ -4,7 +4,8 @@ import { NavLink, Link } from "react-router-dom";
 import "../css/header.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-const Header = () => {
+
+const Header = ({ isDarkMode, toggleDarkMode }) => {
   return (
     <header className="header-container">
       <div className="logo text-center">
@@ -44,6 +45,9 @@ const Header = () => {
           <NavLink to="/login" className="nav-link">
             <i className="fas fa-sign-in-alt"></i>
           </NavLink>
+          <button onClick={toggleDarkMode} className="btn btn-dark-mode-toggle">
+            {isDarkMode ? "Modo Claro" : "Modo Oscuro"}
+          </button>
         </div>
       </div>
     </header>

@@ -3,6 +3,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import "../css/carrito.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 
 const Carrito = ({ cartItems, setCartItems }) => {
   const navigate = useNavigate();
@@ -65,17 +67,16 @@ const Carrito = ({ cartItems, setCartItems }) => {
             ) : (
               cartItems.map((item, index) => (
                 <div className="cart-item mb-3" key={index}>
-                  <div className="d-flex align-items-center">
-                    <img
-                      src={item.thumbnail}
-                      alt={item.title}
-                      className="img-thumbnail"
-                      style={{ width: "100px", height: "100px" }}
-                    />
-                    <div className="ms-3">
-                      <h5 className="mb-1">{item.title}</h5>
-                      <p className="mb-1">{item.description}</p>
-                      <p className="mb-1">Cantidad: {item.quantity}</p>
+                  <img
+                    src={item.thumbnail}
+                    alt={item.title}
+                    className="img-thumbnail"
+                  />
+                  <div className="cart-item-details">
+                    <h5 className="mb-1">{item.title}</h5>
+                    <p className="mb-1">{item.description}</p>
+                    <p className="mb-1">Cantidad: {item.quantity}</p>
+                    <div className="cart-buttons">
                       <button
                         className="btn btn-link p-0"
                         onClick={() => handleViewProduct(item.id)}
@@ -83,17 +84,17 @@ const Carrito = ({ cartItems, setCartItems }) => {
                         Ver producto
                       </button>
                       <button
-                        className="btn btn-link text-danger p-0 ms-3"
+                        className="btn btn-link text-danger p-0"
                         onClick={() => handleRemoveItem(index)}
                       >
                         Eliminar
                       </button>
                     </div>
-                    <div className="ms-auto" id="precio">
-                      <h5 className="mb-0">
-                        ${(item.price * item.quantity).toFixed(2)}
-                      </h5>
-                    </div>
+                  </div>
+                  <div className="cart-item-price">
+                    <h5 className="mb-0">
+                      ${(item.price * item.quantity).toFixed(2)}
+                    </h5>
                   </div>
                 </div>
               ))
@@ -103,16 +104,22 @@ const Carrito = ({ cartItems, setCartItems }) => {
             </div>
           </div>
           <div className="col-md-4">
-            <div>
+            <div className="card">
               <div className="card-body">
                 <h3 className="card-title">Resumen</h3>
                 <p className="card-text">
-                  Subtotal <span className="float-end">${getTotalPrice()}</span>
+                  Subtotal
+                  <FontAwesomeIcon
+                    icon={faInfoCircle}
+                    className="summary-icon"
+                  />
+                  <span className="float-end">${getTotalPrice()}</span>
                 </p>
                 <p className="card-text">
-                  Gastos de envío y gestión estimados{" "}
+                  Gastos de envío y gestión estimados
                   <span className="float-end">Gratis</span>
                 </p>
+                <hr />
                 <h4 className="card-text">
                   Total <span className="float-end">${getTotalPrice()}</span>
                 </h4>
