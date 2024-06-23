@@ -4,12 +4,25 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button, Col, Row } from "react-bootstrap";
 import swal from "sweetalert";
 import JustValidate from "just-validate";
+import { useNavigate } from "react-router-dom";
 import "../css/registro.css";
 
 const Registro = () => {
+  localStorage.removeItem("token");
+  const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("../");
+    }
+  }, [navigate]);
+
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const email = params.get("email") || "";
+
+  const [sessionChecked, setSessionChecked] = useState(false);
 
   const [formData, setFormData] = useState({
     nombre: "",
@@ -220,9 +233,7 @@ const Registro = () => {
   return (
     <div className="container mt-5 mb-4">
       <h2 className="text-center">Vamos a hacerte un Xclusive member.</h2>
-      <p className="text-center">
-        Hemos enviado un código a <strong>{email}</strong>
-      </p>
+      <br />
       <Form id="registroForm" onSubmit={handleSubmit}>
         <Row className="mb-3">
           <Form.Group as={Col}>
