@@ -160,12 +160,17 @@ CREATE TABLE `usuario` (
   `apellidos` varchar(100) DEFAULT NULL,
   `correo` varchar(100) DEFAULT NULL,
   `contraseña` char(32) DEFAULT NULL,
-  `numero` varchar(20) DEFAULT NULL,
   `preferencia` varchar(30) DEFAULT NULL,
   `fechaNac` date DEFAULT NULL,
   `saldo` decimal(10,2) DEFAULT NULL,
+  `CP` varchar(10) DEFAULT NULL,
+  `estado` varchar(30) DEFAULT NULL,
+  `municipio` varchar(30) DEFAULT NULL,
+  `colonia` varchar(30) DEFAULT NULL,
+  `calle` varchar(30) DEFAULT NULL,
+  `numCalle` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,7 +179,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,1,'admin','admin','admin@admin.com','21232f297a57a5a743894a0e4a801fc3','5566778899','Ropa','2003-01-25',5000.00);
+INSERT INTO `usuario` VALUES (1,1,'admin','admin','admin@admin.com','21232f297a57a5a743894a0e4a801fc3','Ropa','2003-01-25',5000.00,NULL,NULL,NULL,NULL,NULL,NULL),(59,0,'Jose Eduardo','Serrano Gayosso','marumarobird@gmail.com','5645d0f3ecb76e6d35044268cb34ff24','Accesorios','2003-01-25',5000.00,'54023','Mexico','Tlalnepantla de Baz','ahi por mi casita','mi rancho','540'),(60,0,'Jose Eduardo','Serrano Gayosso','marumarobird@gmail.comg','5645d0f3ecb76e6d35044268cb34ff24','Accesorios','2003-01-25',5000.00,'54023','Mexico','Tlalnepantla de Baz','ahi por mi casita','mi rancho','540'),(61,0,'Jose Eduardo','Serrano Gayosso','marumarobird@gmail.comga','5645d0f3ecb76e6d35044268cb34ff24','Accesorios','2003-01-25',5000.00,'54023','Mexico','Tlalnepantla de Baz','ahi por mi casita','mi rancho','540');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -187,4 +192,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-06-11 20:28:59
+-- Dump completed on 2024-06-20 22:13:11

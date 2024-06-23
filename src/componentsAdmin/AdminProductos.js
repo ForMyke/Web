@@ -11,8 +11,8 @@ const AdminProductos = () => {
 
   useEffect(() => {
     // Fetch products from API or backend
-    axios.get("https://api.npoint.io/3dcbf4a923f9995e08c1").then((response) => {
-      setProductos(response.data.products);
+    axios.get("http://localhost/backend/api/products.php").then((response) => {
+      setProductos(response.data);
     });
   }, []);
 

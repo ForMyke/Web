@@ -31,15 +31,14 @@ const Header = () => {
           </NavLink>
         </div>
         <div className="right-links d-flex align-items-center">
-          {" "}
           <NavLink to="/productos" className="nav-link">
             <i className="fas fa-box-open"></i>
           </NavLink>
-          <NavLink to="/perfil" className={"nav-link"}>
+          <NavLink to="/perfil" className="nav-link">
             <i className="fas fa-user"></i>
           </NavLink>
           <NavLink to="/carrito" className="nav-link">
-            <i className="fas fa-shopping-cart"></i>{" "}
+            <i className="fas fa-shopping-cart"></i>
           </NavLink>
           <NavLink to="/login" className="nav-link">
             <i className="fas fa-sign-in-alt"></i>
