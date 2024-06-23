@@ -47,7 +47,7 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
           <NavLink to="/login" className="nav-link">
             <i className="fas fa-sign-in-alt"></i>
           </NavLink>
-          <button onClick={toggleDarkMode} className="btn btn-dark-mode-toggle">
+          <button onClick={toggleDarkMode} className=" btn-dark-mode-toggle">
             <FontAwesomeIcon
               icon={isDarkMode ? faSun : faMoon}
               className="dark-mode-icon"

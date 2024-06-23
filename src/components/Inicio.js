@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/inicio.css";
 
-const Inicio = () => {
+const Inicio = ({ isDarkMode }) => {
   const [products, setProducts] = useState([]);
   const [reviews, setReviews] = useState([
     {
@@ -74,11 +74,16 @@ const Inicio = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="inicio-container">
-      <Alert variant="light" className="text-center mb-0">
+    <div className={`inicio-container ${isDarkMode ? "dark-mode" : ""}`}>
+      <Alert
+        variant={isDarkMode ? "dark" : "light"}
+        className="text-center mb-0"
+      >
         Unete y se parte de la familia Xclusive Store
       </Alert>
-      <div className="flash-sale bg-dark text-white text-center py-2">
+      <div
+        className={`flash-sale ${isDarkMode ? "bg-light text-dark" : "bg-dark text-white"} text-center py-2`}
+      >
         <h2 className="mb-0">Descuentos en todas nuestras áreas</h2>
         <p className="mb-0">¡No te lo pierdas! {formatTime(timeLeft)}</p>
       </div>

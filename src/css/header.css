@@ -44,9 +44,5 @@
   border: none;
   color: inherit;
   cursor: pointer;
-  font-size: 1.5rem;
-}
-
-.btn-dark-mode-toggle:hover {
-  color: #0793ff;
+  padding: 0;
 }
