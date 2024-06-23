@@ -12,8 +12,9 @@ const Admin = () => {
 
   return (
     <div className="admin-dashboard container-fluid">
-      <div className="header d-flex justify-content-center align-items-center py-3 mb-5">
-        <h1>Administrador</h1>
+      <div className="header d-flex justify-content-between align-items-center py-3 mb-5">
+        <h1 className="fs-1">Administrador</h1>
+        <button className="btn btn-dark btn-lg"> Salir</button>
       </div>
 
       <div className="row justify-content-center">
