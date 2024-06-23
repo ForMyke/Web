@@ -96,10 +96,9 @@ const ServicioCliente = () => {
         </div>
         <Form onSubmit={(e) => e.preventDefault()} className="w-100">
           <Form.Group controlId="inputText" className="mb-3">
-            <Form.Label>Escribe tu consulta</Form.Label>
             <Form.Control
               type="text"
-              placeholder="Escribe algo aquí..."
+              placeholder="Mensaje..."
               value={inputText}
               onChange={handleInputChange}
             />
