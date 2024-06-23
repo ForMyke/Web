@@ -6,7 +6,11 @@ header("Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token");
 // Conexión a la base de datos
 include '../conexion.php';
 
-// Consulta SQL para obtener todos los campos de la tabla products y las tablas relacionadas
+// Obtener la categoría desde el parámetro de consulta
+$category = isset($_GET['category']) ? $_GET['category'] : '';
+
+// Consulta SQL para obtener todos los campos de la tabla productos y las tablas relacionadas
+// Filtrar por categoría si se proporciona una
 $sql = "
     SELECT 
         p.id, p.title, p.description, p.category, p.price, p.discountPercentage, p.rating, p.stock, p.brand, p.sku, 
@@ -20,7 +24,18 @@ $sql = "
         LEFT JOIN imagenes_productos ip ON p.id = ip.producto_id
 ";
 
-$result = $conn->query($sql);
+if ($category) {
+    $sql .= " WHERE p.category = ?";
+}
+
+$stmt = $conn->prepare($sql);
+
+if ($category) {
+    $stmt->bind_param("s", $category);
+}
+
+$stmt->execute();
+$result = $stmt->get_result();
 
 if ($result === FALSE) {
     die("Error en la consulta SQL: " . $conn->error);
