@@ -18,6 +18,7 @@ import AdminGraficas from "./componentsAdmin/AdminGraficas";
 import Administradores from "./componentsAdmin/Administradores";
 import AdminProductos from "./componentsAdmin/AdminProductos";
 import AdminUsuarios from "./componentsAdmin/AdminUsuarios";
+import AdminPedidos from "./componentsAdmin/AdminPedidos";
 import ForgotPassword from "./components/ForgotPassword";
 import ServicioCliente from "./components/ServicioCliente";
 import Privacidad from "./components/Privacidad";
@@ -31,10 +32,17 @@ import "react-toastify/dist/ReactToastify.css";
 
 const AppContent = ({ products, addToCart, cartItems, setCartItems }) => {
   const location = useLocation();
+  const isAdminRoute =
+    location.pathname.startsWith("/admin") ||
+    location.pathname.startsWith("/AdminGraficas") ||
+    location.pathname.startsWith("/Administradores") ||
+    location.pathname.startsWith("/AdminUsuarios") ||
+    location.pathname.startsWith("/AdminPedidos") ||
+    location.pathname.startsWith("/AdminProductos");
 
   return (
-    <div>
-      {location.pathname !== "/admin" && <Header />}
+    <div className="app-container">
+      {!isAdminRoute && <Header />}
       <main className="flex-grow-1">
         <Routes>
           <Route path="/" element={<Inicio />} />
@@ -71,11 +79,12 @@ const AppContent = ({ products, addToCart, cartItems, setCartItems }) => {
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/AdminGraficas" element={<AdminGraficas />} />
           <Route path="/Administradores" element={<Administradores />} />
+          <Route path="/AdminPedidos" element={<AdminPedidos />} />
           <Route path="/AdminProductos" element={<AdminProductos />} />
           <Route path="/AdminUsuarios" element={<AdminUsuarios />} />
         </Routes>
       </main>
-      {location.pathname !== "/admin" && <Footer />}
+      {!isAdminRoute && <Footer />}
     </div>
   );
 };

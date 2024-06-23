@@ -15,12 +15,15 @@
 
 .card-body {
   padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.card-body img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
+.admin-icon {
+  width: 250px;
+  height: 250px;
+  object-fit: contain;
 }
 
 .clickable-card:hover {

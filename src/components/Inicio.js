@@ -25,14 +25,13 @@ const Inicio = () => {
     },
   ]);
 
-  // Estado del contador para 7 días
   const [timeLeft, setTimeLeft] = useState(() => {
     const savedTime = localStorage.getItem("flashSaleTime");
-    return savedTime ? parseInt(savedTime) : 7 * 24 * 60 * 60; // 7 días en segundos
+    return savedTime ? parseInt(savedTime) : 7 * 24 * 60 * 60;
   });
 
   useEffect(() => {
-    const category = "laptops"; // Cambia esto a la categoría que desees
+    const category = "laptops";
     axios
       .get(`http://localhost/backend/api/products.php?category=${category}`)
       .then((response) => {
@@ -57,7 +56,6 @@ const Inicio = () => {
       });
     }, 1000);
 
-    // Cleanup interval on component unmount
     return () => clearInterval(countdownInterval);
   }, []);
 
@@ -72,11 +70,9 @@ const Inicio = () => {
       .toString()
       .padStart(2, "0")}`;
   };
+
   const navigate = useNavigate();
 
-  const handleNavLinkClick = (url) => {
-    window.location.href = url;
-  };
   return (
     <div className="inicio-container">
       <Alert variant="light" className="text-center mb-0">
@@ -162,7 +158,7 @@ const Inicio = () => {
       </div>
 
       <div className="store-visit-section d-flex justify-content-around align-items-center py-5">
-        <div className="map-container" style={{ maxWidth: "600px" }}>
+        <div className="map-container">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3760.857272087078!2d-99.1487033!3d19.5047755!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f94c06d75fd7%3A0x3fe1567da2190ac9!2sESCOM%20-%20Escuela%20Superior%20de%20C%C3%B3mputo%20-%20IPN!5e0!3m2!1ses-419!2smx!4v1717204480754!5m2!1ses-419!2smx"
             width="600"
@@ -173,7 +169,7 @@ const Inicio = () => {
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>
-        <div className="store-info text-left">
+        <div className="store-info">
           <h2>Herramientas revolucionarias para mejorar tu rutina</h2>
           <p>
             Nuestra gama de productos tecnológicos tiene como objetivo agilizar

@@ -1,5 +1,6 @@
 .footer-container {
   background-color: #f8f9fa;
+  padding: 20px 0;
 }
 
 .footer-container .row {
@@ -33,4 +34,18 @@
 .footer-container .btn-dark:hover {
   background-color: #23272b;
   border-color: #1d2124;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .footer-container .row {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-container .col-md-3,
+  .footer-container .col-md-2 {
+    width: 100%;
+  }
 }
