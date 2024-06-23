@@ -31,7 +31,7 @@ const Inicio = () => {
   });
 
   useEffect(() => {
-    const category = "beauty"; // Cambia esto a la categoría que desees
+    const category = "laptops"; // Cambia esto a la categoría que desees
     axios
       .get(`http://localhost/backend/api/products.php?category=${category}`)
       .then((response) => {
@@ -90,8 +90,8 @@ const Inicio = () => {
           />
           <Carousel.Caption>
             <div className="caption-box">
-              <h3>$20,299.00</h3>
-              <p>Apple Mac M3</p>
+              <h3>Tecnología unica</h3>
+              <p>A la vanguardia con la tecnología</p>
             </div>
           </Carousel.Caption>
         </Carousel.Item>
@@ -104,7 +104,7 @@ const Inicio = () => {
           <Carousel.Caption>
             <div className="caption-box">
               <h3>Tecnología 2024</h3>
-              <button className="btn btn-primary">Comprar ahora</button>
+              <button className="btn btn-dark">Comprar ahora</button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>

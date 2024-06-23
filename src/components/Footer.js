@@ -2,6 +2,13 @@ import React from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/footer.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faGithub,
+  faInstagram,
+  faTwitter,
+  faFacebook,
+} from "@fortawesome/free-brands-svg-icons";
 
 const Footer = () => {
   const navigate = useNavigate();
@@ -79,13 +86,19 @@ const Footer = () => {
             <p>1-800-555-1234</p>
             <div>
               <a href="https://instagram.com" className="text-dark me-2">
-                <i className="fab fa-instagram"></i>
+                <FontAwesomeIcon icon={faInstagram} />
               </a>
               <a href="https://twitter.com" className="text-dark me-2">
-                <i className="fab fa-twitter"></i>
+                <FontAwesomeIcon icon={faTwitter} />
               </a>
               <a href="https://facebook.com" className="text-dark me-2">
-                <i className="fab fa-facebook"></i>
+                <FontAwesomeIcon icon={faFacebook} />
+              </a>
+              <a
+                href="https://github.com/ForMyke/Web/tree/master"
+                className="text-dark me-2"
+              >
+                <FontAwesomeIcon icon={faGithub} />
               </a>
             </div>
           </div>

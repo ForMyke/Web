@@ -10,10 +10,10 @@ const ThreeFigureExpanded = ({ color }) => {
   useEffect(() => {
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
-      75,
+      60,
       window.innerWidth / window.innerHeight,
-      0.1,
-      1000
+      5.8,
+      400
     );
     camera.position.z = 5;
 
@@ -41,8 +41,8 @@ const ThreeFigureExpanded = ({ color }) => {
 
     const animate = () => {
       requestAnimationFrame(animate);
-      particles.rotation.x += 0.001;
-      particles.rotation.y += 0.004;
+      particles.rotation.x += 0.003;
+      particles.rotation.y += 0.005;
       renderer.render(scene, camera);
     };
     animate();

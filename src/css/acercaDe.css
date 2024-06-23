@@ -1,5 +1,5 @@
 .acerca-de-container {
-  color: white; /* Asegura que el texto sea visible en fondo oscuro */
+  color: black; /* Asegura que el texto sea visible en fondo oscuro */
 }
 
 .overflow-hidden {
@@ -18,7 +18,7 @@
 }
 
 .centered-text {
-  color: white;
+  color: black;
   font-size: 30px; /* Tamaño de fuente grande */
 }
 
