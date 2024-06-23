@@ -35,7 +35,7 @@ ul li a {
 
 ul li a:hover {
   text-decoration: underline;
-  color: #495057; /* Un tono más oscuro de gris para el hover */
+  color: #495057;
 }
 
 ul li {

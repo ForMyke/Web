@@ -2,12 +2,21 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
+import swal from "sweetalert";
 import JustValidate from "just-validate";
 
 const Login = () => {
   const navigate = useNavigate();
   const formRef = useRef(null);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    if (token) {
+      // Si tenemos un token, redirigimos al usuario a la página principal
+      navigate("../");
+    }
+  }, [token, navigate]);
 
   useEffect(() => {
     const validation = new JustValidate("#login-form");
@@ -36,7 +45,6 @@ const Login = () => {
 
         if (showPasswordInput) {
           const password = formData.get("password");
-          console.log("Contraseña enviada:", password);
           fetch("https://localhost/backend/api/contrasena.php", {
             method: "POST",
             body: JSON.stringify({ email, contrasena: password }),
@@ -47,9 +55,17 @@ const Login = () => {
             .then((response) => response.json())
             .then((data) => {
               if (data.success) {
-                window.location.href = "./registro?email=" + email;
+                localStorage.setItem("token", data.jwt); // Guarda el token JWT en localStorage
+                navigate("../");
               } else {
-                alert("Contraseña incorrecta.");
+                swal({
+                  text: "Contraseña incorrecta",
+                  icon: "error",
+                  button: {
+                    text: "Aceptar",
+                    className: "btn btn-dark",
+                  },
+                });
               }
             })
             .catch((error) => {
@@ -68,7 +84,7 @@ const Login = () => {
               if (data.exists) {
                 setShowPasswordInput(true);
               } else {
-                window.location.href = "./registro?email=" + email;
+                navigate("/registro?email=" + email);
               }
             })
             .catch((error) => {
@@ -76,7 +92,7 @@ const Login = () => {
             });
         }
       });
-  }, [navigate, showPasswordInput]);
+  }, [navigate, showPasswordInput, token]);
 
   return (
     <div className="login-container d-flex flex-column justify-content-center align-items-center vh-100">

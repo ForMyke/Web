@@ -2,6 +2,10 @@
   color: white; /* Asegura que el texto sea visible en fondo oscuro */
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .black {
   background-color: black;
 }
