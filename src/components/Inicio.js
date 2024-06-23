@@ -104,7 +104,7 @@ const Inicio = () => {
           <Carousel.Caption>
             <div className="caption-box">
               <h3>Tecnología 2024</h3>
-              <button className="btn btn-primary">Comprar ahora</button>
+              <button className="btn btn-dark">Comprar ahora</button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>

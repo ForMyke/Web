@@ -3,7 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Form, Button } from "react-bootstrap";
 import "../css/contraseña.css";
-import { Link } from "react-router-dom"; // Importar Link de react-router-dom
+import { Link } from "react-router-dom";
 
 const PasswordLogin = () => {
   const [password, setPassword] = useState("");
