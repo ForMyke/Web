@@ -75,7 +75,7 @@ const Inicio = () => {
   return (
     <div className="inicio-container">
       <Alert variant="light" className="text-center mb-0">
-        Unete y se parte de la familia Xclusive Store
+        Unete ahora y se parte de la familia Xclusive Store
       </Alert>
       <div className="flash-sale bg-dark text-white text-center py-2">
         <h2 className="mb-0">Descuentos en todas nuestras áreas</h2>
