@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/inicio.css";
 import { Carousel, Alert } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../css/inicio.css"; // Asegúrate de crear y usar este archivo CSS
+
 const Inicio = () => {
   const [products, setProducts] = useState([]);
   const [reviews, setReviews] = useState([
     {
       id: 1,
-      name: "Juan López",
+      name: "Juan Pérez",
       review: "Excelente servicio y productos de alta calidad.",
     },
     {
@@ -24,28 +24,62 @@ const Inicio = () => {
     },
   ]);
 
+  // Estado del contador para 7 días
+  const [timeLeft, setTimeLeft] = useState(() => {
+    const savedTime = localStorage.getItem("flashSaleTime");
+    return savedTime ? parseInt(savedTime) : 7 * 24 * 60 * 60; // 7 días en segundos
+  });
+
   useEffect(() => {
     const category = "beauty"; // Cambia esto a la categoría que desees
     axios
       .get(`http://localhost/backend/api/products.php?category=${category}`)
       .then((response) => {
         console.log(response.data);
-
         setProducts(response.data);
       })
       .catch((error) => {
-        console.error("Error con los objectos:", error);
+        console.error("Error fetching products:", error);
       });
   }, []);
+
+  useEffect(() => {
+    const countdownInterval = setInterval(() => {
+      setTimeLeft((prevTimeLeft) => {
+        if (prevTimeLeft <= 0) {
+          clearInterval(countdownInterval);
+          return 0;
+        }
+        const newTimeLeft = prevTimeLeft - 1;
+        localStorage.setItem("flashSaleTime", newTimeLeft);
+        return newTimeLeft;
+      });
+    }, 1000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(countdownInterval);
+  }, []);
+
+  const formatTime = (seconds) => {
+    const days = Math.floor(seconds / (24 * 3600));
+    const hours = Math.floor((seconds % (24 * 3600)) / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    const secs = seconds % 60;
+    return `${days.toString().padStart(2, "0")}:${hours
+      .toString()
+      .padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:${secs
+      .toString()
+      .padStart(2, "0")}`;
+  };
 
   return (
     <div className="inicio-container">
       <Alert variant="light" className="text-center mb-0">
-        Unete ahora y se parte de la familia Xclusive Store
+        Unete y se parte de la familia Xclusive Store
       </Alert>
       <div className="flash-sale bg-dark text-white text-center py-2">
-        <h2 className="mb-0">Flash Sale: -20%</h2>
-        <p className="mb-0">¡No te lo pierdas! 00:02:58:42</p>
+        <h2 className="mb-0">Descuentos en todas nuestras áreas</h2>
+        <p className="mb-0">¡No te lo pierdas! {formatTime(timeLeft)}</p>
       </div>
       <Carousel>
         <Carousel.Item>
