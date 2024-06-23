@@ -13,7 +13,16 @@ const Productos = () => {
     axios
       .get("http://localhost/backend/api/products.php")
       .then((response) => {
-        setProducts(response.data);
+        const sortedProducts = response.data.sort((a, b) => {
+          if (a.category === "laptops" && b.category !== "laptops") {
+            return -1;
+          }
+          if (a.category !== "laptops" && b.category === "laptops") {
+            return 1;
+          }
+          return 0;
+        });
+        setProducts(sortedProducts);
       })
       .catch((error) => {
         console.error("Error fetching products:", error);

@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,10 @@ import {
 
 const Footer = () => {
   const navigate = useNavigate();
+
+  const handleNavLinkClick = (url) => {
+    window.location.href = url;
+  };
 
   return (
     <footer className="bg-light text-dark py-4 mt-auto w-100">
@@ -31,14 +35,20 @@ const Footer = () => {
             <h6 className="font-weight-bold">Compañía</h6>
             <ul className="list-unstyled">
               <li>
-                <NavLink to="/acerca-de" className="text-dark nav-link">
+                <span
+                  className="text-dark nav-link cursor-pointer"
+                  onClick={() => handleNavLinkClick("/acerca-de")}
+                >
                   Acerca de
-                </NavLink>
+                </span>
               </li>
               <li>
-                <NavLink to="/servicioCliente" className="text-dark nav-link">
+                <span
+                  className="text-dark nav-link cursor-pointer"
+                  onClick={() => handleNavLinkClick("/servicioCliente")}
+                >
                   Servicio al Cliente
-                </NavLink>
+                </span>
               </li>
             </ul>
           </div>
@@ -46,19 +56,28 @@ const Footer = () => {
             <h6 className="font-weight-bold">Legal</h6>
             <ul className="list-unstyled">
               <li>
-                <NavLink to="/privacidad" className="text-dark nav-link">
+                <span
+                  className="text-dark nav-link cursor-pointer"
+                  onClick={() => handleNavLinkClick("/privacidad")}
+                >
                   Privacidad
-                </NavLink>
+                </span>
               </li>
               <li>
-                <NavLink to="/seguridad" className="text-dark nav-link">
+                <span
+                  className="text-dark nav-link cursor-pointer"
+                  onClick={() => handleNavLinkClick("/seguridad")}
+                >
                   Seguridad
-                </NavLink>
+                </span>
               </li>
               <li>
-                <NavLink to="/letra-chica" className="text-dark nav-link">
+                <span
+                  className="text-dark nav-link cursor-pointer"
+                  onClick={() => handleNavLinkClick("/letra-chica")}
+                >
                   Letra chica
-                </NavLink>
+                </span>
               </li>
             </ul>
           </div>
@@ -66,17 +85,20 @@ const Footer = () => {
             <h6 className="font-weight-bold">Ayuda</h6>
             <ul className="list-unstyled">
               <li>
-                <NavLink
-                  to="/preguntas-frecuentes"
-                  className="text-dark nav-link"
+                <span
+                  className="text-dark nav-link cursor-pointer"
+                  onClick={() => handleNavLinkClick("/preguntas-frecuentes")}
                 >
                   Preguntas más frecuentes
-                </NavLink>
+                </span>
               </li>
               <li>
-                <NavLink to="/contacto" className="text-dark nav-link">
+                <span
+                  className="text-dark nav-link cursor-pointer"
+                  onClick={() => handleNavLinkClick("/contacto")}
+                >
                   Contacto
-                </NavLink>
+                </span>
               </li>
             </ul>
           </div>

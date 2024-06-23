@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Carousel, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "../css/inicio.css"; // Asegúrate de crear y usar este archivo CSS
+import "../css/inicio.css";
 
 const Inicio = () => {
   const [products, setProducts] = useState([]);
@@ -71,7 +72,11 @@ const Inicio = () => {
       .toString()
       .padStart(2, "0")}`;
   };
+  const navigate = useNavigate();
 
+  const handleNavLinkClick = (url) => {
+    window.location.href = url;
+  };
   return (
     <div className="inicio-container">
       <Alert variant="light" className="text-center mb-0">
@@ -104,7 +109,12 @@ const Inicio = () => {
           <Carousel.Caption>
             <div className="caption-box">
               <h3>Tecnología 2024</h3>
-              <button className="btn btn-dark">Comprar ahora</button>
+              <button
+                className="btn btn-dark"
+                onClick={() => navigate("/productos")}
+              >
+                Comprar ahora
+              </button>
             </div>
           </Carousel.Caption>
         </Carousel.Item>

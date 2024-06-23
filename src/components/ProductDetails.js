@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Carousel } from "react-bootstrap";
-import "../css/paginaProducto.css";
+import { Tab, Nav } from "react-bootstrap";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import "../css/paginaProducto.css"; // Asegúrate de crear y usar este archivo CSS
 
 const ProductDetails = ({ addToCart }) => {
   const { productId } = useParams();
@@ -49,7 +51,6 @@ const ProductDetails = ({ addToCart }) => {
       quantity,
     };
     addToCart(productToAdd);
-    navigate("/carrito");
   };
 
   return (
@@ -57,28 +58,10 @@ const ProductDetails = ({ addToCart }) => {
       <div className="row">
         <div className="col-md-6">
           <div className="product-images">
-            <Carousel>
-              {product.images && product.images.length > 0 ? (
-                product.images.map((image, index) => (
-                  <Carousel.Item key={index}>
-                    <img
-                      src={image}
-                      className="d-block w-100"
-                      alt={`${product.title} ${index + 1}`}
-                    />
-                  </Carousel.Item>
-                ))
-              ) : (
-                <Carousel.Item>
-                  <img
-                    src={mainImage}
-                    className="d-block w-100"
-                    alt="No image available"
-                  />
-                </Carousel.Item>
-              )}
-            </Carousel>
-            <div className="product-thumbnails mt-3 d-flex justify-content-around">
+            <div className="main-image">
+              <img src={mainImage} className="img-fluid" alt={product.title} />
+            </div>
+            <div className="thumbnail-images mt-3 d-flex flex-column">
               {product.images &&
                 product.images.length > 0 &&
                 product.images.map((image, index) => (
@@ -86,8 +69,8 @@ const ProductDetails = ({ addToCart }) => {
                     key={index}
                     src={image}
                     alt={`${product.title} ${index + 1}`}
-                    className="img-thumbnail"
-                    style={{ width: "20%", cursor: "pointer" }}
+                    className="img-thumbnail mb-2"
+                    style={{ cursor: "pointer", width: "100px" }}
                     onClick={() => handleThumbnailClick(image)}
                   />
                 ))}
@@ -101,11 +84,21 @@ const ProductDetails = ({ addToCart }) => {
           <h4>Marca: {product.brand}</h4>
           <p>Stock: {product.stock}</p>
           <p>Descuento: {product.discountPercentage}%</p>
+          <p>SKU: {product.sku}</p>
+          <p>Peso: {product.weight}</p>
+          <p>
+            Dimensiones: {product.dimensions.width} x{" "}
+            {product.dimensions.height} x {product.dimensions.depth}
+          </p>
+          <p>Información de garantía: {product.warrantyInformation}</p>
+          <p>Información de envío: {product.shippingInformation}</p>
+          <p>Estado de disponibilidad: {product.availabilityStatus}</p>
+          <p>Política de devoluciones: {product.returnPolicy}</p>
+          <p>Cantidad mínima de pedido: {product.minimumOrderQuantity}</p>
           <div className="product-rating">
             <span>Rating: {product.rating}</span>
             <span className="ms-2">Categoría: {product.category}</span>
           </div>
-          <div className="product-options mt-3"></div>
           <div className="product-quantity mt-3">
             <label>Cantidad</label>
             <div className="quantity-control d-flex align-items-center">
@@ -137,76 +130,33 @@ const ProductDetails = ({ addToCart }) => {
         </div>
       </div>
       <div className="product-info-tabs mt-5">
-        <ul className="nav nav-tabs" id="myTab" role="tablist">
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link active"
-              id="characteristics-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#characteristics"
-              type="button"
-              role="tab"
-              aria-controls="characteristics"
-              aria-selected="true"
-            >
-              Características
-            </button>
-          </li>
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link"
-              id="reviews-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#reviews"
-              type="button"
-              role="tab"
-              aria-controls="reviews"
-              aria-selected="false"
-            >
-              Reseñas
-            </button>
-          </li>
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link"
-              id="shipping-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#shipping"
-              type="button"
-              role="tab"
-              aria-controls="shipping"
-              aria-selected="false"
-            >
-              Envío
-            </button>
-          </li>
-        </ul>
-        <div className="tab-content" id="myTabContent">
-          <div
-            className="tab-pane fade show active"
-            id="characteristics"
-            role="tabpanel"
-            aria-labelledby="characteristics-tab"
-          >
-            <h3>Características</h3>
-            <ul>
-              <li>Marca: {product.brand}</li>
-              <li>Precio: ${product.price}</li>
-              <li>Stock: {product.stock}</li>
-              <li>Descuento: {product.discountPercentage}%</li>
-              <li>Rating: {product.rating}</li>
-              <li>Categoría: {product.category}</li>
-            </ul>
-          </div>
-          <div
-            className="tab-pane fade"
-            id="reviews"
-            role="tabpanel"
-            aria-labelledby="reviews-tab"
-          >
-            <h3>Reseñas</h3>
-            {product.reviews && product.reviews.length > 0 ? (
-              product.reviews.map((review, index) => (
+        <Tab.Container defaultActiveKey="characteristics">
+          <Nav variant="tabs">
+            <Nav.Item>
+              <Nav.Link eventKey="characteristics">Características</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="reviews">Reseñas</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="shipping">Envío</Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <Tab.Content className="mt-3">
+            <Tab.Pane eventKey="characteristics">
+              <h3>Características</h3>
+              <ul>
+                <li>Marca: {product.brand}</li>
+                <li>Precio: ${product.price}</li>
+                <li>Stock: {product.stock}</li>
+                <li>Descuento: {product.discountPercentage}%</li>
+                <li>Rating: {product.rating}</li>
+                <li>Categoría: {product.category}</li>
+              </ul>
+            </Tab.Pane>
+            <Tab.Pane eventKey="reviews">
+              <h3>Reseñas</h3>
+              {product.reviews.map((review, index) => (
                 <div key={index} className="review-item">
                   <p>
                     <strong>{review.reviewerName}</strong>: {review.comment}
@@ -215,21 +165,14 @@ const ProductDetails = ({ addToCart }) => {
                     Rating: {review.rating} - {review.date}
                   </p>
                 </div>
-              ))
-            ) : (
-              <p>No hay reseñas disponibles</p>
-            )}
-          </div>
-          <div
-            className="tab-pane fade"
-            id="shipping"
-            role="tabpanel"
-            aria-labelledby="shipping-tab"
-          >
-            <h3>Envío</h3>
-            <p>{product.shippingInformation}</p>
-          </div>
-        </div>
+              ))}
+            </Tab.Pane>
+            <Tab.Pane eventKey="shipping">
+              <h3>Envío</h3>
+              <p>{product.shippingInformation}</p>
+            </Tab.Pane>
+          </Tab.Content>
+        </Tab.Container>
       </div>
     </div>
   );

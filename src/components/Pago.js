@@ -2,7 +2,13 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/pago.css";
 
-const Pago = () => {
+const Pago = ({ cartItems }) => {
+  const getTotalPrice = () => {
+    return cartItems
+      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .toFixed(2);
+  };
+
   return (
     <div className="container mt-5 mb-5">
       <h2 className="text-center mb-4">Proceso de compra</h2>
@@ -196,21 +202,23 @@ const Pago = () => {
           <div>
             <div className="card-body">
               <h4 className="card-title">Resumen de la compra</h4>
-              <p>
-                Producto 1 <span className="float-right">$2,079.20</span>
-              </p>
+              {cartItems.map((item, index) => (
+                <p key={index}>
+                  {item.title} ({item.quantity}){" "}
+                  <span className="float-right">
+                    ${(item.price * item.quantity).toFixed(2)}
+                  </span>
+                </p>
+              ))}
               <hr />
               <p>
-                Subtotal <span className="float-right">$2,599.00</span>
-              </p>
-              <p>
-                Descuentos <span className="float-right">-$519.80</span>
+                Subtotal <span className="float-right">${getTotalPrice()}</span>
               </p>
               <p>
                 Gastos del envío <span className="float-right">Gratis</span>
               </p>
               <h5>
-                Total <span className="float-right">$2,079.20</span>
+                Total <span className="float-right">${getTotalPrice()}</span>
               </h5>
               <form className="mt-3">
                 <div className="form-group mb-3">

@@ -1,8 +1,9 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { NavLink, Link } from "react-router-dom";
-import "../css/header.css"; // Asegúrate de que este archivo importa Font Awesome
-
+import "../css/header.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 const Header = () => {
   return (
     <header className="header-container">
