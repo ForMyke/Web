@@ -1,41 +1,42 @@
-body {
-  background-color: #f8f9fa;
-}
-
 .container {
-  max-width: 80%;
+  padding: 20px;
 }
 
-.card {
-  border: none;
+.btn-dark {
+  background-color: #000;
+  border-color: #000;
 }
 
-.card-title {
-  font-weight: bold;
+.btn-dark:hover {
+  background-color: #333;
+  border-color: #333;
 }
 
-.form-group label {
-  font-weight: bold;
+.text-center {
+  text-align: center;
 }
 
-.form-group small {
-  display: block;
-  margin-top: 5px;
-  color: #6c757d;
+.text-decoration-none {
+  text-decoration: none;
 }
 
-.float-right {
-  float: right;
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
-.btn {
-  font-weight: bold;
-}
+@media (max-width: 576px) {
+  .container {
+    padding: 5px;
+  }
 
-a {
-  color: #007bff;
-}
-
-a:hover {
-  color: #0056b3;
+  .form-check-label {
+    font-size: 0.8rem; /* Reduce el tamaño de la letra del campo de marcar */
+  }
 }

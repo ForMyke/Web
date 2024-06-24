@@ -40,3 +40,27 @@
   position: absolute;
   width: 1px;
 }
+
+@media (max-width: 576px) {
+  .login-form {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .login-container {
+    padding: 5px;
+  }
+
+  .logo {
+    max-height: 80px;
+  }
+
+  h2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .form-check-label {
+    font-size: 0.8rem; /* Reduce el tamaño de la letra del campo de marcar */
+  }
+}

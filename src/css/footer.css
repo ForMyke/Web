@@ -1,10 +1,5 @@
 .footer-container {
-  background-color: #f8f9fa;
   padding: 20px 0;
-}
-
-.footer-container .row {
-  justify-content: space-between;
 }
 
 .footer-container .col-md-3,

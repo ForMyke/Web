@@ -32,8 +32,16 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
         </button>
       </div>
       <div className="collapse navbar-collapse" id="navbarNav">
-        <div className="top-nav d-flex justify-content-between align-items-center">
+        <div className="top-nav d-flex justify-content-between align-items-center w-100">
           <div className="left-links d-flex">
+            <NavLink to="/acerca-de" className="nav-link pr-3">
+              Acerca de
+            </NavLink>
+            <NavLink to="/servicioCliente" className="nav-link">
+              Servicio Cliente
+            </NavLink>
+          </div>
+          <div className="right-links d-flex ml-auto">
             <NavLink to="/" className="nav-link">
               <i className="fas fa-home icon-placeholder"></i>
             </NavLink>
@@ -58,14 +66,6 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
                 className="icon-placeholder"
               />
             </button>
-          </div>
-          <div className="right-links d-flex">
-            <NavLink to="/acerca-de" className="nav-link pr-3">
-              Acerca de
-            </NavLink>
-            <NavLink to="/servicioCliente" className="nav-link">
-              Servicio Cliente
-            </NavLink>
           </div>
         </div>
       </div>

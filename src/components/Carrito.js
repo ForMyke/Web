@@ -60,7 +60,7 @@ const Carrito = ({ cartItems, setCartItems }) => {
     <div className="carrito-container mt-5">
       <div className="container-fluid">
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-lg-8">
             <h2>Bolsa de compra</h2>
             {cartItems.length === 0 ? (
               <p>No hay productos en el carrito</p>
@@ -103,7 +103,7 @@ const Carrito = ({ cartItems, setCartItems }) => {
               <small>Asegúrate de revisar tu pedido antes de comprar.</small>
             </div>
           </div>
-          <div className="col-md-4">
+          <div className="col-lg-4">
             <div className="card">
               <div className="card-body">
                 <h3 className="card-title">Resumen</h3>

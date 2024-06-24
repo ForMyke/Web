@@ -1,12 +1,34 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/pago.css";
+import Swal from "sweetalert2";
 
 const Pago = ({ cartItems }) => {
   const getTotalPrice = () => {
     return cartItems
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+
+    if (!form.querySelector("#terms").checked) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Debe aceptar los términos y condiciones",
+        footer: '<a href="#">Why do I have this issue?</a>',
+      });
+      return;
+    }
+
+    Swal.fire({
+      icon: "success",
+      title: "Compra Realizada",
+      text: "Su compra se realizo con exito",
+    });
   };
 
   return (
@@ -21,7 +43,7 @@ const Pago = ({ cartItems }) => {
                 Solicitamos únicamente la información esencial para la
                 finalización de la compra.
               </p>
-              <form>
+              <form onSubmit={handleSubmit}>
                 <div className="form-group mb-3">
                   <label>Correo *</label>
                   <input
@@ -60,6 +82,15 @@ const Pago = ({ cartItems }) => {
                     required
                   />
                 </div>
+                <div className="form-group mb-3">
+                  <label>
+                    <input type="checkbox" id="terms" /> He leído y acepto la
+                    Política de Privacidad de PayPal.
+                  </label>
+                </div>
+                <button type="submit" className="btn btn-dark btn-block w-100">
+                  Continuar
+                </button>
               </form>
             </div>
           </div>
@@ -188,12 +219,6 @@ const Pago = ({ cartItems }) => {
                     la próxima compra en este sitio web.
                   </label>
                 </div>
-                <div className="form-group mb-3">
-                  <label>
-                    <input type="checkbox" required /> He leído y acepto la
-                    Política de Privacidad de PayPal.
-                  </label>
-                </div>
               </form>
             </div>
           </div>
@@ -220,7 +245,7 @@ const Pago = ({ cartItems }) => {
               <h5>
                 Total <span className="float-right">${getTotalPrice()}</span>
               </h5>
-              <form className="mt-3">
+              <form className="mt-3" onSubmit={handleSubmit}>
                 <div className="form-group mb-3">
                   <label>Código</label>
                   <input
@@ -232,7 +257,7 @@ const Pago = ({ cartItems }) => {
                 </div>
                 <div className="form-group">
                   <label>
-                    <input type="checkbox" required /> He leído el{" "}
+                    <input type="checkbox" id="terms" required /> He leído el{" "}
                     <a href="#">Aviso de Privacidad</a>
                   </label>
                 </div>
