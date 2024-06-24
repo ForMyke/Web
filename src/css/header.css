@@ -6,12 +6,8 @@
   border-bottom: 1px solid #ddd;
 }
 
-.logo-container {
-  padding: 20px 0;
-}
-
-.logo {
-  max-height: 70px;
+.logo-1 {
+  max-height: 75px;
 }
 
 .top-nav {
@@ -24,13 +20,12 @@
 .left-links .nav-link,
 .right-links .nav-link {
   color: black;
-  margin-right: 20px;
   text-decoration: none;
   font-weight: bold;
 }
 
 .left-links .nav-link:hover,
-.right-links .nav-link:hoaver {
+.right-links .nav-link:hover {
   text-decoration: underline;
 }
 
@@ -45,4 +40,73 @@
   color: inherit;
   cursor: pointer;
   padding: 0;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 575.98px) {
+  .top-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .navbar-toggler {
+    display: block;
+    border: none;
+    background: none;
+  }
+
+  .navbar-collapse {
+    display: none;
+  }
+
+  .navbar-collapse.show {
+    display: block;
+  }
+
+  .left-links,
+  .right-links {
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
+
+  .nav-link {
+    margin: 10px 0;
+    text-align: left;
+  }
+
+  .icon-placeholder {
+    margin-left: 0;
+    margin-right: 20px; /* Align icons to the right */
+  }
+}
+
+/* Estilos para pantallas medianas y grandes (tablets y laptops) */
+@media (min-width: 576px) {
+  .top-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 40px;
+  }
+
+  .navbar-toggler {
+    display: none;
+  }
+
+  .navbar-collapse {
+    display: flex !important;
+  }
+
+  .left-links {
+    display: flex;
+  }
+
+  .right-links {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Alinea los enlaces a la derecha */
+    margin-left: auto; /* Empuja el grupo de enlaces a la derecha */
+  }
 }
