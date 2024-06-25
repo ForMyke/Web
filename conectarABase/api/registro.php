@@ -4,6 +4,9 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Content-Type: application/json");
+require __DIR__ . '/vendor/autoload.php';
+
+use Firebase\JWT\JWT;
 
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     exit();
@@ -45,7 +48,27 @@ if ($count > 0) {
     VALUES(0, '$nombre', '$apellido', '$email', MD5('$contrasena'), '$preferencia', '$nacimiento', 10000, '$codigoPostal', '$estado', '$municipio', '$colonia', '$calle', '$numero')";
     $resultado = $conn->query($query);
 
-    $response = ["success" => "Usuario registrado correctamente"];
+    $query = "SELECT id, nombre, correo, contraseña FROM usuario WHERE correo = ?";
+    $stmt = $conn->prepare($query);
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $stmt->bind_result($id, $nombre, $correo, $hashed_password);
+    $stmt->fetch();
+
+
+    $bytes = openssl_random_pseudo_bytes(32);
+    $secret_key = base64_encode($bytes);
+    $issued_at = time();
+    $expiration_time = $issued_at +  180* 60; // El token expira en 1 hora
+    $payload = array(
+        'id' => $id,
+        'nombre' => $nombre,
+        'correo' => $email,
+        'iat' => $issued_at,
+        'exp' => $expiration_time
+    );
+    $jwt = JWT::encode($payload, $secret_key, 'HS256');
+    $response = array("success" => "Usuario registrado correctamente", "jwt" => $jwt);
 }
 
 echo json_encode($response);

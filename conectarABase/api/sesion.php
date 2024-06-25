@@ -11,12 +11,14 @@ $email = $data['email'] ?? null;
 include '../conexion.php';
 
 if ($email) {
-    $query = "SELECT nombre, correo, apellidos, fechaNac, preferencia, saldo FROM usuario WHERE correo = ?";
+    $query = "SELECT nombre, correo, apellidos, fechaNac, preferencia, saldo, CP, estado, municipio, colonia, calle,
+    numCalle FROM usuario WHERE correo = ?";
     $stmt = $conn->prepare($query);
     if ($stmt) {
         $stmt->bind_param('s', $email);
         $stmt->execute();
-        $stmt->bind_result($nombre, $correo, $apellidos, $fechaNac, $preferencia, $saldo);
+        $stmt->bind_result($nombre, $correo, $apellidos, $fechaNac, $preferencia, $saldo, $CP, $estado, $municipio,
+        $colonia, $calle, $numCalle);
         $stmt->fetch();
         $stmt->close();
 
@@ -26,7 +28,13 @@ if ($email) {
             "apellidos" => $apellidos,
             "fechaNac" => $fechaNac,
             "preferencia" => $preferencia,
-            "saldo" => $saldo
+            "saldo" => $saldo,
+            "CP" => $CP,
+            "estado" => $estado,
+            "municipio" => $municipio,
+            "colonia" => $colonia,
+            "calle" => $calle,
+            "numCalle" => $numCalle
         );
 
         echo json_encode(array("success" => true, "user" => $user));

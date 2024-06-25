@@ -8,12 +8,19 @@ import { useNavigate } from "react-router-dom";
 import "../css/registro.css";
 
 const Registro = () => {
-  localStorage.removeItem("token");
   const navigate = useNavigate();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      navigate("../");
+    }
+  }, [navigate]);
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const email = params.get("email") || "";
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   const [sessionChecked, setSessionChecked] = useState(false);
 
@@ -206,6 +213,10 @@ const Registro = () => {
                 text: "Aceptar",
                 className: "btn btn-dark",
               },
+            }).then(() => {
+              // Redireccionar después de hacer clic en Aceptar en SweetAlert
+              localStorage.setItem("token", result.jwt);
+              navigate("../");
             });
           }
         })

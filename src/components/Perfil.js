@@ -79,7 +79,7 @@ const Perfil = () => {
   return (
     <div className="container mt-5 perfil-container">
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Mi perfil</h2>
+        <h1>Mi perfil</h1>
         <div>
           <button
             className="btn btn-outline-dark me-2"
@@ -121,23 +121,11 @@ const Perfil = () => {
         </div>
       </div>
 
-      <div className=" mb-4">
-        <div className="card-body">
-          <h5 className="card-title">Configuración de pago </h5>
-          <p className="card-text">
-            No hay ninguna tarjeta guardada actualmente. Puedes agregar nuevos
-            métodos de pago durante el proceso de compra.
-          </p>
-        </div>
-      </div>
 
       <div className=" mb-4">
         <div className="card-body">
           <h5 className="card-title">Dirección </h5>
-          <p className="card-text">
-            También puedes agregar y editar tus direcciones de entrega aquí
-          </p>
-          <p className="card-text">No se guardó tu domicilio.</p>
+          <p className="card-text">{user.calle} {user.numCalle}, {user.colonia}. {user.municipio}, {user.estado}. C.P. {user.CP}</p>
         </div>
       </div>
 
