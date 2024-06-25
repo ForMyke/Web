@@ -10,13 +10,6 @@ import "../css/registro.css";
 const Registro = () => {
   localStorage.removeItem("token");
   const navigate = useNavigate();
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      navigate("../");
-    }
-  }, [navigate]);
 
   const location = useLocation();
   const params = new URLSearchParams(location.search);

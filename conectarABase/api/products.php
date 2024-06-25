@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *"); // Permitir acceso desde cualquier origen
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token");
+header("Content-Type: application/json");
 
 // Conexión a la base de datos
 include '../conexion.php';

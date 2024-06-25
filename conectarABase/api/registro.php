@@ -42,7 +42,7 @@ if ($count > 0) {
 } else {
 
     $query = "INSERT INTO usuario(tipo, nombre, apellidos, correo, contraseña, preferencia, fechaNac, saldo, CP, estado, municipio, colonia, calle, numCalle)
-    VALUES(0, '$nombre', '$apellido', '$email', MD5('$contrasena'), '$preferencia', '$nacimiento', 5000, '$codigoPostal', '$estado', '$municipio', '$colonia', '$calle', '$numero')";
+    VALUES(0, '$nombre', '$apellido', '$email', MD5('$contrasena'), '$preferencia', '$nacimiento', 10000, '$codigoPostal', '$estado', '$municipio', '$colonia', '$calle', '$numero')";
     $resultado = $conn->query($query);
 
     $response = ["success" => "Usuario registrado correctamente"];

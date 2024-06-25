@@ -1,17 +1,80 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/perfil.css";
+import{jwtDecode} from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
-const Perfil = ({ user }) => {
+const Perfil = () => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Obtener el token JWT desde el almacenamiento local
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      try {
+        // Decodificar el token JWT para obtener el correo del usuario
+        const decoded = jwtDecode(token);
+        console.log("Token decodificado:", decoded); // Verifica el contenido del token decodificado
+        const userEmail = decoded.correo;
+
+        fetch("https://localhost/backend/api/sesion.php", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email: userEmail }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.success) {
+              setUser(data.user);
+            } else {
+              setError("Error al obtener los datos del usuario: " + data.message);
+            }
+          })
+          .catch((error) => {
+            setError("Error al obtener los datos del usuario: " + error.message);
+          })
+          .finally(() => {
+            setLoading(false);
+          });
+      } catch (e) {
+        setError("Token inválido.");
+        setLoading(false);
+      }
+    } else {
+      setLoading(false);
+      navigate("/login");
+    }
+  }, []);
+
   const handleLogout = () => {
     // Lógica para cerrar sesión
+    localStorage.removeItem("token");
     console.log("Cerrar sesión");
+    navigate("/login");
   };
 
   const handleViewPurchases = () => {
     // Lógica para ver compras realizadas
     console.log("Ver compras realizadas");
   };
+
+  if (loading) {
+    return <div>Cargando...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!user) {
+    return <div>No has iniciado sesión.</div>;
+  }
 
   return (
     <div className="container mt-5 perfil-container">
@@ -30,37 +93,30 @@ const Perfil = ({ user }) => {
       <div className=" mb-4">
         <div className="card-body">
           <h5 className="card-title">Mi información </h5>
+          <br></br>
           <p className="card-text">
             <strong>Correo electrónico: </strong>
-            {user.email}
+            {user.correo}
           </p>
           <p className="card-text">
             <strong>Nombre: </strong>
-            {user.firstName}
+            {user.nombre}
           </p>
           <p className="card-text">
             <strong>Apellido: </strong>
-            {user.lastName}
+            {user.apellidos}
           </p>
           <p className="card-text">
             <strong>Fecha de nacimiento: </strong>
-            {user.birthDate}
+            {user.fechaNac}
           </p>
           <p className="card-text">
-            <strong>Número de teléfono: </strong>
-            {user.phoneNumber}
+            <strong>Preferencia de compras: </strong>
+            {user.preferencia}
           </p>
           <p className="card-text">
-            <strong>Género: </strong>
-            {user.gender}
-          </p>
-          <p className="card-text">
-            <strong>País: </strong>
-            {user.country}
-          </p>
-          <p className="card-text">
-            <strong>Staff Card: </strong>
-            {user.staffCard}
+            <strong>Saldo: </strong>
+            {user.saldo}
           </p>
         </div>
       </div>
@@ -106,18 +162,6 @@ const Perfil = ({ user }) => {
   );
 };
 
-// Ejemplo de datos de usuario
-const user = {
-  email: "golomian16@hotmail.com",
-  firstName: "Nombre",
-  lastName: "Apellido",
-  birthDate: "19/10/2003",
-  phoneNumber: "Número de teléfono",
-  gender: "Género",
-  country: "México",
-  staffCard: "Staff Card",
-};
-
-const App = () => <Perfil user={user} />;
+const App = () => <Perfil />;
 
 export default App;
