@@ -5,7 +5,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Tab, Nav } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ReactImageMagnify from "react-image-magnify";
 import "../css/paginaProducto.css"; // Asegúrate de crear y usar este archivo CSS
 
 const ProductDetails = ({ addToCart, isDarkMode }) => {
@@ -58,30 +57,16 @@ const ProductDetails = ({ addToCart, isDarkMode }) => {
     <div
       className={`product-details-container container ${isDarkMode ? "dark-mode" : ""}`}
     >
-      <div className="row">
-        <div className="col-md-6">
+      <div className="product-title-top text-center mt-4">
+        <h1>{product.title}</h1>
+      </div>
+      <div className="row mt-4">
+        <div className="col-md-12">
           <div className="product-images">
             <div className="main-image">
-              <ReactImageMagnify
-                {...{
-                  smallImage: {
-                    alt: product.title,
-                    isFluidWidth: true,
-                    src: mainImage,
-                  },
-                  largeImage: {
-                    src: mainImage,
-                    width: 1200,
-                    height: 1800,
-                  },
-                  enlargedImageContainerStyle: {
-                    background: "#fff",
-                    zIndex: 9,
-                  },
-                }}
-              />
+              <img src={mainImage} className="img-fluid" alt={product.title} />
             </div>
-            <div className="thumbnail-images mt-3 d-flex flex-column">
+            <div className="thumbnail-images">
               {product.images &&
                 product.images.length > 0 &&
                 product.images.map((image, index) => (
@@ -89,15 +74,16 @@ const ProductDetails = ({ addToCart, isDarkMode }) => {
                     key={index}
                     src={image}
                     alt={`${product.title} ${index + 1}`}
-                    className="img-thumbnail mb-2"
-                    style={{ cursor: "pointer", width: "100px" }}
+                    className="img-thumbnail"
                     onClick={() => handleThumbnailClick(image)}
                   />
                 ))}
             </div>
           </div>
         </div>
-        <div className="col-md-6">
+      </div>
+      <div className="row mt-4">
+        <div className="col-md-12">
           <h1>{product.title}</h1>
           <p>{product.description}</p>
           <h2>${product.price}</h2>
@@ -149,50 +135,56 @@ const ProductDetails = ({ addToCart, isDarkMode }) => {
           </button>
         </div>
       </div>
-      <div className="product-info-tabs mt-5">
-        <Tab.Container defaultActiveKey="characteristics">
-          <Nav variant="tabs">
-            <Nav.Item>
-              <Nav.Link eventKey="characteristics">Características</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="reviews">Reseñas</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="shipping">Envío</Nav.Link>
-            </Nav.Item>
-          </Nav>
-          <Tab.Content className="mt-3">
-            <Tab.Pane eventKey="characteristics">
-              <h3>Características</h3>
-              <ul>
-                <li>Marca: {product.brand}</li>
-                <li>Precio: ${product.price}</li>
-                <li>Stock: {product.stock}</li>
-                <li>Descuento: {product.discountPercentage}%</li>
-                <li>Rating: {product.rating}</li>
-                <li>Categoría: {product.category}</li>
-              </ul>
-            </Tab.Pane>
-            <Tab.Pane eventKey="reviews">
-              <h3>Reseñas</h3>
-              {product.reviews.map((review, index) => (
-                <div key={index} className="review-item">
-                  <p>
-                    <strong>{review.reviewerName}</strong>: {review.comment}
-                  </p>
-                  <p>
-                    Rating: {review.rating} - {review.date}
-                  </p>
-                </div>
-              ))}
-            </Tab.Pane>
-            <Tab.Pane eventKey="shipping">
-              <h3>Envío</h3>
-              <p>{product.shippingInformation}</p>
-            </Tab.Pane>
-          </Tab.Content>
-        </Tab.Container>
+      <div className="row mt-4">
+        <div className="col-md-12">
+          <div className="product-info-tabs">
+            <Tab.Container defaultActiveKey="characteristics">
+              <Nav variant="tabs">
+                <Nav.Item>
+                  <Nav.Link eventKey="characteristics">
+                    Características
+                  </Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="reviews">Reseñas</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="shipping">Envío</Nav.Link>
+                </Nav.Item>
+              </Nav>
+              <Tab.Content className="mt-3">
+                <Tab.Pane eventKey="characteristics">
+                  <h3>Características</h3>
+                  <ul>
+                    <li>Marca: {product.brand}</li>
+                    <li>Precio: ${product.price}</li>
+                    <li>Stock: {product.stock}</li>
+                    <li>Descuento: {product.discountPercentage}%</li>
+                    <li>Rating: {product.rating}</li>
+                    <li>Categoría: {product.category}</li>
+                  </ul>
+                </Tab.Pane>
+                <Tab.Pane eventKey="reviews">
+                  <h3>Reseñas</h3>
+                  {product.reviews.map((review, index) => (
+                    <div key={index} className="review-item">
+                      <p>
+                        <strong>{review.reviewerName}</strong>: {review.comment}
+                      </p>
+                      <p>
+                        Rating: {review.rating} - {review.date}
+                      </p>
+                    </div>
+                  ))}
+                </Tab.Pane>
+                <Tab.Pane eventKey="shipping">
+                  <h3>Envío</h3>
+                  <p>{product.shippingInformation}</p>
+                </Tab.Pane>
+              </Tab.Content>
+            </Tab.Container>
+          </div>
+        </div>
       </div>
     </div>
   );
