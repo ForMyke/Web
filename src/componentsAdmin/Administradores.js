@@ -54,19 +54,27 @@ const Administradores = () => {
   };
 
   const handleGuardarUsuario = (usuario) => {
+    console.log("Datos a guardar:", usuario); // Log the user data
+  
     if (modoAgregar) {
       axios.post("http://localhost/backend/api/administradores.php", usuario).then((response) => {
+        console.log("Respuesta del servidor (POST):", response.data); // Log the response
         setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
+      }).catch(error => {
+        console.error("Error al agregar usuario:", error); // Log any errors
       });
     } else if (modoEditar) {
       axios.put(`http://localhost/backend/api/administradores.php?id=${usuario.id}`, usuario).then(() => {
         setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
+      }).catch(error => {
+        console.error("Error al editar usuario:", error); // Log any errors
       });
     }
     setUsuarioActual(null);
     setModoAgregar(false);
     setModoEditar(false);
   };
+  
 
   const usuariosFiltrados = usuarios.filter((usuario) =>
     usuario.name.toLowerCase().includes(busqueda.toLowerCase())
@@ -114,7 +122,6 @@ const Administradores = () => {
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
                 <th scope="col">Correo</th>
-                <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -130,7 +137,6 @@ const Administradores = () => {
                   <td>{usuario.name}</td>
                   <td>{usuario.surname}</td>
                   <td>{usuario.email}</td>
-                  <td>{usuario.state}</td>
                   <td>
                     <button
                       className="btn btn-info"

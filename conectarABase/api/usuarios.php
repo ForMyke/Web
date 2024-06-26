@@ -92,23 +92,19 @@ function handlePost() {
 function handlePut() {
     global $conn;
     $data = json_decode(file_get_contents("php://input"), true);
+    error_log(print_r($data, true));  // Log the received data
 
-    if (isset($data['id']) && isset($data['name']) && isset($data['surname']) && isset($data['email']) && isset($data['birthDate']) && isset($data['state']) && isset($data['municipality']) && isset($data['colony']) && isset($data['street']) && isset($data['streetNumber']) && isset($data['postalCode']) && isset($data['preferences']) && isset($data['saldo'])) {
+    if (isset($data['id']) && isset($data['name']) && isset($data['surname']) && isset($data['email']) && isset($data['birthDate']) && isset($data['preferences']) && isset($data['saldo'])) {
         $id = intval($data['id']);
         $name = $conn->real_escape_string($data['name']);
         $surname = $conn->real_escape_string($data['surname']);
         $email = $conn->real_escape_string($data['email']);
         $birthDate = $conn->real_escape_string($data['birthDate']);
-        $state = $conn->real_escape_string($data['state']);
-        $municipality = $conn->real_escape_string($data['municipality']);
-        $colony = $conn->real_escape_string($data['colony']);
-        $street = $conn->real_escape_string($data['street']);
-        $streetNumber = $conn->real_escape_string($data['streetNumber']);
-        $postalCode = $conn->real_escape_string($data['postalCode']);
+
         $preferences = $conn->real_escape_string($data['preferences']);
         $saldo = floatval($data['saldo']);
 
-        $query = "UPDATE usuario SET nombre='$name', apellidos='$surname', correo='$email', fechaNac='$birthDate', estado='$state', municipio='$municipality', colonia='$colony', calle='$street', numCalle='$streetNumber', CP='$postalCode', preferencia='$preferences', saldo='$saldo' WHERE id=$id";
+        $query = "UPDATE usuario SET nombre='$name', apellidos='$surname', correo='$email', fechaNac='$birthDate', preferencia='$preferences', saldo='$saldo' WHERE id=$id";
 
         if ($conn->query($query) === TRUE) {
             echo json_encode(array("success" => true, "message" => "Usuario actualizado con éxito."));
@@ -120,6 +116,7 @@ function handlePut() {
     }
     $conn->close();
 }
+
 
 function handleDelete() {
     global $conn;

@@ -54,19 +54,27 @@ const AdminUsuarios = () => {
   };
 
   const handleGuardarUsuario = (usuario) => {
+    console.log("Datos a guardar:", usuario);
     if (modoAgregar) {
       axios.post("http://localhost/backend/api/usuarios.php", usuario).then((response) => {
+        console.log("Respuesta del servidor (POST):", response.data);
         setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
+      }).catch(error => {
+        console.error("Error al agregar usuario:", error);
       });
     } else if (modoEditar) {
-      axios.put(`http://localhost/backend/api/usuarios.php?id=${usuario.id}`, usuario).then(() => {
+      axios.put(`http://localhost/backend/api/usuarios.php?id=${usuario.id}`, usuario).then((response) => {
+        console.log("Respuesta del servidor (PUT):", response.data);
         setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
+      }).catch(error => {
+        console.error("Error al editar usuario:", error);
       });
     }
     setUsuarioActual(null);
     setModoAgregar(false);
     setModoEditar(false);
   };
+  
 
   const usuariosFiltrados = usuarios.filter((usuario) =>
     usuario.name.toLowerCase().includes(busqueda.toLowerCase())
