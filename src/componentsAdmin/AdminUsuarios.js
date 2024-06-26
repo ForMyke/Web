@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import JustValidate from "just-validate";
 
 const AdminUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -7,18 +9,12 @@ const AdminUsuarios = () => {
   const [usuariosSeleccionados, setUsuariosSeleccionados] = useState([]);
   const [usuarioActual, setUsuarioActual] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
+  const [modoEditar, setModoEditar] = useState(false);
 
   useEffect(() => {
-    fetch("http://localhost/backend/api/usuarios.php")
-      .then((response) => response.json())
-      .then((data) => {
-        if (data.success) {
-          setUsuarios(data.users);
-        } else {
-          console.error("Error fetching users:", data.message);
-        }
-      })
-      .catch((error) => console.error("Error:", error));
+    axios.get("http://localhost/backend/api/usuarios.php").then((response) => {
+      setUsuarios(response.data.users);
+    });
   }, []);
 
   const handleBusquedaChange = (e) => {
@@ -36,30 +32,41 @@ const AdminUsuarios = () => {
   };
 
   const handleEditarUsuario = (usuario) => {
-    setUsuarioActual(usuario);
-    setModoAgregar(false);
+    axios.get(`http://localhost/backend/api/usuarios.php?id=${usuario.id}`).then((response) => {
+      setUsuarioActual(response.data.user);
+      setModoAgregar(false);
+      setModoEditar(true);
+    });
   };
 
   const handleEliminarUsuario = () => {
-    setUsuarios(
-      usuarios.filter((usuario) => !usuariosSeleccionados.includes(usuario.id))
-    );
-    setUsuariosSeleccionados([]);
+    axios.delete("http://localhost/backend/api/usuarios.php", {
+      data: { ids: usuariosSeleccionados }
+    }).then(() => {
+      setUsuarios(usuarios.filter((usuario) => !usuariosSeleccionados.includes(usuario.id)));
+      setUsuariosSeleccionados([]);
+    });
   };
 
   const handleAgregarUsuario = () => {
     setUsuarioActual(null);
     setModoAgregar(true);
+    setModoEditar(false);
   };
 
   const handleGuardarUsuario = (usuario) => {
     if (modoAgregar) {
-      setUsuarios([...usuarios, usuario]);
-    } else {
-      setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
+      axios.post("http://localhost/backend/api/usuarios.php", usuario).then((response) => {
+        setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
+      });
+    } else if (modoEditar) {
+      axios.put(`http://localhost/backend/api/usuarios.php?id=${usuario.id}`, usuario).then(() => {
+        setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
+      });
     }
     setUsuarioActual(null);
     setModoAgregar(false);
+    setModoEditar(false);
   };
 
   const usuariosFiltrados = usuarios.filter((usuario) =>
@@ -69,9 +76,8 @@ const AdminUsuarios = () => {
   return (
     <div className="container mt-5">
       <h1>Admin Usuarios</h1>
-      <div className="row">
-        <div className="col-md-4">
-          <h3>Acciones</h3>
+      <div>
+        <div className="d-flex flex-column w-100">
           <button
             className="btn btn-secondary mb-3"
             onClick={handleEliminarUsuario}
@@ -89,6 +95,7 @@ const AdminUsuarios = () => {
             <EditarAgregarUsuario
               usuario={usuarioActual}
               onGuardar={handleGuardarUsuario}
+              modoAgregar={modoAgregar}
             />
           )}
         </div>
@@ -101,56 +108,52 @@ const AdminUsuarios = () => {
             value={busqueda}
             onChange={handleBusquedaChange}
           />
-          <div className="table-responsive">
-            <table className="table table-bordered w-100">
-              <thead>
-                <tr>
-                  <th scope="col">Seleccionar</th>
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Apellidos</th>
-                  <th scope="col">Correo</th>
-                  <th scope="col">Tipo</th>
-                  <th scope="col">Estado</th>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">Seleccionar</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {usuariosFiltrados.map((usuario) => (
+                <tr key={usuario.id}>
+                  <td>
+                    <input
+                      type="checkbox"
+                      onChange={(e) => handleCheckboxChange(e, usuario.id)}
+                    />
+                  </td>
+                  <td>{usuario.name}</td>
+                  <td>{usuario.surname}</td>
+                  <td>{usuario.email}</td>
+                  <td>{usuario.state}</td>
+                  <td>
+                    <button
+                      className="btn btn-info"
+                      onClick={() => handleEditarUsuario(usuario)}
+                    >
+                      Editar
+                    </button>
+                  </td>
                 </tr>
-              </thead>
-              <tbody>
-                {usuariosFiltrados.map((usuario) => (
-                  <tr key={usuario.id}>
-                    <td>
-                      <input
-                        type="checkbox"
-                        onChange={(e) => handleCheckboxChange(e, usuario.id)}
-                      />
-                    </td>
-                    <td>{usuario.name}</td>
-                    <td>{usuario.surname}</td>
-                    <td>{usuario.email}</td>
-                    <td>{usuario.type}</td>
-                    <td>{usuario.state}</td>
-                    <td>
-                      <button
-                        className="btn btn-info"
-                        onClick={() => handleEditarUsuario(usuario)}
-                      >
-                        Editar
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   );
 };
 
-const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
+const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
   const [usuarioEditado, setUsuarioEditado] = useState(
     usuario || {
       id: Math.random().toString(36).substr(2, 9),
-      type: "0",
       name: "",
       surname: "",
       email: "",
@@ -160,9 +163,136 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
       municipality: "",
       colony: "",
       street: "",
-      streetNumber: ""
+      streetNumber: "",
+      postalCode: "",
+      preferences: "",
+      saldo: 10000,
     }
   );
+
+  useEffect(() => {
+    if (usuario) {
+      setUsuarioEditado(usuario);
+    }
+  }, [usuario]);
+
+  useEffect(() => {
+    const validator = new JustValidate("#usuarioForm");
+
+    validator
+      .addField("#name", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+        {
+          rule: "minLength",
+          value: 2,
+          errorMessage: "Nombre inválido",
+        },
+        {
+          rule: "customRegexp",
+          value: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/,
+          errorMessage: "Nombre inválido",
+        },
+      ])
+      .addField("#surname", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+        {
+          rule: "minLength",
+          value: 2,
+          errorMessage: "Apellido inválido",
+        },
+        {
+          rule: "customRegexp",
+          value: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/,
+          errorMessage: "Apellido inválido",
+        },
+      ])
+      .addField("#email", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+        {
+          rule: "email",
+          errorMessage: "Ingrese un correo electrónico válido",
+        },
+      ])
+      .addField("#password", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+        {
+          rule: "password",
+          errorMessage: "Ingrese una contraseña válida",
+        },
+      ])
+      .addField("#birthDate", [
+        {
+          rule: "required",
+          errorMessage: "Por favor ingrese su fecha de nacimiento",
+        },
+        {
+          validator: (value) => {
+            const today = new Date();
+            const birthDate = new Date(value);
+            return birthDate <= today;
+          },
+          errorMessage: "Por favor ingrese una fecha de nacimiento válida",
+        },
+      ])
+      .addField("#state", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+      ])
+      .addField("#municipality", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+      ])
+      .addField("#colony", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+      ])
+      .addField("#street", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+      ])
+      .addField("#streetNumber", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+      ])
+      .addField("#postalCode", [
+        {
+          rule: "required",
+          errorMessage: "Este campo es obligatorio",
+        },
+      ])
+      .addField("#preferences", [
+        {
+          rule: "required",
+          errorMessage: "Por favor seleccione una opción",
+        },
+        {
+          validator: (value) => value !== "",
+          errorMessage: "Por favor seleccione una opción válida",
+        },
+      ]);
+  }, []);
 
   const handleChange = (e) => {
     setUsuarioEditado({
@@ -173,28 +303,16 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onGuardar(usuarioEditado);
+    const validationErrors = document.querySelector(".just-validate-error-label");
+    if (!validationErrors) {
+      onGuardar(usuarioEditado);
+    }
   };
 
   return (
     <div>
-      <h3>{usuario ? "Editar Usuario" : "Agregar Usuario"}</h3>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-3">
-          <label htmlFor="type" className="form-label">
-            Tipo
-          </label>
-          <select
-            className="form-control"
-            id="type"
-            name="type"
-            value={usuarioEditado.type}
-            onChange={handleChange}
-          >
-            <option value="0">0</option>
-            <option value="1">1</option>
-          </select>
-        </div>
+      <h3>{modoAgregar ? "Agregar Usuario" : "Editar Usuario"}</h3>
+      <form id="usuarioForm" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Nombre
@@ -234,7 +352,7 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
             onChange={handleChange}
           />
         </div>
-        {!usuario && (
+        {modoAgregar && (
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
               Contraseña
@@ -245,6 +363,21 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
               id="password"
               name="password"
               value={usuarioEditado.password}
+              onChange={handleChange}
+            />
+          </div>
+        )}
+        {!modoAgregar && (
+          <div className="mb-3">
+            <label htmlFor="saldo" className="form-label">
+              Saldo
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="saldo"
+              name="saldo"
+              value={usuarioEditado.saldo}
               onChange={handleChange}
             />
           </div>
@@ -326,6 +459,36 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
             value={usuarioEditado.streetNumber}
             onChange={handleChange}
           />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="postalCode" className="form-label">
+            Código Postal
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="postalCode"
+            name="postalCode"
+            value={usuarioEditado.postalCode}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="preferences" className="form-label">
+            Preferencias
+          </label>
+          <select
+            className="form-control"
+            id="preferences"
+            name="preferences"
+            value={usuarioEditado.preferences}
+            onChange={handleChange}
+          >
+            <option value="">Seleccionar</option>
+            <option value="calzado">Calzado</option>
+            <option value="ropa">Ropa</option>
+            <option value="accesorios">Accesorios</option>
+          </select>
         </div>
         <button type="submit" className="btn btn-success">
           Guardar

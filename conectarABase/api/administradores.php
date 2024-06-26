@@ -38,7 +38,7 @@ function handleGet() {
             echo json_encode(array("success" => false, "message" => "Usuario no encontrado."));
         }
     } else {
-        $query = "SELECT id, nombre AS name, correo AS email, estado as state, apellidos as surname, tipo as type FROM usuario WHERE tipo = 0";
+        $query = "SELECT id, nombre AS name, correo AS email, estado as state, apellidos as surname, tipo as type FROM usuario WHERE tipo = 1";
         $result = $conn->query($query);
 
         if ($result->num_rows > 0) {
@@ -71,13 +71,13 @@ function handlePost() {
         $streetNumber = $conn->real_escape_string($data['streetNumber']);
         $postalCode = $conn->real_escape_string($data['postalCode']);
         $preferences = $conn->real_escape_string($data['preferences']);
-        $type = isset($data['type']) ? $conn->real_escape_string($data['type']) : '0';
+        $type = 1;  // Forzar el tipo a 1
         $saldo = 10000;  // Saldo inicial
 
         $query = "INSERT INTO usuario (nombre, apellidos, correo, contraseña, fechaNac, estado, municipio, colonia, calle, numCalle, CP, preferencia, tipo, saldo) VALUES ('$name', '$surname', '$email', '$password', '$birthDate', '$state', '$municipality', '$colony', '$street', '$streetNumber', '$postalCode', '$preferences', '$type', '$saldo')";
 
         if ($conn->query($query) === TRUE) {
-            $id = $conn->insert_id;  // Get the last inserted ID
+            $id = $conn->insert_id;  // Obtener el ID insertado
             echo json_encode(array("success" => true, "id" => $id, "message" => "Usuario registrado con éxito."));
         } else {
             echo json_encode(array("success" => false, "message" => "Error al registrar el usuario: " . $conn->error));
@@ -88,39 +88,38 @@ function handlePost() {
     $conn->close();
 }
 
-
 function handlePut() {
-    global $conn;
-    $data = json_decode(file_get_contents("php://input"), true);
+  global $conn;
+  $data = json_decode(file_get_contents("php://input"), true);
 
-    if (isset($data['id']) && isset($data['name']) && isset($data['surname']) && isset($data['email']) && isset($data['birthDate']) && isset($data['state']) && isset($data['municipality']) && isset($data['colony']) && isset($data['street']) && isset($data['streetNumber']) && isset($data['postalCode']) && isset($data['preferences']) && isset($data['saldo'])) {
-        $id = intval($data['id']);
-        $name = $conn->real_escape_string($data['name']);
-        $surname = $conn->real_escape_string($data['surname']);
-        $email = $conn->real_escape_string($data['email']);
-        $birthDate = $conn->real_escape_string($data['birthDate']);
-        $state = $conn->real_escape_string($data['state']);
-        $municipality = $conn->real_escape_string($data['municipality']);
-        $colony = $conn->real_escape_string($data['colony']);
-        $street = $conn->real_escape_string($data['street']);
-        $streetNumber = $conn->real_escape_string($data['streetNumber']);
-        $postalCode = $conn->real_escape_string($data['postalCode']);
-        $preferences = $conn->real_escape_string($data['preferences']);
-        $saldo = floatval($data['saldo']);
+  if (isset($data['id']) && isset($data['name']) && isset($data['surname']) && isset($data['email']) && isset($data['birthDate']) && isset($data['state']) && isset($data['municipality']) && isset($data['colony']) && isset($data['street']) && isset($data['streetNumber']) && isset($data['postalCode']) && isset($data['saldo'])) {
+      $id = intval($data['id']);
+      $name = $conn->real_escape_string($data['name']);
+      $surname = $conn->real_escape_string($data['surname']);
+      $email = $conn->real_escape_string($data['email']);
+      $birthDate = $conn->real_escape_string($data['birthDate']);
+      $state = $conn->real_escape_string($data['state']);
+      $municipality = $conn->real_escape_string($data['municipality']);
+      $colony = $conn->real_escape_string($data['colony']);
+      $street = $conn->real_escape_string($data['street']);
+      $streetNumber = $conn->real_escape_string($data['streetNumber']);
+      $postalCode = $conn->real_escape_string($data['postalCode']);
+      $saldo = floatval($data['saldo']);
 
-        $query = "UPDATE usuario SET nombre='$name', apellidos='$surname', correo='$email', fechaNac='$birthDate', estado='$state', municipio='$municipality', colonia='$colony', calle='$street', numCalle='$streetNumber', CP='$postalCode', preferencia='$preferences', saldo='$saldo' WHERE id=$id";
+      $query = "UPDATE usuario SET nombre='$name', apellidos='$surname', correo='$email', fechaNac='$birthDate', estado='$state', municipio='$municipality', colonia='$colony', calle='$street', numCalle='$streetNumber', CP='$postalCode', saldo='$saldo' WHERE id=$id";
 
-        if ($conn->query($query) === TRUE) {
-            echo json_encode(array("success" => true, "message" => "Usuario actualizado con éxito."));
-        } else {
-            echo json_encode(array("success" => false, "message" => "Error al actualizar el usuario: " . $conn->error));
-        }
-    } else {
-        echo json_encode(array("success" => false, "message" => "Datos incompletos."));
-    }
-    $conn->close();
+      error_log("Executing query: $query"); // Log the query
+
+      if ($conn->query($query) === TRUE) {
+          echo json_encode(array("success" => true, "message" => "Usuario actualizado con éxito."));
+      } else {
+          echo json_encode(array("success" => false, "message" => "Error al actualizar el usuario: " . $conn->error));
+      }
+  } else {
+      echo json_encode(array("success" => false, "message" => "Datos incompletos."));
+  }
+  $conn->close();
 }
-
 function handleDelete() {
     global $conn;
     $data = json_decode(file_get_contents("php://input"), true);
