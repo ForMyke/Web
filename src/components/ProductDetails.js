@@ -7,27 +7,12 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "../css/paginaProducto.css"; // Asegúrate de crear y usar este archivo CSS
 
-import Zooming from "zooming";
-
 const ProductDetails = ({ addToCart, isDarkMode }) => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [mainImage, setMainImage] = useState("");
   const [quantity, setQuantity] = useState(1);
-
-  useEffect(() => {
-    const zooming = new Zooming({
-      bgColor: "black",
-      scaleBase: 1.5,
-      scaleExtra: 0.5,
-    });
-    zooming.listen(".zoomable");
-
-    return () => {
-      zooming.destroy();
-    };
-  }, []);
 
   useEffect(() => {
     axios
@@ -79,11 +64,7 @@ const ProductDetails = ({ addToCart, isDarkMode }) => {
         <div className="col-md-12">
           <div className="product-images">
             <div className="main-image">
-              <img
-                src={mainImage}
-                className="img-fluid zoomable"
-                alt={product.title}
-              />
+              <img src={mainImage} className="img-fluid" alt={product.title} />
             </div>
             <div className="thumbnail-images">
               {product.images &&

@@ -144,6 +144,38 @@
   color: #28a745;
 }
 
+/* Modo oscuro */
+.dark-mode .flash-sale {
+  background-color: #000;
+  color: #fff;
+}
+
+.dark-mode .product-card {
+  background-color: #000;
+  border-color: #000;
+  color: #fff;
+}
+
+.dark-mode .review-card {
+  background-color: #000;
+  border-color: #555;
+  color: #fff;
+}
+
+.dark-mode .store-visit-section {
+  background-color: #000;
+  color: #fff;
+}
+
+.dark-mode .store-info h2,
+.dark-mode .store-info h3 {
+  color: #ddd;
+}
+
+.dark-mode .store-info ul li::before {
+  color: #0f0;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
   .store-visit-section {
