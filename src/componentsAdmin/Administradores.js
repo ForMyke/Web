@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
-import JustValidate from "just-validate";
 
 const Administradores = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -104,7 +103,7 @@ const Administradores = () => {
           <input
             type="text"
             className="form-control mb-3"
-            placeholder="Buscar administrador..."
+            placeholder="Buscar administradores..."
             value={busqueda}
             onChange={handleBusquedaChange}
           />
@@ -115,6 +114,7 @@ const Administradores = () => {
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
                 <th scope="col">Correo</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -130,6 +130,7 @@ const Administradores = () => {
                   <td>{usuario.name}</td>
                   <td>{usuario.surname}</td>
                   <td>{usuario.email}</td>
+                  <td>{usuario.state}</td>
                   <td>
                     <button
                       className="btn btn-info"
@@ -163,6 +164,7 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
       street: "",
       streetNumber: "",
       postalCode: "",
+      preferences: "",
       saldo: 10000,
     }
   );
@@ -173,114 +175,6 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
     }
   }, [usuario]);
 
-  useEffect(() => {
-    const validator = new JustValidate("#usuarioForm");
-
-    validator
-      .addField("#name", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-        {
-          rule: "minLength",
-          value: 2,
-          errorMessage: "Nombre inválido",
-        },
-        {
-          rule: "customRegexp",
-          value: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/,
-          errorMessage: "Nombre inválido",
-        },
-      ])
-      .addField("#surname", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-        {
-          rule: "minLength",
-          value: 2,
-          errorMessage: "Apellido inválido",
-        },
-        {
-          rule: "customRegexp",
-          value: /^[a-zA-ZáéíóúÁÉÍÓÚüÜñÑ\s]+$/,
-          errorMessage: "Apellido inválido",
-        },
-      ])
-      .addField("#email", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-        {
-          rule: "email",
-          errorMessage: "Ingrese un correo electrónico válido",
-        },
-      ])
-      .addField("#password", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-        {
-          rule: "password",
-          errorMessage: "Ingrese una contraseña válida",
-        },
-      ])
-      .addField("#birthDate", [
-        {
-          rule: "required",
-          errorMessage: "Por favor ingrese su fecha de nacimiento",
-        },
-        {
-          validator: (value) => {
-            const today = new Date();
-            const birthDate = new Date(value);
-            return birthDate <= today;
-          },
-          errorMessage: "Por favor ingrese una fecha de nacimiento válida",
-        },
-      ])
-      .addField("#state", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-      ])
-      .addField("#municipality", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-      ])
-      .addField("#colony", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-      ])
-      .addField("#street", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-      ])
-      .addField("#streetNumber", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-      ])
-      .addField("#postalCode", [
-        {
-          rule: "required",
-          errorMessage: "Este campo es obligatorio",
-        },
-      ]);
-  }, []);
-
   const handleChange = (e) => {
     setUsuarioEditado({
       ...usuarioEditado,
@@ -290,16 +184,13 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const validationErrors = document.querySelector(".just-validate-error-label");
-    if (!validationErrors) {
-      onGuardar(usuarioEditado);
-    }
+    onGuardar(usuarioEditado);
   };
 
   return (
     <div>
       <h3>{modoAgregar ? "Agregar Usuario" : "Editar Usuario"}</h3>
-      <form id="usuarioForm" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Nombre
@@ -460,6 +351,7 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
             onChange={handleChange}
           />
         </div>
+
         <button type="submit" className="btn btn-success">
           Guardar
         </button>

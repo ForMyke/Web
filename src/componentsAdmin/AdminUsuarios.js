@@ -74,7 +74,7 @@ const AdminUsuarios = () => {
 
   return (
     <div className="container mt-5">
-      <h1>Admin Usuarios</h1>
+      <h1>Admininistrar Usuarios</h1>
       <div>
         <div className="d-flex flex-column w-100">
           <button
