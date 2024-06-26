@@ -1,25 +1,63 @@
 .admin-dashboard {
-  background-color: #f8f9fa;
-  min-height: 150vh;
+  background-color: #fff;
+  min-height: 100vh;
+  padding: 20px;
 }
 
 .header {
-  background-color: #343a40;
+  background-color: #000;
   color: white;
   padding: 10px 20px;
 }
 
 .card {
   cursor: pointer;
+  background-color: #f8f9fa;
+  border: 1px solid #ddd;
+}
+
+.card-header {
+  background-color: #000;
+  color: white;
+  text-align: center;
+  font-weight: bold;
 }
 
 .admin-icon {
-  width: 250px;
-  height: 250px;
+  width: 150px;
+  height: 150px;
   object-fit: contain;
 }
 
 .clickable-card:hover {
-  transform: scale(1.02);
+  transform: scale(1.05);
   transition: transform 0.2s;
+}
+
+/* Media Queries */
+@media (max-width: 576px) {
+  .admin-icon {
+    width: 100px;
+    height: 100px;
+  }
+
+  .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .btn-lg {
+    padding: 10px 20px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .btn-lg {
+    padding: 10px 20px;
+    font-size: 1.25rem;
+  }
 }
