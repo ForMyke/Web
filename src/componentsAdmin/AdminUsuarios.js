@@ -273,84 +273,89 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="state" className="form-label">
-            Estado
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="state"
-            name="state"
-            value={usuarioEditado.state}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="municipality" className="form-label">
-            Municipio
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="municipality"
-            name="municipality"
-            value={usuarioEditado.municipality}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="colony" className="form-label">
-            Colonia
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="colony"
-            name="colony"
-            value={usuarioEditado.colony}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="street" className="form-label">
-            Calle
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="street"
-            name="street"
-            value={usuarioEditado.street}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="streetNumber" className="form-label">
-            Num de Calle
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="streetNumber"
-            name="streetNumber"
-            value={usuarioEditado.streetNumber}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="postalCode" className="form-label">
-            Código Postal
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="postalCode"
-            name="postalCode"
-            value={usuarioEditado.postalCode}
-            onChange={handleChange}
-          />
-        </div>
+
+        {modoAgregar && (
+          <>
+            <div className="mb-3">
+              <label htmlFor="state" className="form-label">
+                Estado
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="state"
+                name="state"
+                value={usuarioEditado.state}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="municipality" className="form-label">
+                Municipio
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="municipality"
+                name="municipality"
+                value={usuarioEditado.municipality}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="colony" className="form-label">
+                Colonia
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="colony"
+                name="colony"
+                value={usuarioEditado.colony}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="street" className="form-label">
+                Calle
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="street"
+                name="street"
+                value={usuarioEditado.street}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="streetNumber" className="form-label">
+                Num de Calle
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="streetNumber"
+                name="streetNumber"
+                value={usuarioEditado.streetNumber}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="postalCode" className="form-label">
+                Código Postal
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="postalCode"
+                name="postalCode"
+                value={usuarioEditado.postalCode}
+                onChange={handleChange}
+              />
+            </div>
+          </>
+        )}
         <div className="mb-3">
           <label htmlFor="preferences" className="form-label">
             Preferencias
