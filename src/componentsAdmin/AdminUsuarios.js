@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AdminUsuarios = () => {
@@ -9,12 +8,18 @@ const AdminUsuarios = () => {
   const [usuarioActual, setUsuarioActual] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
 
-  /*useEffect(() => {
-    axios.get("http://localhost/backend/api/users.php").then((response) => {
-      setUsuarios(response.data.users);
-    });
+  useEffect(() => {
+    fetch("http://localhost/backend/api/usuarios.php")
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.success) {
+          setUsuarios(data.users);
+        } else {
+          console.error("Error fetching users:", data.message);
+        }
+      })
+      .catch((error) => console.error("Error:", error));
   }, []);
-  */
 
   const handleBusquedaChange = (e) => {
     setBusqueda(e.target.value);
@@ -87,7 +92,7 @@ const AdminUsuarios = () => {
             />
           )}
         </div>
-        <div className="col-md-8">
+        <div className="col-md-12">
           <h3>Lista de Usuarios</h3>
           <input
             type="text"
@@ -96,38 +101,41 @@ const AdminUsuarios = () => {
             value={busqueda}
             onChange={handleBusquedaChange}
           />
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Seleccionar</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Email</th>
-                <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usuariosFiltrados.map((usuario) => (
-                <tr key={usuario.id}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      onChange={(e) => handleCheckboxChange(e, usuario.id)}
-                    />
-                  </td>
-                  <td>{usuario.name}</td>
-                  <td>{usuario.email}</td>
-                  <td>
-                    <button
-                      className="btn btn-info"
-                      onClick={() => handleEditarUsuario(usuario)}
-                    >
-                      Editar
-                    </button>
-                  </td>
+          <div className="table-responsive">
+            <table className="table table-bordered w-100">
+              <thead>
+                <tr>
+                  <th scope="col">Seleccionar</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">Estado</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {usuariosFiltrados.map((usuario) => (
+                  <tr key={usuario.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        onChange={(e) => handleCheckboxChange(e, usuario.id)}
+                      />
+                    </td>
+                    <td>{usuario.name}</td>
+                    <td>{usuario.email}</td>
+                    <td>{usuario.state}</td>
+                    <td>
+                      <button
+                        className="btn btn-info"
+                        onClick={() => handleEditarUsuario(usuario)}
+                      >
+                        Editar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -141,6 +149,7 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
       name: "",
       email: "",
       password: "",
+      state: "", // Agregamos el campo estado
     }
   );
 
@@ -201,6 +210,19 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
             />
           </div>
         )}
+        <div className="mb-3">
+          <label htmlFor="state" className="form-label">
+            Estado
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="state"
+            name="state"
+            value={usuarioEditado.state}
+            onChange={handleChange}
+          />
+        </div>
         <button type="submit" className="btn btn-success">
           Guardar
         </button>
