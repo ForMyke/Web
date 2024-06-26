@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
 import JustValidate from "just-validate";
+import { jsPDF } from "jspdf";
 
 const Pago = ({ cartItems }) => {
   const [user, setUser] = useState(null);
@@ -138,16 +139,28 @@ const Pago = ({ cartItems }) => {
             }
 
             if (data.error) {
+              let redirectPath = "/";
+              if (data.error === "Saldo insuficiente") {
+                redirectPath = "/perfil";
+              } else{
+                redirectPath = "/carrito";
+              }
+
               Swal.fire({
                 icon: "error",
                 title: "Error",
                 text: data.error,
+              }).then(() => {
+                navigate(redirectPath);
               });
             } else {
               Swal.fire({
                 icon: "success",
                 title: "Compra Realizada",
                 text: "Su compra se realizó con éxito",
+              }).then(() => {
+                generatePDF();
+                navigate("../");
               });
             }
           } catch (error) {
@@ -172,6 +185,73 @@ const Pago = ({ cartItems }) => {
   const getShippingCost = () => {
     const subtotal = parseFloat(getTotalPrice());
     return subtotal < 100 ? 20 : 0;
+  };
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+    const date = new Date();
+    const oneDayLater = new Date();
+    oneDayLater.setDate(date.getDate() + 1);
+    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+    const formattedArrivalDate = `${oneDayLater.getDate()}/${oneDayLater.getMonth() + 1}/${oneDayLater.getFullYear()}`;
+
+    doc.setFontSize(18);
+    doc.text("Xclusive Store", 105, 20, { align: "center" });
+    doc.setFontSize(12);
+    doc.text("Xclusive Store S.A. de C.V.", 105, 30, { align: "center" });
+    doc.text("RFC: HAM111006K69", 105, 40, { align: "center" });
+    doc.text("Unidad Profesional Adolfo López Mateos, Av. Juan de Dios Bátiz", 105, 50, { align: "center" });
+    doc.text("Nueva Industrial Vallejo, Gustavo A. Madero", 105, 60, { align: "center" });
+    doc.text("C.P. 07320 Ciudad de México, CDMX", 105, 70, { align: "center" });
+    doc.text("Tel. 1-800-555-1234", 105, 80, { align: "center" });
+    doc.text("----------------------------------------", 105, 90, { align: "center" });
+    doc.text("Fecha y hora de compra", 105, 100, { align: "center" });
+    doc.text("----------------------------------------", 105, 110, { align: "center" });
+    doc.text(formattedDate, 105, 120, { align: "center" });
+
+    const startY = 130;
+    let currentY = startY;
+
+    cartItems.forEach((item) => {
+      doc.text(`${item.title} (Cantidad: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`, 105, currentY, { align: "center" });
+      currentY += 10;
+    });
+
+    const shippingCost = getShippingCost();
+    const totalPrice = (parseFloat(getTotalPrice()) + shippingCost).toFixed(2);
+    currentY += 10;
+    doc.text(`Gastos de envío: ${shippingCost === 0 ? 'GRATIS' : `$${shippingCost}`}`, 105, currentY, { align: "center" });
+    currentY += 10;
+    doc.text(`Total: $${totalPrice}`, 105, currentY, { align: "center" });
+
+    currentY += 20;
+    doc.text(`Num. Tarj. xxxxxx******xxxx`, 105, currentY, { align: "center" });
+    currentY += 10;
+    doc.text(`Núm. Seguimiento 72057-0-09342`, 105, currentY, { align: "center" });
+    currentY += 10;
+    doc.text(`Autorización 614751`, 105, currentY, { align: "center" });
+
+    currentY += 10;
+    doc.text("----------------------------------------", 105, currentY, { align: "center" });
+    currentY += 10;
+    doc.text(`Llegará el ${formattedArrivalDate} a la dirección:`, 105, currentY, { align: "center" });
+    currentY += 10;
+    doc.text(`${formRef.current.street.value} ${formRef.current.extNumber.value}.`, 105, currentY, { align: "center" });
+    currentY += 10;
+    doc.text(`${formRef.current.colony.value}, ${formRef.current.state.value}.`, 105, currentY, { align: "center" });
+    currentY += 10;
+    doc.text(`C.P. ${formRef.current.postalCode.value}`, 105, currentY, { align: "center" });
+
+    currentY += 20;
+    doc.text("----------------------------------------", 105, currentY, { align: "center" });
+    currentY += 10;
+    doc.text("No. de Folio: 0001122403088558", 105, currentY, { align: "center" });
+
+    doc.setDrawColor(0, 0, 0);
+    doc.setLineWidth(5);
+    doc.rect(10, 10, 190, currentY + 10, "S");
+
+    doc.save("recibo_compra.pdf");
   };
 
   if (loading) {
