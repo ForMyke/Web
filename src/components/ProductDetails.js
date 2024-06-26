@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Tab, Nav } from "react-bootstrap";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ReactImageMagnify from "react-image-magnify";
 import "../css/paginaProducto.css"; // Asegúrate de crear y usar este archivo CSS
 
 const ProductDetails = ({ addToCart, isDarkMode }) => {
@@ -64,7 +65,24 @@ const ProductDetails = ({ addToCart, isDarkMode }) => {
         <div className="col-md-12">
           <div className="product-images">
             <div className="main-image">
-              <img src={mainImage} className="img-fluid" alt={product.title} />
+              <ReactImageMagnify
+                {...{
+                  smallImage: {
+                    alt: product.title,
+                    isFluidWidth: true,
+                    src: mainImage,
+                  },
+                  largeImage: {
+                    src: mainImage,
+                    width: 1200,
+                    height: 1800,
+                  },
+                  enlargedImageContainerStyle: {
+                    background: "#fff",
+                    zIndex: 9,
+                  },
+                }}
+              />
             </div>
             <div className="thumbnail-images">
               {product.images &&
