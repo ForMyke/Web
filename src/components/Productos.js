@@ -10,6 +10,14 @@ const Productos = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
     axios
       .get("http://localhost/backend/api/products.php")
       .then((response) => {

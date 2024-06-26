@@ -10,6 +10,14 @@ const Carrito = ({ cartItems, setCartItems }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      navigate("/login");
+    }
+  }, [navigate]);
+
+  useEffect(() => {
     const savedCartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     setCartItems(savedCartItems);
   }, [setCartItems]);
@@ -55,6 +63,14 @@ const Carrito = ({ cartItems, setCartItems }) => {
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
   };
+
+  const getShippingCost = () => {
+    const subtotal = parseFloat(getTotalPrice());
+    return subtotal < 100 ? 20 : 0;
+  };
+
+  const shippingCost = getShippingCost();
+  const totalPrice = (parseFloat(getTotalPrice()) + shippingCost).toFixed(2);
 
   return (
     <div className="carrito-container mt-5">
@@ -117,11 +133,13 @@ const Carrito = ({ cartItems, setCartItems }) => {
                 </p>
                 <p className="card-text">
                   Gastos de envío y gestión estimados
-                  <span className="float-end">Gratis</span>
+                  <span className="float-end">
+                    {shippingCost === 0 ? 'GRATIS' : `$${shippingCost}`}
+                  </span>
                 </p>
                 <hr />
                 <h4 className="card-text">
-                  Total <span className="float-end">${getTotalPrice()}</span>
+                  Total <span className="float-end">${totalPrice}</span>
                 </h4>
                 <button
                   className="btn btn-dark btn-block mb-2"
