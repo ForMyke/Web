@@ -7,7 +7,7 @@ import { faSun, faMoon, faBars } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ isDarkMode, toggleDarkMode }) => {
   return (
-    <header className="header-container">
+    <header className={`header-container ${isDarkMode ? "dark-mode" : ""}`}>
       <div className="logo-container text-center">
         <Link to="/">
           <img
@@ -34,32 +34,53 @@ const Header = ({ isDarkMode, toggleDarkMode }) => {
       <div className="collapse navbar-collapse" id="navbarNav">
         <div className="top-nav d-flex justify-content-between align-items-center w-100">
           <div className="left-links d-flex">
-            <NavLink to="/acerca-de" className="nav-link pr-3">
+            <NavLink
+              to="/acerca-de"
+              className={`nav-link pr-3 ${isDarkMode ? "dark-mode" : ""}`}
+            >
               Acerca de
             </NavLink>
-            <NavLink to="/servicioCliente" className="nav-link">
+            <NavLink
+              to="/servicioCliente"
+              className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}
+            >
               Servicio Cliente
             </NavLink>
           </div>
           <div className="right-links d-flex ml-auto">
-            <NavLink to="/" className="nav-link">
+            <NavLink
+              to="/"
+              className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}
+            >
               <i className="fas fa-home icon-placeholder"></i>
             </NavLink>
-            <NavLink to="/productos" className="nav-link">
+            <NavLink
+              to="/productos"
+              className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}
+            >
               <i className="fas fa-box-open icon-placeholder"></i>
             </NavLink>
-            <NavLink to="/perfil" className="nav-link">
+            <NavLink
+              to="/perfil"
+              className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}
+            >
               <i className="fas fa-user icon-placeholder"></i>
             </NavLink>
-            <NavLink to="/carrito" className="nav-link">
+            <NavLink
+              to="/carrito"
+              className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}
+            >
               <i className="fas fa-shopping-cart icon-placeholder"></i>
             </NavLink>
-            <NavLink to="/login" className="nav-link">
+            <NavLink
+              to="/login"
+              className={`nav-link ${isDarkMode ? "dark-mode" : ""}`}
+            >
               <i className="fas fa-sign-in-alt icon-placeholder"></i>
             </NavLink>
             <button
               onClick={toggleDarkMode}
-              className="btn-dark-mode-toggle pr-3 nav-link"
+              className={`btn-dark-mode-toggle pr-3 nav-link ${isDarkMode ? "dark-mode" : ""}`}
             >
               <FontAwesomeIcon
                 icon={isDarkMode ? faSun : faMoon}

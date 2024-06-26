@@ -2,6 +2,8 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/admin.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -13,8 +15,13 @@ const Admin = () => {
   return (
     <div className="admin-dashboard container-fluid">
       <div className="header d-flex justify-content-between align-items-center py-3 mb-5">
-        <h1 className="fs-1">Administrador</h1>
-        <button className="btn btn-dark btn-lg"> Salir</button>
+        <h1 className="fs-1  ">
+          <FontAwesomeIcon icon={faUser} className="me-2 " />
+          Administrador
+        </h1>
+        <button className="btn btn-dark btn-lg">
+          <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
+        </button>
       </div>
 
       <div className="row justify-content-center">
@@ -23,7 +30,7 @@ const Admin = () => {
             className="card shadow-sm clickable-card"
             onClick={() => handleNavigation("/AdminGraficas")}
           >
-            <div className="card-header">Graficos</div>
+            <div className="card-header">Gráficos</div>
             <div className="card-body d-flex justify-content-center align-items-center">
               <img
                 src="./img/grafico.png"

@@ -10,7 +10,7 @@ import {
   faFacebook,
 } from "@fortawesome/free-brands-svg-icons";
 
-const Footer = () => {
+const Footer = ({ isDarkMode }) => {
   const navigate = useNavigate();
 
   const handleNavLinkClick = (url) => {
@@ -18,7 +18,9 @@ const Footer = () => {
   };
 
   return (
-    <footer className="footer-container bg-light text-dark py-4 mt-auto w-100">
+    <footer
+      className={`footer-container ${isDarkMode ? "dark-mode" : ""} py-4 mt-auto w-100`}
+    >
       <div className="container-fluid px-5">
         <div className="row justify-content-center">
           <div className="col-md-3 mb-3">
@@ -36,7 +38,7 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li>
                 <span
-                  className="text-dark nav-link cursor-pointer"
+                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
                   onClick={() => handleNavLinkClick("/acerca-de")}
                 >
                   Acerca de
@@ -44,7 +46,7 @@ const Footer = () => {
               </li>
               <li>
                 <span
-                  className="text-dark nav-link cursor-pointer"
+                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
                   onClick={() => handleNavLinkClick("/servicioCliente")}
                 >
                   Servicio al Cliente
@@ -57,7 +59,7 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li>
                 <span
-                  className="text-dark nav-link cursor-pointer"
+                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
                   onClick={() => handleNavLinkClick("/privacidad")}
                 >
                   Privacidad
@@ -65,7 +67,7 @@ const Footer = () => {
               </li>
               <li>
                 <span
-                  className="text-dark nav-link cursor-pointer"
+                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
                   onClick={() => handleNavLinkClick("/seguridad")}
                 >
                   Seguridad
@@ -73,7 +75,7 @@ const Footer = () => {
               </li>
               <li>
                 <span
-                  className="text-dark nav-link cursor-pointer"
+                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
                   onClick={() => handleNavLinkClick("/letra-chica")}
                 >
                   Letra chica
@@ -86,7 +88,7 @@ const Footer = () => {
             <ul className="list-unstyled">
               <li>
                 <span
-                  className="text-dark nav-link cursor-pointer"
+                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
                   onClick={() => handleNavLinkClick("/preguntas-frecuentes")}
                 >
                   Preguntas más frecuentes
@@ -94,7 +96,7 @@ const Footer = () => {
               </li>
               <li>
                 <span
-                  className="text-dark nav-link cursor-pointer"
+                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
                   onClick={() => handleNavLinkClick("/contacto")}
                 >
                   Contacto
@@ -103,7 +105,7 @@ const Footer = () => {
             </ul>
           </div>
           <div className="col-12 col-md-3 mb-3">
-            <h6 className="font-weight-bold">Contact us</h6>
+            <h6 className="font-weight-bold">Contáctenos</h6>
             <p>support@xclusivestore.com</p>
             <p>1-800-555-1234</p>
             <div>

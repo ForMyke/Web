@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import axios from "axios";
 import { Carousel, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/inicio.css";
+
+const ReviewsSection = lazy(() => import("./ReviewSection"));
 
 const Inicio = ({ isDarkMode }) => {
   const [products, setProducts] = useState([]);
@@ -97,6 +99,7 @@ const Inicio = ({ isDarkMode }) => {
             className="d-block w-100"
             src="./img/img1.jpg"
             alt="First slide"
+            loading="lazy"
           />
           <Carousel.Caption>
             <div className="caption-box">
@@ -110,6 +113,7 @@ const Inicio = ({ isDarkMode }) => {
             className="d-block w-100"
             src="./img/img2.jpg"
             alt="Second slide"
+            loading="lazy"
           />
           <Carousel.Caption>
             <div className="caption-box">
@@ -128,6 +132,7 @@ const Inicio = ({ isDarkMode }) => {
             className="d-block w-100"
             src="./img/img3.jpg"
             alt="Third slide"
+            loading="lazy"
           />
           <Carousel.Caption>
             <div className="caption-box">
@@ -152,6 +157,7 @@ const Inicio = ({ isDarkMode }) => {
                 src={product.thumbnail}
                 alt={product.title}
                 className="product-image"
+                loading="lazy"
               />
               <h5 className="product-title">{product.title}</h5>
             </div>
@@ -159,17 +165,9 @@ const Inicio = ({ isDarkMode }) => {
         </div>
       </div>
 
-      <div className="reviews-section text-center my-5">
-        <h2>Opiniones de los clientes</h2>
-        <div className="reviews-container">
-          {reviews.map((review) => (
-            <div className="review-card" key={review.id}>
-              <h5 className="reviewer-name">{review.name}</h5>
-              <p className="review-text">"{review.review}"</p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Suspense fallback={<div>Cargando reseñas...</div>}>
+        <ReviewsSection reviews={reviews} />
+      </Suspense>
 
       <div className="store-visit-section d-flex justify-content-around align-items-center py-5">
         <div className="map-container">

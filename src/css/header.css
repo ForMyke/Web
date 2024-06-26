@@ -6,6 +6,11 @@
   border-bottom: 1px solid #ddd;
 }
 
+.header-container.dark-mode {
+  background-color: #000;
+  border-color: #00;
+}
+
 .logo-container {
   padding: 5px 0;
 }
@@ -32,6 +37,16 @@
 
 .left-links .nav-link:hover,
 .right-links .nav-link:hover {
+  text-decoration: underline;
+}
+
+.left-links .nav-link.dark-mode,
+.right-links .nav-link.dark-mode {
+  color: #fff;
+}
+
+.left-links .nav-link.dark-mode:hover,
+.right-links .nav-link.dark-mode:hover {
   text-decoration: underline;
 }
 

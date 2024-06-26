@@ -107,7 +107,9 @@ const AdminUsuarios = () => {
                 <tr>
                   <th scope="col">Seleccionar</th>
                   <th scope="col">Nombre</th>
-                  <th scope="col">Email</th>
+                  <th scope="col">Apellidos</th>
+                  <th scope="col">Correo</th>
+                  <th scope="col">Tipo</th>
                   <th scope="col">Estado</th>
                 </tr>
               </thead>
@@ -121,7 +123,9 @@ const AdminUsuarios = () => {
                       />
                     </td>
                     <td>{usuario.name}</td>
+                    <td>{usuario.surname}</td>
                     <td>{usuario.email}</td>
+                    <td>{usuario.type}</td>
                     <td>{usuario.state}</td>
                     <td>
                       <button
@@ -146,10 +150,17 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
   const [usuarioEditado, setUsuarioEditado] = useState(
     usuario || {
       id: Math.random().toString(36).substr(2, 9),
+      type: "0",
       name: "",
+      surname: "",
       email: "",
       password: "",
-      state: "", // Agregamos el campo estado
+      birthDate: "",
+      state: "",
+      municipality: "",
+      colony: "",
+      street: "",
+      streetNumber: ""
     }
   );
 
@@ -170,6 +181,21 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
       <h3>{usuario ? "Editar Usuario" : "Agregar Usuario"}</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
+          <label htmlFor="type" className="form-label">
+            Tipo
+          </label>
+          <select
+            className="form-control"
+            id="type"
+            name="type"
+            value={usuarioEditado.type}
+            onChange={handleChange}
+          >
+            <option value="0">0</option>
+            <option value="1">1</option>
+          </select>
+        </div>
+        <div className="mb-3">
           <label htmlFor="name" className="form-label">
             Nombre
           </label>
@@ -183,8 +209,21 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
           />
         </div>
         <div className="mb-3">
+          <label htmlFor="surname" className="form-label">
+            Apellidos
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="surname"
+            name="surname"
+            value={usuarioEditado.surname}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
           <label htmlFor="email" className="form-label">
-            Email
+            Correo
           </label>
           <input
             type="email"
@@ -211,6 +250,19 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
           </div>
         )}
         <div className="mb-3">
+          <label htmlFor="birthDate" className="form-label">
+            Fecha de Nacimiento
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            id="birthDate"
+            name="birthDate"
+            value={usuarioEditado.birthDate}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
           <label htmlFor="state" className="form-label">
             Estado
           </label>
@@ -220,6 +272,58 @@ const EditarAgregarUsuario = ({ usuario, onGuardar }) => {
             id="state"
             name="state"
             value={usuarioEditado.state}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="municipality" className="form-label">
+            Municipio
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="municipality"
+            name="municipality"
+            value={usuarioEditado.municipality}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="colony" className="form-label">
+            Colonia
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="colony"
+            name="colony"
+            value={usuarioEditado.colony}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="street" className="form-label">
+            Calle
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="street"
+            name="street"
+            value={usuarioEditado.street}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="streetNumber" className="form-label">
+            Num de Calle
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="streetNumber"
+            name="streetNumber"
+            value={usuarioEditado.streetNumber}
             onChange={handleChange}
           />
         </div>
