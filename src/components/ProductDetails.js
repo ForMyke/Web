@@ -58,11 +58,8 @@ const ProductDetails = ({ addToCart, isDarkMode }) => {
     <div
       className={`product-details-container container ${isDarkMode ? "dark-mode" : ""}`}
     >
-      <div className="product-title-top text-center mt-4">
-        <h1>{product.title}</h1>
-      </div>
-      <div className="row mt-4">
-        <div className="col-md-12">
+      <div className="row">
+        <div className="col-md-6">
           <div className="product-images">
             <div className="main-image">
               <ReactImageMagnify
@@ -84,7 +81,7 @@ const ProductDetails = ({ addToCart, isDarkMode }) => {
                 }}
               />
             </div>
-            <div className="thumbnail-images">
+            <div className="thumbnail-images mt-3 d-flex flex-column">
               {product.images &&
                 product.images.length > 0 &&
                 product.images.map((image, index) => (
@@ -92,16 +89,15 @@ const ProductDetails = ({ addToCart, isDarkMode }) => {
                     key={index}
                     src={image}
                     alt={`${product.title} ${index + 1}`}
-                    className="img-thumbnail"
+                    className="img-thumbnail mb-2"
+                    style={{ cursor: "pointer", width: "100px" }}
                     onClick={() => handleThumbnailClick(image)}
                   />
                 ))}
             </div>
           </div>
         </div>
-      </div>
-      <div className="row mt-4">
-        <div className="col-md-12">
+        <div className="col-md-6">
           <h1>{product.title}</h1>
           <p>{product.description}</p>
           <h2>${product.price}</h2>
@@ -153,56 +149,50 @@ const ProductDetails = ({ addToCart, isDarkMode }) => {
           </button>
         </div>
       </div>
-      <div className="row mt-4">
-        <div className="col-md-12">
-          <div className="product-info-tabs">
-            <Tab.Container defaultActiveKey="characteristics">
-              <Nav variant="tabs">
-                <Nav.Item>
-                  <Nav.Link eventKey="characteristics">
-                    Características
-                  </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="reviews">Reseñas</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link eventKey="shipping">Envío</Nav.Link>
-                </Nav.Item>
-              </Nav>
-              <Tab.Content className="mt-3">
-                <Tab.Pane eventKey="characteristics">
-                  <h3>Características</h3>
-                  <ul>
-                    <li>Marca: {product.brand}</li>
-                    <li>Precio: ${product.price}</li>
-                    <li>Stock: {product.stock}</li>
-                    <li>Descuento: {product.discountPercentage}%</li>
-                    <li>Rating: {product.rating}</li>
-                    <li>Categoría: {product.category}</li>
-                  </ul>
-                </Tab.Pane>
-                <Tab.Pane eventKey="reviews">
-                  <h3>Reseñas</h3>
-                  {product.reviews.map((review, index) => (
-                    <div key={index} className="review-item">
-                      <p>
-                        <strong>{review.reviewerName}</strong>: {review.comment}
-                      </p>
-                      <p>
-                        Rating: {review.rating} - {review.date}
-                      </p>
-                    </div>
-                  ))}
-                </Tab.Pane>
-                <Tab.Pane eventKey="shipping">
-                  <h3>Envío</h3>
-                  <p>{product.shippingInformation}</p>
-                </Tab.Pane>
-              </Tab.Content>
-            </Tab.Container>
-          </div>
-        </div>
+      <div className="product-info-tabs mt-5">
+        <Tab.Container defaultActiveKey="characteristics">
+          <Nav variant="tabs">
+            <Nav.Item>
+              <Nav.Link eventKey="characteristics">Características</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="reviews">Reseñas</Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="shipping">Envío</Nav.Link>
+            </Nav.Item>
+          </Nav>
+          <Tab.Content className="mt-3">
+            <Tab.Pane eventKey="characteristics">
+              <h3>Características</h3>
+              <ul>
+                <li>Marca: {product.brand}</li>
+                <li>Precio: ${product.price}</li>
+                <li>Stock: {product.stock}</li>
+                <li>Descuento: {product.discountPercentage}%</li>
+                <li>Rating: {product.rating}</li>
+                <li>Categoría: {product.category}</li>
+              </ul>
+            </Tab.Pane>
+            <Tab.Pane eventKey="reviews">
+              <h3>Reseñas</h3>
+              {product.reviews.map((review, index) => (
+                <div key={index} className="review-item">
+                  <p>
+                    <strong>{review.reviewerName}</strong>: {review.comment}
+                  </p>
+                  <p>
+                    Rating: {review.rating} - {review.date}
+                  </p>
+                </div>
+              ))}
+            </Tab.Pane>
+            <Tab.Pane eventKey="shipping">
+              <h3>Envío</h3>
+              <p>{product.shippingInformation}</p>
+            </Tab.Pane>
+          </Tab.Content>
+        </Tab.Container>
       </div>
     </div>
   );

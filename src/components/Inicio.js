@@ -30,8 +30,6 @@ const Inicio = ({ isDarkMode }) => {
     return savedTime ? parseInt(savedTime) : 7 * 24 * 60 * 60;
   });
 
-  const navigate = useNavigate();
-
   useEffect(() => {
     const category = "laptops";
     axios
@@ -73,9 +71,7 @@ const Inicio = ({ isDarkMode }) => {
       .padStart(2, "0")}`;
   };
 
-  const handleProductClick = (productId) => {
-    navigate(`/productos/${productId}`);
-  };
+  const navigate = useNavigate();
 
   return (
     <div className={`inicio-container ${isDarkMode ? "dark-mode" : ""}`}>
@@ -142,12 +138,7 @@ const Inicio = ({ isDarkMode }) => {
         <h2>CLÁSICOS EN TENDENCIA</h2>
         <div className="product-carousel d-flex justify-content-center">
           {products.map((product) => (
-            <div
-              className="product-card mx-2"
-              key={product.id}
-              onClick={() => handleProductClick(product.id)}
-              style={{ cursor: "pointer" }} // Estilo opcional para indicar que es clickeable
-            >
+            <div className="product-card mx-2" key={product.id}>
               <img
                 src={product.thumbnail}
                 alt={product.title}
