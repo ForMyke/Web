@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/perfil.css";
-import{jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 
 const Perfil = () => {
@@ -33,11 +33,15 @@ const Perfil = () => {
             if (data.success) {
               setUser(data.user);
             } else {
-              setError("Error al obtener los datos del usuario: " + data.message);
+              setError(
+                "Error al obtener los datos del usuario: " + data.message
+              );
             }
           })
           .catch((error) => {
-            setError("Error al obtener los datos del usuario: " + error.message);
+            setError(
+              "Error al obtener los datos del usuario: " + error.message
+            );
           })
           .finally(() => {
             setLoading(false);
@@ -121,11 +125,13 @@ const Perfil = () => {
         </div>
       </div>
 
-
       <div className=" mb-4">
         <div className="card-body">
           <h5 className="card-title">Dirección </h5>
-          <p className="card-text">{user.calle} {user.numCalle}, {user.colonia}. {user.municipio}, {user.estado}. C.P. {user.CP}</p>
+          <p className="card-text">
+            {user.calle} {user.numCalle}, {user.colonia}. {user.municipio},{" "}
+            {user.estado}. C.P. {user.CP}
+          </p>
         </div>
       </div>
 

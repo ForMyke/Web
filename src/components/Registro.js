@@ -203,6 +203,7 @@ const Registro = () => {
               button: {
                 text: "Aceptar",
                 className: "btn btn-dark",
+                color: "black",
               },
             });
           } else if (result.success) {

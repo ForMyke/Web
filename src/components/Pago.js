@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/pago.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import JustValidate from "just-validate";
 import { jsPDF } from "jspdf";
 
@@ -25,23 +25,30 @@ const Pago = ({ cartItems }) => {
 
         const fetchData = async () => {
           try {
-            const response = await fetch("https://localhost/backend/api/sesion.php", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email: userEmail }),
-            });
+            const response = await fetch(
+              "https://localhost/backend/api/sesion.php",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email: userEmail }),
+              }
+            );
 
             const data = await response.json();
 
             if (data.success) {
               setUser(data.user);
             } else {
-              setError("Error al obtener los datos del usuario: " + data.message);
+              setError(
+                "Error al obtener los datos del usuario: " + data.message
+              );
             }
           } catch (error) {
-            setError("Error al obtener los datos del usuario: " + error.message);
+            setError(
+              "Error al obtener los datos del usuario: " + error.message
+            );
           } finally {
             setLoading(false);
           }
@@ -80,55 +87,100 @@ const Pago = ({ cartItems }) => {
         ])
         .addField("#postalCode", [
           { rule: "required", errorMessage: "El código postal es obligatorio" },
-          { rule: "number", errorMessage: "El código postal debe ser numérico" },
+          {
+            rule: "number",
+            errorMessage: "El código postal debe ser numérico",
+          },
         ])
         .addField("#cardNumber", [
-          { rule: "required", errorMessage: "El número de tarjeta es obligatorio" },
-          { rule: "number", errorMessage: "El número de tarjeta debe ser numérico" },
-          { rule: "minLength", value: 16, errorMessage: "El número de tarjeta debe tener 16 dígitos" },
-          { rule: "maxLength", value: 16, errorMessage: "El número de tarjeta debe tener 16 dígitos" },
+          {
+            rule: "required",
+            errorMessage: "El número de tarjeta es obligatorio",
+          },
+          {
+            rule: "number",
+            errorMessage: "El número de tarjeta debe ser numérico",
+          },
+          {
+            rule: "minLength",
+            value: 16,
+            errorMessage: "El número de tarjeta debe tener 16 dígitos",
+          },
+          {
+            rule: "maxLength",
+            value: 16,
+            errorMessage: "El número de tarjeta debe tener 16 dígitos",
+          },
         ])
         .addField("#cardExpiry", [
-          { rule: "required", errorMessage: "La fecha de vencimiento es obligatoria" },
-          { rule: "customRegexp", value: /^(0[1-9]|1[0-2])\/\d{2}$/, errorMessage: "La fecha de vencimiento debe estar en el formato MM/AA" },
+          {
+            rule: "required",
+            errorMessage: "La fecha de vencimiento es obligatoria",
+          },
+          {
+            rule: "customRegexp",
+            value: /^(0[1-9]|1[0-2])\/\d{2}$/,
+            errorMessage:
+              "La fecha de vencimiento debe estar en el formato MM/AA",
+          },
         ])
         .addField("#cardCSC", [
           { rule: "required", errorMessage: "El CVV es obligatorio" },
           { rule: "number", errorMessage: "El CVV debe ser numérico" },
-          { rule: "minLength", value: 3, errorMessage: "El CVV debe tener 3 dígitos" },
-          { rule: "maxLength", value: 3, errorMessage: "El CVV debe tener 3 dígitos" },
+          {
+            rule: "minLength",
+            value: 3,
+            errorMessage: "El CVV debe tener 3 dígitos",
+          },
+          {
+            rule: "maxLength",
+            value: 3,
+            errorMessage: "El CVV debe tener 3 dígitos",
+          },
         ])
         .addField("#cardHolderName", [
-          { rule: "required", errorMessage: "El nombre del titular es obligatorio" },
+          {
+            rule: "required",
+            errorMessage: "El nombre del titular es obligatorio",
+          },
         ])
         .addField("#cardHolderSurname", [
-          { rule: "required", errorMessage: "El apellido del titular es obligatorio" },
+          {
+            rule: "required",
+            errorMessage: "El apellido del titular es obligatorio",
+          },
         ])
         .addField("#terms", [
-          { rule: "required", errorMessage: "Debe aceptar los términos y condiciones" },
+          {
+            rule: "required",
+            errorMessage: "Debe aceptar los términos y condiciones",
+          },
         ])
         .onSuccess(async (event) => {
           event.preventDefault();
-          
+
           if (isSubmitting) return;
           setIsSubmitting(true);
 
           const correo = user.correo;
-          const productos = cartItems.map(item => ({
+          const productos = cartItems.map((item) => ({
             id: item.id,
             titulo: item.title,
-            cantidad: item.quantity
+            cantidad: item.quantity,
           }));
           const total = parseFloat(getTotalPrice()) + getShippingCost();
 
           try {
-            const response = await fetch("https://localhost/backend/api/comprar.php", {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ correo, productos, total })
-            });
+            const response = await fetch(
+              "https://localhost/backend/api/comprar.php",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ correo, productos, total }),
+              }
+            );
 
             const responseText = await response.text();
             let data;
@@ -142,7 +194,7 @@ const Pago = ({ cartItems }) => {
               let redirectPath = "/";
               if (data.error === "Saldo insuficiente") {
                 redirectPath = "/perfil";
-              } else{
+              } else {
                 redirectPath = "/carrito";
               }
 
@@ -200,52 +252,98 @@ const Pago = ({ cartItems }) => {
     doc.setFontSize(12);
     doc.text("Xclusive Store S.A. de C.V.", 105, 30, { align: "center" });
     doc.text("RFC: HAM111006K69", 105, 40, { align: "center" });
-    doc.text("Unidad Profesional Adolfo López Mateos, Av. Juan de Dios Bátiz", 105, 50, { align: "center" });
-    doc.text("Nueva Industrial Vallejo, Gustavo A. Madero", 105, 60, { align: "center" });
+    doc.text(
+      "Unidad Profesional Adolfo López Mateos, Av. Juan de Dios Bátiz",
+      105,
+      50,
+      { align: "center" }
+    );
+    doc.text("Nueva Industrial Vallejo, Gustavo A. Madero", 105, 60, {
+      align: "center",
+    });
     doc.text("C.P. 07320 Ciudad de México, CDMX", 105, 70, { align: "center" });
     doc.text("Tel. 1-800-555-1234", 105, 80, { align: "center" });
-    doc.text("----------------------------------------", 105, 90, { align: "center" });
+    doc.text("----------------------------------------", 105, 90, {
+      align: "center",
+    });
     doc.text("Fecha y hora de compra", 105, 100, { align: "center" });
-    doc.text("----------------------------------------", 105, 110, { align: "center" });
+    doc.text("----------------------------------------", 105, 110, {
+      align: "center",
+    });
     doc.text(formattedDate, 105, 120, { align: "center" });
 
     const startY = 130;
     let currentY = startY;
 
     cartItems.forEach((item) => {
-      doc.text(`${item.title} (Cantidad: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`, 105, currentY, { align: "center" });
+      doc.text(
+        `${item.title} (Cantidad: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`,
+        105,
+        currentY,
+        { align: "center" }
+      );
       currentY += 10;
     });
 
     const shippingCost = getShippingCost();
     const totalPrice = (parseFloat(getTotalPrice()) + shippingCost).toFixed(2);
     currentY += 10;
-    doc.text(`Gastos de envío: ${shippingCost === 0 ? 'GRATIS' : `$${shippingCost}`}`, 105, currentY, { align: "center" });
+    doc.text(
+      `Gastos de envío: ${shippingCost === 0 ? "GRATIS" : `$${shippingCost}`}`,
+      105,
+      currentY,
+      { align: "center" }
+    );
     currentY += 10;
     doc.text(`Total: $${totalPrice}`, 105, currentY, { align: "center" });
 
     currentY += 20;
     doc.text(`Num. Tarj. xxxxxx******xxxx`, 105, currentY, { align: "center" });
     currentY += 10;
-    doc.text(`Núm. Seguimiento 72057-0-09342`, 105, currentY, { align: "center" });
+    doc.text(`Núm. Seguimiento 72057-0-09342`, 105, currentY, {
+      align: "center",
+    });
     currentY += 10;
     doc.text(`Autorización 614751`, 105, currentY, { align: "center" });
 
     currentY += 10;
-    doc.text("----------------------------------------", 105, currentY, { align: "center" });
+    doc.text("----------------------------------------", 105, currentY, {
+      align: "center",
+    });
     currentY += 10;
-    doc.text(`Llegará el ${formattedArrivalDate} a la dirección:`, 105, currentY, { align: "center" });
+    doc.text(
+      `Llegará el ${formattedArrivalDate} a la dirección:`,
+      105,
+      currentY,
+      { align: "center" }
+    );
     currentY += 10;
-    doc.text(`${formRef.current.street.value} ${formRef.current.extNumber.value}.`, 105, currentY, { align: "center" });
+    doc.text(
+      `${formRef.current.street.value} ${formRef.current.extNumber.value}.`,
+      105,
+      currentY,
+      { align: "center" }
+    );
     currentY += 10;
-    doc.text(`${formRef.current.colony.value}, ${formRef.current.state.value}.`, 105, currentY, { align: "center" });
+    doc.text(
+      `${formRef.current.colony.value}, ${formRef.current.state.value}.`,
+      105,
+      currentY,
+      { align: "center" }
+    );
     currentY += 10;
-    doc.text(`C.P. ${formRef.current.postalCode.value}`, 105, currentY, { align: "center" });
+    doc.text(`C.P. ${formRef.current.postalCode.value}`, 105, currentY, {
+      align: "center",
+    });
 
     currentY += 20;
-    doc.text("----------------------------------------", 105, currentY, { align: "center" });
+    doc.text("----------------------------------------", 105, currentY, {
+      align: "center",
+    });
     currentY += 10;
-    doc.text("No. de Folio: 0001122403088558", 105, currentY, { align: "center" });
+    doc.text("No. de Folio: 0001122403088558", 105, currentY, {
+      align: "center",
+    });
 
     doc.setDrawColor(0, 0, 0);
     doc.setLineWidth(5);
@@ -274,16 +372,20 @@ const Pago = ({ cartItems }) => {
             <div className="card-body">
               <h4 className="card-title">1 Identificación</h4>
               <p className="card-text">
-                <strong>Correo electrónico: </strong>{user.correo}
+                <strong>Correo electrónico: </strong>
+                {user.correo}
               </p>
               <p className="card-text">
-                <strong>Nombre: </strong>{user.nombre}
+                <strong>Nombre: </strong>
+                {user.nombre}
               </p>
               <p className="card-text">
-                <strong>Apellido: </strong>{user.apellidos}
+                <strong>Apellido: </strong>
+                {user.apellidos}
               </p>
               <p className="card-text">
-                <strong>Saldo disponible: </strong>{user.saldo}
+                <strong>Saldo disponible: </strong>
+                {user.saldo}
               </p>
             </div>
           </div>
@@ -417,7 +519,11 @@ const Pago = ({ cartItems }) => {
                     <a href="#">Aviso de Privacidad</a>
                   </label>
                 </div>
-                <button type="submit" className="btn btn-dark w-100" disabled={isSubmitting}>
+                <button
+                  type="submit"
+                  className="btn btn-dark w-100"
+                  disabled={isSubmitting}
+                >
                   {isSubmitting ? "Procesando..." : "Comprar ahora"}
                 </button>
               </form>
@@ -442,15 +548,15 @@ const Pago = ({ cartItems }) => {
               </p>
               <p>
                 Gastos de envío{" "}
-                <span className="float-right" style={{ color: shippingCost === 0 ? 'green' : 'black' }}>
-                  {shippingCost === 0 ? 'GRATIS' : `$${shippingCost}`}
+                <span
+                  className="float-right"
+                  style={{ color: shippingCost === 0 ? "green" : "black" }}
+                >
+                  {shippingCost === 0 ? "GRATIS" : `$${shippingCost}`}
                 </span>
               </p>
               <h5>
-                Total{" "}
-                <span className="float-right">
-                  ${totalPrice}
-                </span>
+                Total <span className="float-right">${totalPrice}</span>
               </h5>
               <hr />
               <p>

@@ -14,3 +14,26 @@ ul {
   color: #d92f21;
   font-size: 0.875rem; /* Tamaño de fuente más pequeño */
 }
+
+/* src/css/registro.css */
+input.is-invalid,
+select.is-invalid {
+  border-color: red;
+}
+
+input.is-valid,
+select.is-valid {
+  border-color: blue;
+}
+
+.just-validate-error-label {
+  color: red;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.just-validate-success-label {
+  color: blue;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
