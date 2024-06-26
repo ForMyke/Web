@@ -1,46 +1,66 @@
-.footer-container {
+.footer {
+  background-color: #343a40;
+  color: #ffffff;
   padding: 20px 0;
 }
 
-.footer-container .col-md-3,
-.footer-container .col-md-2 {
-  margin-bottom: 15px;
+.footer a {
+  color: #ffffff;
+  text-decoration: none;
 }
 
-.footer-container h5,
-.footer-container h6 {
-  font-weight: bold;
-}
-
-.footer-container p,
-.footer-container a {
-  color: #343a40;
-}
-
-.footer-container a:hover {
+.footer a:hover {
   text-decoration: underline;
 }
 
-.footer-container .btn-dark {
-  background-color: #343a40;
-  border-color: #343a40;
+.footer .social-icon {
+  width: 24px;
+  height: 24px;
 }
 
-.footer-container .btn-dark:hover {
-  background-color: #23272b;
-  border-color: #1d2124;
-}
-
-/* Media Queries */
-@media (max-width: 768px) {
-  .footer-container .row {
-    flex-direction: column;
-    align-items: center;
+@media (max-width: 767.98px) {
+  .footer .col-md-4 {
     text-align: center;
+    margin-bottom: 20px;
   }
 
-  .footer-container .col-md-3,
-  .footer-container .col-md-2 {
-    width: 100%;
+  .footer .col-md-4 ul {
+    display: inline-block;
+    text-align: center; /* Centrar texto en pantallas pequeñas */
+  }
+}
+
+@media (max-width: 1000.98px) {
+  .footer .container {
+    padding: 0 10px;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    align-items: center; /* Centrar contenido verticalmente */
+    justify-content: center;
+  }
+
+  .footer .col-md-4 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .footer .col-md-4 ul {
+    display: inline-block;
+    text-align: center; /* Centrar texto en pantallas pequeñas */
+    padding-left: 0;
+  }
+
+  .footer .row {
+    justify-content: center; /* Asegura que las columnas estén centradas horizontalmente */
+    width: 100%; /* Asegura que el contenido ocupe todo el ancho disponible */
+  }
+
+  .footer .row .col-md-4 {
+    flex: 1; /* Permite que las columnas se distribuyan equitativamente */
+  }
+
+  .footer .row .col-md-4 ul {
+    width: 100%; /* Asegura que las listas ocupen todo el ancho de la columna */
   }
 }

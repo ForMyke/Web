@@ -12,7 +12,7 @@ const ThreeFigureExpanded = ({ color }) => {
     const camera = new THREE.PerspectiveCamera(
       60,
       window.innerWidth / window.innerHeight,
-      4.5,
+      5,
       400
     );
     camera.position.z = 5;
