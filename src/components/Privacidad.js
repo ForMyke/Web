@@ -12,7 +12,7 @@ const Privacidad = () => {
         recopilados o generados (tratados) cuando usted interactúa con las
         páginas web de Xclusive Store (las "Páginas Web"), las experiencias
         digitales y las aplicaciones móviles de Xclusive Store, eventos de
-        tiendas, o alguno de nuestros otros productos o servicios, todos los
+        tiendas, o alguno de todos nuestros otros productos o servicios, todos los
         cuales forman parte de la Plataforma de Xclusive Store (la
         "Plataforma"). Esta Política describe los tipos de datos personales
         recopilados y cómo se utilizan, comparten y protegen. También explica
