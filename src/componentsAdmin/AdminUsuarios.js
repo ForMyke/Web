@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 const AdminUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -9,6 +12,8 @@ const AdminUsuarios = () => {
   const [usuarioActual, setUsuarioActual] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
   const [modoEditar, setModoEditar] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://localhost/backend/api/usuarios.php").then((response) => {
@@ -31,20 +36,28 @@ const AdminUsuarios = () => {
   };
 
   const handleEditarUsuario = (usuario) => {
-    axios.get(`http://localhost/backend/api/usuarios.php?id=${usuario.id}`).then((response) => {
-      setUsuarioActual(response.data.user);
-      setModoAgregar(false);
-      setModoEditar(true);
-    });
+    axios
+      .get(`http://localhost/backend/api/usuarios.php?id=${usuario.id}`)
+      .then((response) => {
+        setUsuarioActual(response.data.user);
+        setModoAgregar(false);
+        setModoEditar(true);
+      });
   };
 
   const handleEliminarUsuario = () => {
-    axios.delete("http://localhost/backend/api/usuarios.php", {
-      data: { ids: usuariosSeleccionados }
-    }).then(() => {
-      setUsuarios(usuarios.filter((usuario) => !usuariosSeleccionados.includes(usuario.id)));
-      setUsuariosSeleccionados([]);
-    });
+    axios
+      .delete("http://localhost/backend/api/usuarios.php", {
+        data: { ids: usuariosSeleccionados },
+      })
+      .then(() => {
+        setUsuarios(
+          usuarios.filter(
+            (usuario) => !usuariosSeleccionados.includes(usuario.id)
+          )
+        );
+        setUsuariosSeleccionados([]);
+      });
   };
 
   const handleAgregarUsuario = () => {
@@ -55,13 +68,20 @@ const AdminUsuarios = () => {
 
   const handleGuardarUsuario = (usuario) => {
     if (modoAgregar) {
-      axios.post("http://localhost/backend/api/usuarios.php", usuario).then((response) => {
-        setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
-      });
+      axios
+        .post("http://localhost/backend/api/usuarios.php", usuario)
+        .then((response) => {
+          setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
+        });
     } else if (modoEditar) {
-      axios.put(`http://localhost/backend/api/usuarios.php?id=${usuario.id}`, usuario).then(() => {
-        setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
-      });
+      axios
+        .put(
+          `http://localhost/backend/api/usuarios.php?id=${usuario.id}`,
+          usuario
+        )
+        .then(() => {
+          setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
+        });
     }
     setUsuarioActual(null);
     setModoAgregar(false);
@@ -74,6 +94,12 @@ const AdminUsuarios = () => {
 
   return (
     <div className="container mt-5">
+      <div className="d-flex justify-content-between align-items-center mb-5">
+        <h1 className="text-center mb-5">Usuarios</h1>
+        <button className="btn btn-dark" onClick={() => navigate("/admin")}>
+          <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> Volver
+        </button>
+      </div>
       <h1>Admininistrar Usuarios</h1>
       <div>
         <div className="d-flex flex-column w-100">

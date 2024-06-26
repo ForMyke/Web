@@ -2,6 +2,10 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
 const AdminProductos = () => {
   const [productos, setProductos] = useState([]);
   const [busqueda, setBusqueda] = useState("");
@@ -19,6 +23,8 @@ const AdminProductos = () => {
   const handleBusquedaChange = (e) => {
     setBusqueda(e.target.value);
   };
+
+  const navigate = useNavigate();
 
   const handleCheckboxChange = (e, productoId) => {
     if (e.target.checked) {
@@ -66,6 +72,12 @@ const AdminProductos = () => {
 
   return (
     <div className="container mt-5">
+      <div className="d-flex justify-content-between align-items-center mb-5">
+        <h1 className="text-center mb-5">Productos</h1>
+        <button className="btn btn-dark" onClick={() => navigate("/admin")}>
+          <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> Volver
+        </button>
+      </div>
       <h1>Admin Productos</h1>
       <div>
         <div className="d-flex flex-column w-100">
