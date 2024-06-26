@@ -67,8 +67,8 @@ const AdminProductos = () => {
   return (
     <div className="container mt-5">
       <h1>Admin Productos</h1>
-      <div className="row">
-        <div className="col-md-4">
+      <div>
+        <div className="d-flex flex-column w-100">
           <button
             className="btn btn-primary  mb-3"
             onClick={handleEliminarProducto}
@@ -89,7 +89,7 @@ const AdminProductos = () => {
             />
           )}
         </div>
-        <div className="col-md-8">
+        <div className="col-md-12">
           <h3>Lista de Productos</h3>
           <input
             type="text"

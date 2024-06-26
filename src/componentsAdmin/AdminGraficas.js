@@ -1,48 +1,119 @@
-import React from "react";
-import { Bar } from "react-chartjs-2";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useEffect, useState } from 'react';
+import { Bar, Pie } from 'react-chartjs-2';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement,
+} from 'chart.js';
 
-const dataCategorias = {
-  labels: ["Categoría 1", "Categoría 2", "Categoría 3"],
-  datasets: [
-    {
-      label: "Compras por Categoría",
-      data: [12, 19, 3],
-      backgroundColor: ["rgba(75, 192, 192, 0.2)"],
-      borderColor: ["rgba(75, 192, 192, 1)"],
-      borderWidth: 1,
-    },
-  ],
-};
-
-const dataTotales = {
-  labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio"],
-  datasets: [
-    {
-      label: "Compras Totales",
-      data: [65, 59, 80, 81, 56, 55],
-      backgroundColor: ["rgba(153, 102, 255, 0.2)"],
-      borderColor: ["rgba(153, 102, 255, 1)"],
-      borderWidth: 1,
-    },
-  ],
-};
+// Registrar las escalas
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+  ArcElement
+);
 
 const AdminGraficas = () => {
+  const [dataCategorias, setDataCategorias] = useState(null);
+  const [dataTotales, setDataTotales] = useState(null);
+  const [dataStock, setDataStock] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const categorias = await axios.get('https://localhost/backend/api/comprasPorCategoria.php');
+      const totales = await axios.get('https://localhost/backend/api/comprasTotales.php');
+      const stock = await axios.get('https://localhost/backend/api/stockPorProducto.php');
+
+      setDataCategorias({
+        labels: categorias.data.labels,
+        datasets: [
+          {
+            label: 'Compras por Categoría',
+            data: categorias.data.data,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+          },
+        ],
+      });
+
+      setDataTotales({
+        labels: totales.data.labels,
+        datasets: [
+          {
+            label: 'Ventas por Producto',
+            data: totales.data.data,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(255, 206, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(153, 102, 255, 0.2)'
+            ],
+            borderColor: [
+              'rgba(255, 99, 132, 1)',
+              'rgba(54, 162, 235, 1)',
+              'rgba(255, 206, 86, 1)',
+              'rgba(75, 192, 192, 1)',
+              'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1,
+          },
+        ],
+      });
+
+      setDataStock({
+        labels: stock.data.labels,
+        datasets: [
+          {
+            label: 'Stock',
+            data: stock.data.data,
+            backgroundColor: 'rgba(255, 159, 64, 0.2)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1,
+          },
+        ],
+      });
+    };
+
+    fetchData();
+  }, []);
+
+  if (!dataCategorias || !dataTotales || !dataStock) {
+    return <div>Cargando...</div>;
+  }
+
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-5">Graficas</h1>
+      <h1 className="text-center mb-5">Gráficas</h1>
       <div className="row">
         <div className="col-12 mb-5">
           <h2 className="text-center">Compras por Categoría de Productos</h2>
           <div className="chart-container">
-            {/* <Bar data={dataCategorias} options={{ responsive: true }} /> */}
+            <Bar data={dataCategorias} options={{ responsive: true }} />
+          </div>
+        </div>
+        <div className="col-12 mb-5">
+          <h2 className="text-center">5 Productos más Vendidos</h2>
+          <div className="chart-container">
+            <Pie data={dataTotales} options={{ responsive: true }} />
           </div>
         </div>
         <div className="col-12">
-          <h2 className="text-center">Compras Totales</h2>
+          <h2 className="text-center">10 Productos con Menos Stock</h2>
           <div className="chart-container">
-            {/* <Bar data={dataTotales} options={{ responsive: true }} /> */}
+            <Bar data={dataStock} options={{ responsive: true }} />
           </div>
         </div>
       </div>

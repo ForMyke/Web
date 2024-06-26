@@ -3,98 +3,103 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const Administradores = () => {
-  const [administradores, setAdministradores] = useState([]);
+  const [usuarios, setUsuarios] = useState([]);
   const [busqueda, setBusqueda] = useState("");
-  const [administradoresSeleccionados, setAdministradoresSeleccionados] =
-    useState([]);
-  const [adminActual, setAdminActual] = useState(null);
+  const [usuariosSeleccionados, setUsuariosSeleccionados] = useState([]);
+  const [usuarioActual, setUsuarioActual] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
-  /*
+  const [modoEditar, setModoEditar] = useState(false);
+
   useEffect(() => {
-    axios.get("http://localhost/backend/api/admins.php").then((response) => {
-      setAdministradores(response.data.admins);
+    axios.get("http://localhost/backend/api/administradores.php").then((response) => {
+      setUsuarios(response.data.users);
     });
   }, []);
-  */
 
   const handleBusquedaChange = (e) => {
     setBusqueda(e.target.value);
   };
 
-  const handleCheckboxChange = (e, adminId) => {
+  const handleCheckboxChange = (e, usuarioId) => {
     if (e.target.checked) {
-      setAdministradoresSeleccionados([
-        ...administradoresSeleccionados,
-        adminId,
-      ]);
+      setUsuariosSeleccionados([...usuariosSeleccionados, usuarioId]);
     } else {
-      setAdministradoresSeleccionados(
-        administradoresSeleccionados.filter((id) => id !== adminId)
+      setUsuariosSeleccionados(
+        usuariosSeleccionados.filter((id) => id !== usuarioId)
       );
     }
   };
 
-  const handleEditarAdmin = (admin) => {
-    setAdminActual(admin);
-    setModoAgregar(false);
+  const handleEditarUsuario = (usuario) => {
+    axios.get(`http://localhost/backend/api/administradores.php?id=${usuario.id}`).then((response) => {
+      setUsuarioActual(response.data.user);
+      setModoAgregar(false);
+      setModoEditar(true);
+    });
   };
 
-  const handleEliminarAdmin = () => {
-    // Lógica para eliminar los administradores seleccionados
-    setAdministradores(
-      administradores.filter(
-        (admin) => !administradoresSeleccionados.includes(admin.id)
-      )
-    );
-    setAdministradoresSeleccionados([]);
+  const handleEliminarUsuario = () => {
+    axios.delete("http://localhost/backend/api/administradores.php", {
+      data: { ids: usuariosSeleccionados }
+    }).then(() => {
+      setUsuarios(usuarios.filter((usuario) => !usuariosSeleccionados.includes(usuario.id)));
+      setUsuariosSeleccionados([]);
+    });
   };
 
-  const handleAgregarAdmin = () => {
-    setAdminActual(null);
+  const handleAgregarUsuario = () => {
+    setUsuarioActual(null);
     setModoAgregar(true);
+    setModoEditar(false);
   };
 
-  const handleGuardarAdmin = (admin) => {
+  const handleGuardarUsuario = (usuario) => {
     if (modoAgregar) {
-      setAdministradores([...administradores, admin]);
-    } else {
-      setAdministradores(
-        administradores.map((a) => (a.id === admin.id ? admin : a))
-      );
+      axios.post("http://localhost/backend/api/administradores.php", usuario).then((response) => {
+        setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
+      });
+    } else if (modoEditar) {
+      axios.put(`http://localhost/backend/api/administradores.php?id=${usuario.id}`, usuario).then(() => {
+        setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
+      });
     }
-    setAdminActual(null);
+    setUsuarioActual(null);
     setModoAgregar(false);
+    setModoEditar(false);
   };
 
-  const administradoresFiltrados = administradores.filter((admin) =>
-    admin.name.toLowerCase().includes(busqueda.toLowerCase())
+  const usuariosFiltrados = usuarios.filter((usuario) =>
+    usuario.name.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (
     <div className="container mt-5">
-      <h1>Página de Administradores</h1>
-      <div className="row">
-        <div className="col-md-4">
-          <h3>Acciones</h3>
+      <h1>Administradores</h1>
+      <div>
+        <div className="d-flex flex-column w-100">
           <button
             className="btn btn-secondary mb-3"
-            onClick={handleEliminarAdmin}
+            onClick={handleEliminarUsuario}
           >
             Eliminar Administradores Seleccionados
           </button>
-          <button className="btn btn-primary mb-3" onClick={handleAgregarAdmin}>
+          <button
+            className="btn btn-primary mb-3"
+            onClick={handleAgregarUsuario}
+          >
             Agregar Administrador
           </button>
 
-          {(adminActual || modoAgregar) && (
-            <EditarAgregarAdmin
-              admin={adminActual}
-              onGuardar={handleGuardarAdmin}
+          {(usuarioActual || modoAgregar) && (
+            <EditarAgregarUsuario
+              usuario={usuarioActual}
+              onGuardar={handleGuardarUsuario}
+              modoAgregar={modoAgregar}
             />
           )}
         </div>
-        <div className="col-md-8">
-          <h3>Lista de Administradores</h3>
+        <div className="col-md-12">
+          <h3>Lista de Usuarios</h3>
           <input
             type="text"
             className="form-control mb-3"
@@ -107,25 +112,29 @@ const Administradores = () => {
               <tr>
                 <th scope="col">Seleccionar</th>
                 <th scope="col">Nombre</th>
-                <th scope="col">Email</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
             <tbody>
-              {administradoresFiltrados.map((admin) => (
-                <tr key={admin.id}>
+              {usuariosFiltrados.map((usuario) => (
+                <tr key={usuario.id}>
                   <td>
                     <input
                       type="checkbox"
-                      onChange={(e) => handleCheckboxChange(e, admin.id)}
+                      onChange={(e) => handleCheckboxChange(e, usuario.id)}
                     />
                   </td>
-                  <td>{admin.name}</td>
-                  <td>{admin.email}</td>
+                  <td>{usuario.name}</td>
+                  <td>{usuario.surname}</td>
+                  <td>{usuario.email}</td>
+                  <td>{usuario.state}</td>
                   <td>
                     <button
                       className="btn btn-info"
-                      onClick={() => handleEditarAdmin(admin)}
+                      onClick={() => handleEditarUsuario(usuario)}
                     >
                       Editar
                     </button>
@@ -140,31 +149,47 @@ const Administradores = () => {
   );
 };
 
-const EditarAgregarAdmin = ({ admin, onGuardar }) => {
-  const [adminEditado, setAdminEditado] = useState(
-    admin || {
+const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
+  const [usuarioEditado, setUsuarioEditado] = useState(
+    usuario || {
       id: Math.random().toString(36).substr(2, 9),
       name: "",
+      surname: "",
       email: "",
       password: "",
+      birthDate: "",
+      state: "",
+      municipality: "",
+      colony: "",
+      street: "",
+      streetNumber: "",
+      postalCode: "",
+      preferences: "",
+      saldo: 10000,
     }
   );
 
+  useEffect(() => {
+    if (usuario) {
+      setUsuarioEditado(usuario);
+    }
+  }, [usuario]);
+
   const handleChange = (e) => {
-    setAdminEditado({
-      ...adminEditado,
+    setUsuarioEditado({
+      ...usuarioEditado,
       [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onGuardar(adminEditado);
+    onGuardar(usuarioEditado);
   };
 
   return (
     <div>
-      <h3>{admin ? "Editar Administrador" : "Agregar Administrador"}</h3>
+      <h3>{modoAgregar ? "Agregar Usuario" : "Editar Usuario"}</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
@@ -175,24 +200,37 @@ const EditarAgregarAdmin = ({ admin, onGuardar }) => {
             className="form-control"
             id="name"
             name="name"
-            value={adminEditado.name}
+            value={usuarioEditado.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="surname" className="form-label">
+            Apellidos
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="surname"
+            name="surname"
+            value={usuarioEditado.surname}
             onChange={handleChange}
           />
         </div>
         <div className="mb-3">
           <label htmlFor="email" className="form-label">
-            Email
+            Correo
           </label>
           <input
             type="email"
             className="form-control"
             id="email"
             name="email"
-            value={adminEditado.email}
+            value={usuarioEditado.email}
             onChange={handleChange}
           />
         </div>
-        {!admin && (
+        {modoAgregar && (
           <div className="mb-3">
             <label htmlFor="password" className="form-label">
               Contraseña
@@ -202,11 +240,118 @@ const EditarAgregarAdmin = ({ admin, onGuardar }) => {
               className="form-control"
               id="password"
               name="password"
-              value={adminEditado.password}
+              value={usuarioEditado.password}
               onChange={handleChange}
             />
           </div>
         )}
+        {!modoAgregar && (
+          <div className="mb-3">
+            <label htmlFor="saldo" className="form-label">
+              Saldo
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="saldo"
+              name="saldo"
+              value={usuarioEditado.saldo}
+              onChange={handleChange}
+            />
+          </div>
+        )}
+        <div className="mb-3">
+          <label htmlFor="birthDate" className="form-label">
+            Fecha de Nacimiento
+          </label>
+          <input
+            type="date"
+            className="form-control"
+            id="birthDate"
+            name="birthDate"
+            value={usuarioEditado.birthDate}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="state" className="form-label">
+            Estado
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="state"
+            name="state"
+            value={usuarioEditado.state}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="municipality" className="form-label">
+            Municipio
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="municipality"
+            name="municipality"
+            value={usuarioEditado.municipality}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="colony" className="form-label">
+            Colonia
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="colony"
+            name="colony"
+            value={usuarioEditado.colony}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="street" className="form-label">
+            Calle
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="street"
+            name="street"
+            value={usuarioEditado.street}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="streetNumber" className="form-label">
+            Num de Calle
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="streetNumber"
+            name="streetNumber"
+            value={usuarioEditado.streetNumber}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="postalCode" className="form-label">
+            Código Postal
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="postalCode"
+            name="postalCode"
+            value={usuarioEditado.postalCode}
+            onChange={handleChange}
+          />
+        </div>
+
         <button type="submit" className="btn btn-success">
           Guardar
         </button>
