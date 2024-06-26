@@ -297,8 +297,6 @@ const Pago = ({ cartItems }) => {
     currentY += 10;
     doc.text(`Total: $${totalPrice}`, 105, currentY, { align: "center" });
 
-    currentY += 20;
-    doc.text(`Num. Tarj. xxxxxx******xxxx`, 105, currentY, { align: "center" });
     currentY += 10;
     doc.text(`Núm. Seguimiento 72057-0-09342`, 105, currentY, {
       align: "center",

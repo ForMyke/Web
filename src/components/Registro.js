@@ -123,17 +123,9 @@ const Registro = () => {
           validator: (value) => {
             const today = new Date();
             const birthDate = new Date(value);
-            const age = today.getFullYear() - birthDate.getFullYear();
-            const monthDifference = today.getMonth() - birthDate.getMonth();
-            if (
-              monthDifference < 0 ||
-              (monthDifference === 0 && today.getDate() < birthDate.getDate())
-            ) {
-              age--;
-            }
             return birthDate <= today;
           },
-          errorMessage: "Por favor ingrese una fecha de nacimiento valida",
+          errorMessage: "Por favor ingrese una fecha de nacimiento válida",
         },
       ])
       .addField("#codigoPostal", [
@@ -388,7 +380,7 @@ const Registro = () => {
           <Form.Group as={Col}>
             <Form.Label>Numero</Form.Label>
             <Form.Control
-              type="number"
+              type="text"
               name="numero"
               id="numero"
               value={formData.numero}
