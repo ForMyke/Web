@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/pago.css";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import {jwtDecode} from "jwt-decode";
 import JustValidate from "just-validate";
 
 const Pago = ({ cartItems }) => {
@@ -22,27 +22,31 @@ const Pago = ({ cartItems }) => {
         const decoded = jwtDecode(token);
         const userEmail = decoded.correo;
 
-        fetch("https://localhost/backend/api/sesion.php", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email: userEmail }),
-        })
-          .then((response) => response.json())
-          .then((data) => {
+        const fetchData = async () => {
+          try {
+            const response = await fetch("https://localhost/backend/api/sesion.php", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ email: userEmail }),
+            });
+
+            const data = await response.json();
+
             if (data.success) {
               setUser(data.user);
             } else {
               setError("Error al obtener los datos del usuario: " + data.message);
             }
-          })
-          .catch((error) => {
+          } catch (error) {
             setError("Error al obtener los datos del usuario: " + error.message);
-          })
-          .finally(() => {
+          } finally {
             setLoading(false);
-          });
+          }
+        };
+
+        fetchData();
       } catch (e) {
         setError("Token inválido.");
         setLoading(false);
@@ -54,7 +58,7 @@ const Pago = ({ cartItems }) => {
   }, [navigate]);
 
   useEffect(() => {
-    if (formRef.current) {
+    if (!loading && formRef.current) {
       const validation = new JustValidate(formRef.current);
 
       validation
@@ -125,12 +129,12 @@ const Pago = ({ cartItems }) => {
               body: JSON.stringify({ correo, productos, total })
             });
 
-            const responseText = await response.text(); // Obtener el texto de respuesta para depuración
+            const responseText = await response.text();
             let data;
             try {
-              data = JSON.parse(responseText); // Intentar parsear el texto a JSON
+              data = JSON.parse(responseText);
             } catch (e) {
-              throw new Error(`Error parsing JSON: ${responseText}`); // Si falla, lanzar un error con el texto de respuesta
+              throw new Error(`Error parsing JSON: ${responseText}`);
             }
 
             if (data.error) {
