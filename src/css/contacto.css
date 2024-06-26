@@ -1,0 +1,29 @@
+.container {
+  max-width: 800px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 1.5em;
+  margin-top: 20px;
+}
+
+p {
+  font-size: 1em;
+  margin-bottom: 15px;
+}
+
+.map-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}

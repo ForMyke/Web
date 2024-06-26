@@ -1,0 +1,25 @@
+.password-login-container {
+  max-width: 500px;
+  margin: auto;
+  text-align: center;
+}
+
+.logo-container .logo {
+  height: 30px;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container .form-control {
+  padding-right: 40px;
+}
+
+.password-input-container .password-toggle {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}

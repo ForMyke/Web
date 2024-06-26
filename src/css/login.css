@@ -1,0 +1,92 @@
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.login-container.dark-mode {
+  background-color: #000;
+  color: #fff;
+}
+
+.logo {
+  max-height: 50px;
+}
+
+.login-form {
+  max-width: 400px;
+  width: 100%;
+}
+
+.btn-dark {
+  background-color: #000;
+  border-color: #000;
+}
+
+.btn-dark:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}
+
+.text-decoration-none.dark-mode {
+  color: #f8f9fa;
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/* Modo oscuro para campos del formulario */
+.login-container.dark-mode .form-control {
+  background-color: #333;
+  color: #fff;
+  border-color: #444;
+}
+
+.login-container.dark-mode .form-check-input {
+  background-color: #333;
+  border-color: #444;
+}
+
+.login-container.dark-mode .form-check-label {
+  color: #f8f9fa;
+}
+
+/* Media Queries */
+@media (max-width: 576px) {
+  .login-form {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .login-container {
+    padding: 5px;
+  }
+
+  .logo {
+    max-height: 80px;
+  }
+
+  h2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .form-check-label {
+    font-size: 0.8rem; /* Reduce el tamaño de la letra del campo de marcar */
+  }
+}

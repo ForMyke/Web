@@ -1,0 +1,25 @@
+.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-mode .header,
+.dark-mode .footer {
+  background-color: #1e1e1e;
+  color: #e0e0e0;
+}
+
+.dark-mode .main {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+.btn-dark-mode-toggle {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.btn-dark-mode-toggle:hover {
+  text-decoration: underline;
+}

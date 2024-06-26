@@ -1,0 +1,16 @@
+.container {
+  max-width: 600px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+ul {
+  padding-left: 20px;
+}
+
+.error-message {
+  color: #d92f21;
+  font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+}

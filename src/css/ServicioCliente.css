@@ -1,0 +1,56 @@
+.card {
+  max-width: 800px;
+  max-height: 600px;
+  width: 100%;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.vh-100 {
+  min-height: 100vh;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-box {
+  flex-grow: 1;
+  height: 400px;
+  overflow-y: auto;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+  margin-bottom: 10px;
+}
+
+.message {
+  padding: 10px;
+  border-radius: 30px;
+  max-width: 80%;
+  word-break: break-word;
+  margin-bottom: 10px;
+}
+
+.user-message {
+  background-color: #000;
+  color: white;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.bot-message {
+  background-color: #f1f0f0;
+  color: black;
+  align-self: flex-start;
+  text-align: left;
+}
+
+.card p {
+  white-space: pre-wrap;
+}
