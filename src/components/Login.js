@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
 import Swal from "sweetalert2";
 
-const Login = () => {
+const Login = ({ isDarkMode }) => {
   const navigate = useNavigate();
   const formRef = useRef(null);
   const [showPasswordInput, setShowPasswordInput] = useState(false);
@@ -85,20 +85,22 @@ const Login = () => {
   };
 
   return (
-    <div className="login-container d-flex flex-column justify-content-center align-items-center vh-100">
+    <div
+      className={`login-container d-flex flex-column justify-content-center align-items-center vh-100 ${isDarkMode ? "dark-mode" : ""}`}
+    >
       <img
         src="./img/logo.png"
         alt="Xclusive Store Logo"
         className="logo mb-5"
       />
-      <h2 className="text-center mt-5 mb-5">
+      <h2 className={`text-center mt-5 mb-5 ${isDarkMode ? "dark-mode" : ""}`}>
         Introduce tu dirección de correo electrónico para unirte o iniciar
         sesión.
       </h2>
       <form
         ref={formRef}
         id="login-form"
-        className="login-form"
+        className={`login-form ${isDarkMode ? "dark-mode" : ""}`}
         onSubmit={handleSubmit}
       >
         <div className="form-group mt-4 mb-3">
@@ -136,13 +138,22 @@ const Login = () => {
             id="terms"
             name="terms"
           />
-          <label className="form-check-label" htmlFor="terms">
+          <label
+            className={`form-check-label ${isDarkMode ? "dark-mode" : ""}`}
+            htmlFor="terms"
+          >
             Al continuar, acepto la{" "}
-            <a href="#" className="text-decoration-none">
+            <a
+              href="#"
+              className={`text-decoration-none ${isDarkMode ? "dark-mode" : ""}`}
+            >
               Política de privacidad
             </a>{" "}
             y los{" "}
-            <a href="#" className="text-decoration-none">
+            <a
+              href="#"
+              className={`text-decoration-none ${isDarkMode ? "dark-mode" : ""}`}
+            >
               Términos de uso
             </a>{" "}
             de Xclusive Store.
