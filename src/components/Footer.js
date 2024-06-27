@@ -52,6 +52,14 @@ const Footer = ({ isDarkMode }) => {
                   Servicio al Cliente
                 </span>
               </li>
+              <li>
+                <span
+                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
+                  onClick={() => handleNavLinkClick("/power")}
+                >
+                  Powered By
+                </span>
+              </li>
             </ul>
           </div>
           <div className="col-12 col-md-2 mb-3">

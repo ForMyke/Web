@@ -1,9 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Playwrite+FR+Trad:wght@100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
 
 .power-by-container {
   text-align: center;
   margin: 20px;
-  font-family: "Playwrite FR Trad", sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .font-power {
@@ -11,7 +11,12 @@
   margin-bottom: 40px;
   color: #333;
 }
-
+.im1 {
+  margin-right: 130px;
+}
+.im3 {
+  margin-left: 130px;
+}
 .image-row {
   display: flex;
   flex-wrap: wrap;
@@ -35,12 +40,13 @@
 }
 
 .middle-image {
-  margin: 20px;
+  margin: 100px;
 }
 
 .single-image {
   display: flex;
   justify-content: center;
+  padding: 30px;
 }
 
 .single-image img {
