@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap");
+
+.power-by-container {
+  text-align: center;
+  margin: 20px;
+  font-family: "Roboto", sans-serif;
+}
+
+.font-power {
+  font-size: 50px;
+  margin-bottom: 40px;
+  color: #333;
+}
+.im1 {
+  margin-right: 100px;
+}
+.im3 {
+  margin-left: 100px;
+}
+.image-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.image-item {
+  margin: 10px;
+  width: 100%;
+  max-width: 250px;
+  height: auto;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.image-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.middle-image {
+  margin: 100px;
+}
+
+.single-image {
+  display: flex;
+  justify-content: center;
+  padding: 30px;
+}
+
+.single-image img {
+  width: 100%;
+  max-width: 350px;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.single-image img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+@media (min-width: 768px) {
+  .font-power {
+    font-size: 60px;
+  }
+
+  .image-row {
+    flex-wrap: nowrap;
+  }
+
+  .middle-image {
+    margin: 50px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .font-power {
+    font-size: 70px;
+  }
+}

@@ -6,6 +6,7 @@ import AcercaDe from "./components/AcercaDe";
 import Carrito from "./components/Carrito";
 import Login from "./components/Login";
 import Registro from "./components/Registro";
+import PowerBy from "./components/PoweredBy";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Admin from "./Admin";
@@ -84,6 +85,7 @@ const AppContent = ({
           <Route path="/letra-chica" element={<LetraChica />} />
           <Route path="/registro" element={<Registro />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/power" element={<PowerBy />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/privacidad" element={<Privacidad />} />
           <Route

@@ -78,7 +78,7 @@ const ServicioCliente = () => {
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center vh-100">
       <div className="card w-100 p-4 shadow chat-container">
-        <div className="logo mb-4 text-center">
+        <div className="logo-1 mb-4 text-center">
           <img src="./img/logo.png" alt="Xclusive Store" className="logo" />
         </div>
         <h2 className="text-center">Soporte Técnico</h2>

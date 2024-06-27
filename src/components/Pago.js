@@ -376,7 +376,7 @@ const Pago = ({ cartItems, setCartItems }) => {
   const totalPrice = (parseFloat(getTotalPrice()) + shippingCost).toFixed(2);
 
   return (
-    <div className="container mt-5 mb-5">
+    <div className="container mt-5 mb-5 ">
       <h2 className="text-center mb-4">Proceso de compra</h2>
       <div className="row">
         <div className="col-md-8">
