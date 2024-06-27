@@ -1,77 +1,94 @@
-@import url("https://fonts.googleapis.com/css2?family=Playwrite+FR+Trad:wght@100..400&display=swap");
+.login-container {
+  background-color: #fff;
+  padding: 20px;
+}
 
-.power-by-container {
+.login-container.dark-mode {
+  background-color: #000;
+  color: #fff;
+}
+
+.logo {
+  max-height: 50px;
+}
+
+.login-form {
+  max-width: 400px;
+  width: 100%;
+}
+
+.btn-dark {
+  background-color: #000;
+  border-color: #000;
+}
+
+.btn-dark:hover {
+  background-color: #333;
+  border-color: #333;
+}
+
+.text-center {
   text-align: center;
-  margin: 20px;
-  font-family: "Playwrite FR Trad", sans-serif;
 }
 
-.font-power {
-  font-size: 50px;
-  margin-bottom: 40px;
-  color: #333;
+.text-decoration-none {
+  text-decoration: none;
 }
 
-.image-row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 20px;
+.text-decoration-none.dark-mode {
+  color: #f8f9fa;
 }
 
-.image-item {
-  margin: 10px;
-  width: 100%;
-  max-width: 250px;
-  height: auto;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
-.image-item:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+.logo-2 {
+  max-width: 60px;
+}
+/* Modo oscuro para campos del formulario */
+.login-container.dark-mode .form-control {
+  background-color: #000;
+  color: #fff;
+  border-color: #444;
 }
 
-.middle-image {
-  margin: 20px;
+.login-container.dark-mode .form-check-input {
+  border-color: #444;
 }
 
-.single-image {
-  display: flex;
-  justify-content: center;
+.login-container.dark-mode .form-check-label {
+  color: #f8f9fa;
 }
 
-.single-image img {
-  width: 100%;
-  max-width: 350px;
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.single-image img:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-@media (min-width: 768px) {
-  .font-power {
-    font-size: 60px;
+/* Media Queries */
+@media (max-width: 576px) {
+  .login-form {
+    width: 100%;
+    padding: 5px;
   }
 
-  .image-row {
-    flex-wrap: nowrap;
+  .login-container {
+    padding: 5px;
   }
 
-  .middle-image {
-    margin: 50px;
+  .logo {
+    max-height: 80px;
   }
-}
 
-@media (min-width: 1200px) {
-  .font-power {
-    font-size: 70px;
+  h2 {
+    font-size: 1rem;
+    text-align: center;
+  }
+
+  .form-check-label {
+    font-size: 0.8rem; /* Reduce el tamaño de la letra del campo de marcar */
   }
 }
