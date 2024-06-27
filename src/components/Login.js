@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
 import Swal from "sweetalert2";
-import{jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 
 const Login = ({ isDarkMode }) => {
   const navigate = useNavigate();
@@ -16,6 +16,10 @@ const Login = ({ isDarkMode }) => {
       navigate("../");
     }
   }, [token, navigate]);
+
+  const handleNavLinkClick = (url) => {
+    window.location.href = url;
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -51,10 +55,9 @@ const Login = ({ isDarkMode }) => {
           const decoded = jwtDecode(token);
           const tipo = decoded.tipo;
           console.log(decoded);
-          if(tipo == 1){
+          if (tipo == 1) {
             navigate("/admin");
-          }
-          else{
+          } else {
             navigate("../");
           }
         } else {
@@ -101,7 +104,7 @@ const Login = ({ isDarkMode }) => {
       <img
         src="./img/logo.png"
         alt="Xclusive Store Logo"
-        className="logo mb-5"
+        className="logo-2 mb-5"
       />
       <h2 className={`text-center mt-5 mb-5 ${isDarkMode ? "dark-mode" : ""}`}>
         Introduce tu dirección de correo electrónico para unirte o iniciar
@@ -155,6 +158,7 @@ const Login = ({ isDarkMode }) => {
             Al continuar, acepto la{" "}
             <a
               href="#"
+              onClick={() => handleNavLinkClick("/privacidad")}
               className={`text-decoration-none ${isDarkMode ? "dark-mode" : ""}`}
             >
               Política de privacidad
@@ -162,6 +166,7 @@ const Login = ({ isDarkMode }) => {
             y los{" "}
             <a
               href="#"
+              onClick={() => handleNavLinkClick("/letra-chica")}
               className={`text-decoration-none ${isDarkMode ? "dark-mode" : ""}`}
             >
               Términos de uso

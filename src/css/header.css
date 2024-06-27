@@ -8,7 +8,7 @@
 
 .header-container.dark-mode {
   background-color: #000;
-  border-color: #00;
+  border-color: #000;
 }
 
 .logo-container {
@@ -16,9 +16,12 @@
 }
 
 .logo-1 {
-  max-height: 75px; /* Aumenta este valor para hacer el logo más grande */
+  max-height: 75px;
   height: auto;
   width: auto;
+  display: block;
+  margin: 0 auto;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .top-nav {

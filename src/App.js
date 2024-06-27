@@ -21,7 +21,6 @@ import AdminUsuarios from "./componentsAdmin/AdminUsuarios";
 import AdminPedidos from "./componentsAdmin/AdminPedidos";
 import ForgotPassword from "./components/ForgotPassword";
 import ServicioCliente from "./components/ServicioCliente";
-import TerminosDeUso from "./components/TerminosDeUso";
 import Privacidad from "./components/Privacidad";
 import Seguridad from "./components/Seguridad";
 import LetraChica from "./components/LetraChica";
@@ -87,6 +86,7 @@ const AppContent = ({
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/privacidad" element={<Privacidad />} />
+
           <Route path="/pago" element={<Pago cartItems={cartItems} />} />
           <Route path="/password" element={<PasswordLogin />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />

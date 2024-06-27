@@ -82,14 +82,6 @@ const Footer = ({ isDarkMode }) => {
                   Letra chica
                 </span>
               </li>
-              <li>
-                <span
-                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
-                  onClick={() => handleNavLinkClick("/terminosDeuso")}
-                >
-                  Terminos de Uso
-                </span>
-              </li>
             </ul>
           </div>
           <div className="col-12 col-md-2 mb-3">

@@ -14,6 +14,9 @@ const Pago = ({ cartItems }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const formRef = useRef(null);
+  const handleNavLinkClick = (url) => {
+    window.location.href = url;
+  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -511,7 +514,12 @@ const Pago = ({ cartItems }) => {
                 <div className="form-group mb-3">
                   <label>
                     <input type="checkbox" id="terms" required /> He leído el{" "}
-                    <a href="#">Aviso de Privacidad</a>
+                    <a
+                      href="#"
+                      onClick={() => handleNavLinkClick("/letra-chica")}
+                    >
+                      Aviso de Privacidad
+                    </a>
                   </label>
                 </div>
                 <button
@@ -556,7 +564,12 @@ const Pago = ({ cartItems }) => {
               <hr />
               <p>
                 ¿Necesitas ayuda? Contacta con nuestro{" "}
-                <a href="#">Servicio de Atención al Cliente</a>
+                <a
+                  href="#"
+                  onClick={() => handleNavLinkClick("/servicioCliente")}
+                >
+                  Servicio de Atención al Cliente
+                </a>
               </p>
             </div>
           </div>

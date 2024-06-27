@@ -50,6 +50,9 @@
   width: 1px;
 }
 
+.logo-2 {
+  max-width: 60px;
+}
 /* Modo oscuro para campos del formulario */
 .login-container.dark-mode .form-control {
   background-color: #333;

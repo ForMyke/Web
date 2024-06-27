@@ -4,6 +4,9 @@ import "../css/preguntasfrecuentes.css";
 
 const PreguntasFrecuentes = () => {
   const navigate = useNavigate();
+  const handleNavLinkClick = (url) => {
+    window.location.href = url;
+  };
 
   return (
     <div className="container mt-5">
