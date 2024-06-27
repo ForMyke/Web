@@ -1,12 +1,33 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/admin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import{jwtDecode} from "jwt-decode";
 
 const Admin = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const decoded = jwtDecode(token);
+      const tipo = decoded.tipo;
+
+      if (tipo !== 1) {
+        navigate("../");
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const handleNavigation = (path) => {
     navigate(path);

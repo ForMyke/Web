@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/login.css";
 import Swal from "sweetalert2";
+import{jwtDecode} from "jwt-decode";
 
 const Login = ({ isDarkMode }) => {
   const navigate = useNavigate();
@@ -46,7 +47,16 @@ const Login = ({ isDarkMode }) => {
         const data = await response.json();
         if (data.success) {
           localStorage.setItem("token", data.jwt); // Guarda el token JWT en localStorage
-          navigate("../");
+          const token = localStorage.getItem("token");
+          const decoded = jwtDecode(token);
+          const tipo = decoded.tipo;
+          console.log(decoded);
+          if(tipo == 1){
+            navigate("/admin");
+          }
+          else{
+            navigate("../");
+          }
         } else {
           Swal.fire({
             text: "Contraseña incorrecta",

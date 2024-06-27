@@ -15,11 +15,11 @@ $contrasena = $data['contrasena'] ?? null;
 include '../conexion.php';
 
 // Consulta la contraseña almacenada en la base de datos
-$query = "SELECT id, nombre, correo, contraseña FROM usuario WHERE correo = ?";
+$query = "SELECT id, nombre, correo, contraseña, tipo FROM usuario WHERE correo = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param('s', $email);
 $stmt->execute();
-$stmt->bind_result($id, $nombre, $correo, $hashed_password);
+$stmt->bind_result($id, $nombre, $correo, $hashed_password, $tipo);
 $stmt->fetch();
 $stmt->close();
 
@@ -35,6 +35,7 @@ if ($id && md5($contrasena) === $hashed_password) {
         'id' => $id,
         'nombre' => $nombre,
         'correo' => $correo,
+        'tipo' => $tipo,
         'iat' => $issued_at,
         'exp' => $expiration_time
     );

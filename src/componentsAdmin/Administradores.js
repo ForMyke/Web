@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import{jwtDecode} from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 
 const Administradores = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -9,6 +11,27 @@ const Administradores = () => {
   const [usuarioActual, setUsuarioActual] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
   const [modoEditar, setModoEditar] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const decoded = jwtDecode(token);
+      const tipo = decoded.tipo;
+
+      if (tipo !== 1) {
+        navigate("../");
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     axios.get("http://localhost/backend/api/administradores.php").then((response) => {

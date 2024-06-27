@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useNavigate } from "react-router-dom";
+import{jwtDecode} from "jwt-decode";
 
 const AdminProductos = () => {
   const [productos, setProductos] = useState([]);
@@ -8,6 +10,27 @@ const AdminProductos = () => {
   const [productosSeleccionados, setProductosSeleccionados] = useState([]);
   const [productoActual, setProductoActual] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const decoded = jwtDecode(token);
+      const tipo = decoded.tipo;
+
+      if (tipo !== 1) {
+        navigate("../");
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      navigate("/login");
+    }
+  }, [navigate]);
 
   useEffect(() => {
     // Fetch products from API or backend
