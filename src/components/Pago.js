@@ -267,14 +267,7 @@ const Pago = ({ cartItems }) => {
       align: "center",
     });
     doc.text("Fecha y hora de compra", 105, 100, { align: "center" });
-<<<<<<< HEAD
-    doc.text("----------------------------------------", 105, 110, {
-      align: "center",
-    });
-    doc.text(formattedDate, 105, 120, { align: "center" });
-=======
     doc.text(formattedDate, 105, 110, { align: "center" });
->>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
 
     const startY = 130;
     let currentY = startY;

@@ -73,12 +73,21 @@ const Footer = ({ isDarkMode }) => {
                   Seguridad
                 </span>
               </li>
+              <li></li>
               <li>
                 <span
                   className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
                   onClick={() => handleNavLinkClick("/letra-chica")}
                 >
                   Letra chica
+                </span>
+              </li>
+              <li>
+                <span
+                  className={`nav-link cursor-pointer ${isDarkMode ? "dark-mode" : ""}`}
+                  onClick={() => handleNavLinkClick("/terminosDeuso")}
+                >
+                  Terminos de Uso
                 </span>
               </li>
             </ul>
