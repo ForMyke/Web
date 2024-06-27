@@ -7,16 +7,13 @@ import { jwtDecode } from "jwt-decode";
 import JustValidate from "just-validate";
 import { jsPDF } from "jspdf";
 
-const Pago = ({ cartItems }) => {
+const Pago = ({ cartItems, setCartItems }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
   const formRef = useRef(null);
-  const handleNavLinkClick = (url) => {
-    window.location.href = url;
-  };
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -215,6 +212,7 @@ const Pago = ({ cartItems }) => {
                 text: "Su compra se realizó con éxito",
               }).then(() => {
                 generatePDF();
+                clearCart();
                 navigate("../");
               });
             }
@@ -243,12 +241,21 @@ const Pago = ({ cartItems }) => {
   };
 
   const generatePDF = () => {
+    if (!formRef.current) {
+      console.error("El formulario no está disponible para generar el PDF.");
+      return;
+    }
+
     const doc = new jsPDF();
     const date = new Date();
     const oneDayLater = new Date();
     oneDayLater.setDate(date.getDate() + 1);
-    const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
-    const formattedArrivalDate = `${oneDayLater.getDate()}/${oneDayLater.getMonth() + 1}/${oneDayLater.getFullYear()}`;
+    const formattedDate = `${date.getDate()}/${
+      date.getMonth() + 1
+    }/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+    const formattedArrivalDate = `${oneDayLater.getDate()}/${
+      oneDayLater.getMonth() + 1
+    }/${oneDayLater.getFullYear()}`;
 
     doc.setFontSize(18);
     doc.text("Xclusive Store", 105, 20, { align: "center" });
@@ -277,7 +284,9 @@ const Pago = ({ cartItems }) => {
 
     cartItems.forEach((item) => {
       doc.text(
-        `${item.title} (Cantidad: ${item.quantity}) - $${(item.price * item.quantity).toFixed(2)}`,
+        `${item.title} (Cantidad: ${item.quantity}) - $${(
+          item.price * item.quantity
+        ).toFixed(2)}`,
         105,
         currentY,
         { align: "center" }
@@ -350,6 +359,11 @@ const Pago = ({ cartItems }) => {
     doc.save("recibo_compra.pdf");
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+    localStorage.removeItem("cartItems");
+  };
+
   if (loading) {
     return <div>Cargando...</div>;
   }
@@ -371,19 +385,19 @@ const Pago = ({ cartItems }) => {
               <h4 className="card-title">1 Identificación</h4>
               <p className="card-text">
                 <strong>Correo electrónico: </strong>
-                {user.correo}
+                {user?.correo}
               </p>
               <p className="card-text">
                 <strong>Nombre: </strong>
-                {user.nombre}
+                {user?.nombre}
               </p>
               <p className="card-text">
                 <strong>Apellido: </strong>
-                {user.apellidos}
+                {user?.apellidos}
               </p>
               <p className="card-text">
                 <strong>Saldo disponible: </strong>
-                {user.saldo}
+                {user?.saldo}
               </p>
             </div>
           </div>
@@ -397,7 +411,7 @@ const Pago = ({ cartItems }) => {
                     type="text"
                     className="form-control"
                     id="street"
-                    defaultValue={user.calle}
+                    defaultValue={user?.calle}
                     required
                   />
                 </div>
@@ -407,7 +421,7 @@ const Pago = ({ cartItems }) => {
                     type="text"
                     className="form-control"
                     id="extNumber"
-                    defaultValue={user.numCalle}
+                    defaultValue={user?.numCalle}
                     required
                   />
                 </div>
@@ -417,7 +431,7 @@ const Pago = ({ cartItems }) => {
                     type="text"
                     className="form-control"
                     id="colony"
-                    defaultValue={user.colonia}
+                    defaultValue={user?.colonia}
                     required
                   />
                 </div>
@@ -427,7 +441,7 @@ const Pago = ({ cartItems }) => {
                     type="text"
                     className="form-control"
                     id="municipality"
-                    defaultValue={user.municipio}
+                    defaultValue={user?.municipio}
                     required
                   />
                 </div>
@@ -437,7 +451,7 @@ const Pago = ({ cartItems }) => {
                     type="text"
                     className="form-control"
                     id="state"
-                    defaultValue={user.estado}
+                    defaultValue={user?.estado}
                     required
                   />
                 </div>
@@ -447,7 +461,7 @@ const Pago = ({ cartItems }) => {
                     type="text"
                     className="form-control"
                     id="postalCode"
-                    defaultValue={user.CP}
+                    defaultValue={user?.CP}
                     required
                   />
                 </div>
@@ -514,10 +528,7 @@ const Pago = ({ cartItems }) => {
                 <div className="form-group mb-3">
                   <label>
                     <input type="checkbox" id="terms" required /> He leído el{" "}
-                    <a
-                      href="#"
-                      onClick={() => handleNavLinkClick("/letra-chica")}
-                    >
+                    <a href="#" onClick={() => navigate("/letra-chica")}>
                       Aviso de Privacidad
                     </a>
                   </label>
@@ -564,10 +575,7 @@ const Pago = ({ cartItems }) => {
               <hr />
               <p>
                 ¿Necesitas ayuda? Contacta con nuestro{" "}
-                <a
-                  href="#"
-                  onClick={() => handleNavLinkClick("/servicioCliente")}
-                >
+                <a href="#" onClick={() => navigate("/servicioCliente")}>
                   Servicio de Atención al Cliente
                 </a>
               </p>

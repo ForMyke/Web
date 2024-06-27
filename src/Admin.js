@@ -1,10 +1,12 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./css/admin.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
-import{jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
 const Admin = () => {
   const navigate = useNavigate();
@@ -29,6 +31,28 @@ const Admin = () => {
     }
   }, [navigate]);
 
+  const handleLogout = () => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#000",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, salir",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem("token");
+        Swal.fire({
+          title: "¡Cerrado!",
+          text: "Tu sesión ha sido cerrada.",
+          icon: "success",
+        }).then(() => {
+          navigate("/login");
+        });
+      }
+    });
+  };
+
   const handleNavigation = (path) => {
     navigate(path);
   };
@@ -36,11 +60,11 @@ const Admin = () => {
   return (
     <div className="admin-dashboard container-fluid">
       <div className="header d-flex justify-content-between align-items-center py-3 mb-5">
-        <h1 className="fs-1  ">
-          <FontAwesomeIcon icon={faUser} className="me-2 " />
+        <h1 className="fs-1">
+          <FontAwesomeIcon icon={faUser} className="me-2" />
           Administrador
         </h1>
-        <button className="btn btn-dark btn-lg">
+        <button className="btn btn-dark btn-lg" onClick={handleLogout}>
           <FontAwesomeIcon icon={faSignOutAlt} className="me-2" />
         </button>
       </div>

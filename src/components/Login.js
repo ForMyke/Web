@@ -31,6 +31,7 @@ const Login = ({ isDarkMode }) => {
         icon: "error",
         title: "Algo anda mal",
         text: "Debe aceptar los términos y condiciones",
+        confirmButtonColor: "#000",
       });
       return;
     }

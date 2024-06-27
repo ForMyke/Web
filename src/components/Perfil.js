@@ -84,14 +84,7 @@ const Perfil = () => {
     <div className="container mt-5 perfil-container">
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h1>Mi perfil</h1>
-        <div>
-          <button
-            className="btn btn-outline-dark me-2"
-            onClick={handleViewPurchases}
-          >
-            Ver Compras
-          </button>
-        </div>
+        <div></div>
       </div>
 
       <div className=" mb-4">
@@ -138,18 +131,13 @@ const Perfil = () => {
       <div className=" mb-4">
         <div className="card-body">
           <h5 className="card-title">Privacidad</h5>
-          <p className="card-text">
-            <a href="#">Cambiar contraseña</a>
-          </p>
+
           <p className="card-text">
             <a href="#">Ir a Mi portal de privacidad</a>
           </p>
         </div>
         <button className="btn mt-5 btn-outline-dark" onClick={handleLogout}>
           Cerrar Sesión
-        </button>
-        <button className="btn mt-5 btn-outline-dark" onClick={handleLogout}>
-          Eliminar Cuenta
         </button>
       </div>
     </div>

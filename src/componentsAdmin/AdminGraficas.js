@@ -3,6 +3,8 @@ import { Bar, Pie } from "react-chartjs-2";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { jwtDecode } from "jwt-decode";
 import {
   Chart as ChartJS,
@@ -123,9 +125,24 @@ const AdminGraficas = () => {
     return <div>Cargando...</div>;
   }
 
+  const handleAdminNavigation = () => {
+    navigate("/admin");
+  };
+
   return (
     <div className="container mt-5">
-      <h1 className="text-center mb-5">Gráficas</h1>
+      <div className="header d-flex justify-content-between align-items-center py-3 mb-5">
+        <h1 className="fs-1">Gráficas</h1>
+        <div>
+          <button
+            className="btn btn-dark btn-lg"
+            onClick={handleAdminNavigation}
+          >
+            <FontAwesomeIcon icon={faUser} className="me-2" />
+            Admin
+          </button>
+        </div>
+      </div>
       <div className="row">
         <div className="col-12 mb-5">
           <h2 className="text-center">Compras por Categoría de Productos</h2>

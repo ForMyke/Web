@@ -134,7 +134,7 @@ const Carrito = ({ cartItems, setCartItems }) => {
                 <p className="card-text">
                   Gastos de envío y gestión estimados
                   <span className="float-end">
-                    {shippingCost === 0 ? 'GRATIS' : `$${shippingCost}`}
+                    {shippingCost === 0 ? "GRATIS" : `$${shippingCost}`}
                   </span>
                 </p>
                 <hr />

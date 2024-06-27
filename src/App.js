@@ -86,8 +86,10 @@ const AppContent = ({
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/privacidad" element={<Privacidad />} />
-
-          <Route path="/pago" element={<Pago cartItems={cartItems} />} />
+          <Route
+            path="/pago"
+            element={<Pago cartItems={cartItems} setCartItems={setCartItems} />}
+          />
           <Route path="/password" element={<PasswordLogin />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/AdminGraficas" element={<AdminGraficas />} />
