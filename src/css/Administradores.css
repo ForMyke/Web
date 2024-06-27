@@ -1,0 +1,110 @@
+/* AdminStyles.css */
+
+/* Ajustes generales */
+body {
+  font-family: "Arial", sans-serif;
+}
+
+.header {
+  padding: 1rem;
+  border-radius: 0.25rem;
+}
+
+.btn-lg {
+  font-size: 1.25rem;
+}
+
+/* Ajustes de tabla */
+.table-responsive {
+  margin-top: 1rem;
+}
+
+.table th,
+.table td {
+  vertical-align: middle;
+}
+
+/* Ajustes para dispositivos móviles */
+@media (max-width: 767.98px) {
+  .header h1 {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .header .btn {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .d-flex {
+    flex-direction: column;
+  }
+
+  .d-flex .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+  }
+
+  .table tbody tr td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border: none;
+  }
+
+  .table tbody tr td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}
+
+/* Ajustes para tabletas */
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .header h1 {
+    font-size: 2rem;
+  }
+
+  .header .btn {
+    font-size: 1rem;
+  }
+
+  .table thead {
+    display: none;
+  }
+
+  .table tbody tr {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+  }
+
+  .table tbody tr td {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border: none;
+  }
+
+  .table tbody tr td::before {
+    content: attr(data-label);
+    font-weight: bold;
+  }
+}

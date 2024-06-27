@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { jwtDecode } from "jwt-decode";
+import "../css/Administradores.css";
 
 const AdminUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -140,7 +141,7 @@ const AdminUsuarios = () => {
         </div>
       </div>
       <div>
-        <div className="d-flex flex-column w-100">
+        <div className="d-flex flex-column w-100 mb-3">
           <button
             className="btn btn-secondary mb-3"
             onClick={handleEliminarUsuario}
@@ -159,7 +160,7 @@ const AdminUsuarios = () => {
             />
           )}
         </div>
-        <div className="col-md-12">
+        <div className="col-12">
           <h3>Lista de Usuarios</h3>
           <input
             type="text"
@@ -168,42 +169,44 @@ const AdminUsuarios = () => {
             value={busqueda}
             onChange={handleBusquedaChange}
           />
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Seleccionar</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usuariosFiltrados.map((usuario) => (
-                <tr key={usuario.id}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      onChange={(e) => handleCheckboxChange(e, usuario.id)}
-                    />
-                  </td>
-                  <td>{usuario.name}</td>
-                  <td>{usuario.surname}</td>
-                  <td>{usuario.email}</td>
-                  <td>{usuario.state}</td>
-                  <td>
-                    <button
-                      className="btn btn-outline-dark"
-                      onClick={() => handleEditarUsuario(usuario)}
-                    >
-                      Editar
-                    </button>
-                  </td>
+          <div className="table-responsive">
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Seleccionar</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellidos</th>
+                  <th scope="col">Correo</th>
+                  <th scope="col">Estado</th>
+                  <th scope="col">Acciones</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {usuariosFiltrados.map((usuario) => (
+                  <tr key={usuario.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        onChange={(e) => handleCheckboxChange(e, usuario.id)}
+                      />
+                    </td>
+                    <td>{usuario.name}</td>
+                    <td>{usuario.surname}</td>
+                    <td>{usuario.email}</td>
+                    <td>{usuario.state}</td>
+                    <td>
+                      <button
+                        className="btn btn-outline-dark"
+                        onClick={() => handleEditarUsuario(usuario)}
+                      >
+                        Editar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -334,107 +337,7 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
             onChange={handleChange}
           />
         </div>
-
-        {modoAgregar && (
-          <>
-            <div className="mb-3">
-              <label htmlFor="state" className="form-label">
-                Estado
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="state"
-                name="state"
-                value={usuarioEditado.state}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="municipality" className="form-label">
-                Municipio
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="municipality"
-                name="municipality"
-                value={usuarioEditado.municipality}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="colony" className="form-label">
-                Colonia
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="colony"
-                name="colony"
-                value={usuarioEditado.colony}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="street" className="form-label">
-                Calle
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="street"
-                name="street"
-                value={usuarioEditado.street}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="streetNumber" className="form-label">
-                Num de Calle
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="streetNumber"
-                name="streetNumber"
-                value={usuarioEditado.streetNumber}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="mb-3">
-              <label htmlFor="postalCode" className="form-label">
-                Código Postal
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="postalCode"
-                name="postalCode"
-                value={usuarioEditado.postalCode}
-                onChange={handleChange}
-              />
-            </div>
-          </>
-        )}
-        <div className="mb-3">
-          <label htmlFor="preferences" className="form-label">
-            Preferencias
-          </label>
-          <select
-            className="form-control"
-            id="preferences"
-            name="preferences"
-            value={usuarioEditado.preferences}
-            onChange={handleChange}
-          >
-            <option value="">Seleccionar</option>
-            <option value="calzado">Calzado</option>
-            <option value="ropa">Ropa</option>
-            <option value="accesorios">Accesorios</option>
-          </select>
-        </div>
-        <button type="submit" className="btn btn-success">
+        <button type="submit" className="btn btn-outline-dark">
           Guardar
         </button>
       </form>

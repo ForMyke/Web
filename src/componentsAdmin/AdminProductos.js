@@ -267,7 +267,7 @@ const EditarAgregarProducto = ({ producto, onGuardar }) => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="btn btn-success">
+        <button type="submit" className="btn btn-outline-dark">
           Guardar
         </button>
       </form>

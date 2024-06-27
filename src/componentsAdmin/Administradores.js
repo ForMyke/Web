@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import "../css/Administradores.css";
 
 const Administradores = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -142,7 +143,7 @@ const Administradores = () => {
         </div>
       </div>
       <div>
-        <div className="d-flex flex-column w-100">
+        <div className="d-flex flex-column w-100 mb-3">
           <button
             className="btn btn-secondary mb-3"
             onClick={handleEliminarUsuario}
@@ -161,7 +162,7 @@ const Administradores = () => {
             />
           )}
         </div>
-        <div className="col-md-12">
+        <div className="col-12">
           <h3>Lista de Usuarios</h3>
           <input
             type="text"
@@ -170,40 +171,42 @@ const Administradores = () => {
             value={busqueda}
             onChange={handleBusquedaChange}
           />
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">Seleccionar</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Apellidos</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {usuariosFiltrados.map((usuario) => (
-                <tr key={usuario.id}>
-                  <td>
-                    <input
-                      type="checkbox"
-                      onChange={(e) => handleCheckboxChange(e, usuario.id)}
-                    />
-                  </td>
-                  <td>{usuario.name}</td>
-                  <td>{usuario.surname}</td>
-                  <td>{usuario.email}</td>
-                  <td>
-                    <button
-                      className="btn btn-outline-dark"
-                      onClick={() => handleEditarUsuario(usuario)}
-                    >
-                      Editar
-                    </button>
-                  </td>
+          <div className="table-responsive">
+            <table className="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Seleccionar</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Apellidos</th>
+                  <th scope="col">Correo</th>
+                  <th scope="col">Acciones</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {usuariosFiltrados.map((usuario) => (
+                  <tr key={usuario.id}>
+                    <td>
+                      <input
+                        type="checkbox"
+                        onChange={(e) => handleCheckboxChange(e, usuario.id)}
+                      />
+                    </td>
+                    <td>{usuario.name}</td>
+                    <td>{usuario.surname}</td>
+                    <td>{usuario.email}</td>
+                    <td>
+                      <button
+                        className="btn btn-outline-dark"
+                        onClick={() => handleEditarUsuario(usuario)}
+                      >
+                        Editar
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -334,7 +337,7 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
             onChange={handleChange}
           />
         </div>
-        <button type="submit" className="btn btn-success">
+        <button type="submit" className="btn btn-outline-dark">
           Guardar
         </button>
       </form>
