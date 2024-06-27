@@ -66,19 +66,6 @@ const AdminGraficas = () => {
         "https://localhost/backend/api/stockPorProducto.php"
       );
 
-      setDataCategorias({
-        labels: categorias.data.labels,
-        datasets: [
-          {
-            label: "Compras por Categoría",
-            data: categorias.data.data,
-            backgroundColor: "rgba(0, 0, 0, 0)",
-            borderColor: "rgba(0, 0, 0, 1)",
-            borderWidth: 4,
-          },
-        ],
-      });
-
       setDataTotales({
         labels: totales.data.labels,
         datasets: [
@@ -86,8 +73,8 @@ const AdminGraficas = () => {
             label: "Ventas por Producto",
             data: totales.data.data,
             backgroundColor: [
-              "rgba(0, 0, 0, 0.2)",
-              "rgba(0, 0, 0, 0.4)",
+              "rgba(0, 0, 0, 0)",
+              "rgba(0, 0, 0, 1)",
               "rgba(0, 0, 0, 0.6)",
               "rgba(0, 0, 0, 0.8)",
               "rgba(0, 0, 0, 1)",
@@ -103,6 +90,24 @@ const AdminGraficas = () => {
           },
         ],
       });
+      setDataCategorias({
+        labels: categorias.data.labels,
+        datasets: [
+          {
+            label: "Compras por Categoría",
+            data: categorias.data.data,
+            backgroundColor: [
+              "rgba(0, 0, 0, 0)",
+              "rgba(0, 0, 0, 1)",
+              "rgba(0, 0, 0, 0.6)",
+              "rgba(0, 0, 0, 0.8)",
+              "rgba(0, 0, 0, 1)",
+            ],
+            borderColor: "rgba(0, 0, 0, 1)",
+            borderWidth: 4,
+          },
+        ],
+      });
 
       setDataStock({
         labels: stock.data.labels,
@@ -110,7 +115,13 @@ const AdminGraficas = () => {
           {
             label: "Stock",
             data: stock.data.data,
-            backgroundColor: "rgba(0, 0, 0,0)",
+            backgroundColor: [
+              "rgba(0, 0, 0, 0)",
+              "rgba(0, 0, 0, 1)",
+              "rgba(0, 0, 0, 0.6)",
+              "rgba(0, 0, 0, 0.8)",
+              "rgba(0, 0, 0, 1)",
+            ],
             borderColor: "rgba(0, 0, 0, 1)",
             borderWidth: 2.5,
           },
@@ -145,17 +156,18 @@ const AdminGraficas = () => {
       </div>
       <div className="row">
         <div className="col-12 mb-5">
-          <h2 className="text-center">Compras por Categoría de Productos</h2>
-          <div className="chart-container">
-            <Bar data={dataCategorias} options={{ responsive: true }} />
-          </div>
-        </div>
-        <div className="col-12 mb-5">
           <h2 className="text-center">5 Productos más Vendidos</h2>
           <div className="chart-container">
             <Pie data={dataTotales} options={{ responsive: true }} />
           </div>
         </div>
+        <div className="col-12 mb-5">
+          <h2 className="text-center">Compras por Categoría de Productos</h2>
+          <div className="chart-container">
+            <Bar data={dataCategorias} options={{ responsive: true }} />
+          </div>
+        </div>
+
         <div className="col-12">
           <h2 className="text-center">10 Productos con Menos Stock</h2>
           <div className="chart-container">
