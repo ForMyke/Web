@@ -110,15 +110,12 @@ const AdminProductos = () => {
       <div>
         <div className="d-flex flex-column w-100">
           <button
-            className="btn btn-primary mb-3"
+            className="btn btn-secondary mb-3"
             onClick={handleEliminarProducto}
           >
             Eliminar Productos Seleccionado
           </button>
-          <button
-            className="btn btn-secondary mb-3"
-            onClick={handleAgregarProducto}
-          >
+          <button className="btn btn-dark mb-3" onClick={handleAgregarProducto}>
             Agregar Producto
           </button>
 
@@ -162,7 +159,7 @@ const AdminProductos = () => {
                   <td>${producto.price}</td>
                   <td>
                     <button
-                      className="btn btn-info"
+                      className="btn btn-outline-dark"
                       onClick={() => handleEditarProducto(producto)}
                     >
                       Editar

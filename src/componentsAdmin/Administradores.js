@@ -149,10 +149,7 @@ const Administradores = () => {
           >
             Eliminar Administradores Seleccionados
           </button>
-          <button
-            className="btn btn-primary mb-3"
-            onClick={handleAgregarUsuario}
-          >
+          <button className="btn btn-dark mb-3" onClick={handleAgregarUsuario}>
             Agregar Administrador
           </button>
 
@@ -197,7 +194,7 @@ const Administradores = () => {
                   <td>{usuario.email}</td>
                   <td>
                     <button
-                      className="btn btn-info"
+                      className="btn btn-outline-dark"
                       onClick={() => handleEditarUsuario(usuario)}
                     >
                       Editar

@@ -15,7 +15,6 @@ ul {
   font-size: 0.875rem; /* Tamaño de fuente más pequeño */
 }
 
-/* src/css/registro.css */
 input.is-invalid,
 select.is-invalid {
   border-color: red;
