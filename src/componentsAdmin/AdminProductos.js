@@ -76,10 +76,31 @@ const AdminProductos = () => {
   };
 
   const handleGuardarProducto = (producto) => {
+    if (!producto.title || !producto.category || !producto.price) {
+      alert("Todos los campos son obligatorios");
+      return;
+    }
+
     if (modoAgregar) {
-      setProductos([...productos, producto]);
+      axios
+        .post("http://localhost/backend/api/products.php", producto)
+        .then((response) => {
+          setProductos([...productos, response.data]);
+        })
+        .catch((error) => {
+          console.error("Error adding product:", error);
+        });
     } else {
-      setProductos(productos.map((p) => (p.id === producto.id ? producto : p)));
+      axios
+        .put(`http://localhost/backend/api/products.php?id=${producto.id}`, producto)
+        .then((response) => {
+          setProductos(
+            productos.map((p) => (p.id === producto.id ? producto : p))
+          );
+        })
+        .catch((error) => {
+          console.error("Error updating product:", error);
+        });
     }
     setProductoActual(null);
     setModoAgregar(false);
@@ -89,8 +110,8 @@ const AdminProductos = () => {
     navigate("/admin");
   };
 
-  const productosFiltrados = productos.filter((producto) =>
-    producto.title.toLowerCase().includes(busqueda.toLowerCase())
+  const productosFiltrados = productos.filter(
+    (producto) => producto.title && producto.title.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (
@@ -214,6 +235,7 @@ const EditarAgregarProducto = ({ producto, onGuardar }) => {
             name="title"
             value={productoEditado.title}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-3">
@@ -227,6 +249,7 @@ const EditarAgregarProducto = ({ producto, onGuardar }) => {
             name="category"
             value={productoEditado.category}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-3">
@@ -240,6 +263,7 @@ const EditarAgregarProducto = ({ producto, onGuardar }) => {
             name="price"
             value={productoEditado.price}
             onChange={handleChange}
+            required
           />
         </div>
         <div className="mb-3">
