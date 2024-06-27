@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Productos = () => {
   const [products, setProducts] = useState([]);
@@ -41,6 +43,10 @@ const Productos = () => {
     setSearchTerm(event.target.value);
   };
 
+  const handleAdminNavigation = () => {
+    navigate("/admin");
+  };
+
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -55,7 +61,18 @@ const Productos = () => {
 
   return (
     <div className="productos-container">
-      <h1 className="text-center mb-4">Xclusive Store</h1>
+      <div className="header d-flex justify-content-between align-items-center py-3 mb-4">
+        <h1 className="fs-1 text-center">Xclusive Store</h1>
+        <div>
+          <button
+            className="btn btn-dark btn-lg"
+            onClick={handleAdminNavigation}
+          >
+            <FontAwesomeIcon icon={faUser} className="me-2" />
+            Admin
+          </button>
+        </div>
+      </div>
       <div className="mb-4 d-flex justify-content-center">
         <input
           type="text"

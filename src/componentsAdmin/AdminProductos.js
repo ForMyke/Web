@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { jwtDecode } from "jwt-decode";
 
 const AdminProductos = () => {
@@ -83,17 +85,32 @@ const AdminProductos = () => {
     setModoAgregar(false);
   };
 
+  const handleAdminNavigation = () => {
+    navigate("/admin");
+  };
+
   const productosFiltrados = productos.filter((producto) =>
     producto.title.toLowerCase().includes(busqueda.toLowerCase())
   );
 
   return (
     <div className="container mt-5">
-      <h1>Admin Productos</h1>
+      <div className="header d-flex justify-content-between align-items-center py-3 mb-4">
+        <h1 className="fs-1">Admin Productos</h1>
+        <div>
+          <button
+            className="btn btn-dark btn-lg"
+            onClick={handleAdminNavigation}
+          >
+            <FontAwesomeIcon icon={faUser} className="me-2" />
+            Admin
+          </button>
+        </div>
+      </div>
       <div>
         <div className="d-flex flex-column w-100">
           <button
-            className="btn btn-primary  mb-3"
+            className="btn btn-primary mb-3"
             onClick={handleEliminarProducto}
           >
             Eliminar Productos Seleccionado

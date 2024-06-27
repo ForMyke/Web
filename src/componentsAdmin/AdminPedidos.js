@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-import { jwtDecode } from "jwt-decode";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { jwtDecode } from "jwt-decode";
 
 const AdminPedidos = () => {
@@ -45,6 +46,10 @@ const AdminPedidos = () => {
     setBusqueda(e.target.value);
   };
 
+  const handleAdminNavigation = () => {
+    navigate("/admin");
+  };
+
   const pedidosFiltrados = pedidos.filter((pedido) =>
     pedido.email.toLowerCase().includes(busqueda.toLowerCase())
   );
@@ -60,7 +65,18 @@ const AdminPedidos = () => {
 
   return (
     <div className="container mt-5">
-      <h1>Administrar Pedidos</h1>
+      <div className="header d-flex justify-content-between align-items-center py-3 mb-5">
+        <h1 className="fs-1">Administrar Pedidos</h1>
+        <div>
+          <button
+            className="btn btn-dark btn-lg"
+            onClick={handleAdminNavigation}
+          >
+            <FontAwesomeIcon icon={faUser} className="me-2" />
+            Admin
+          </button>
+        </div>
+      </div>
       <div className="row">
         <div className="col-md-12">
           <h3>Lista de Pedidos</h3>
