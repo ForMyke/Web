@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
+<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+=======
+import{jwtDecode} from "jwt-decode";
+>>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
 import { useNavigate } from "react-router-dom";
 
 const Administradores = () => {
@@ -13,6 +17,29 @@ const Administradores = () => {
   const [modoAgregar, setModoAgregar] = useState(false);
   const [modoEditar, setModoEditar] = useState(false);
   const navigate = useNavigate();
+<<<<<<< HEAD
+=======
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const decoded = jwtDecode(token);
+      const tipo = decoded.tipo;
+
+      if (tipo !== 1) {
+        navigate("../");
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      navigate("/login");
+    }
+  }, [navigate]);
+>>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
 
   useEffect(() => {
     axios
@@ -68,7 +95,10 @@ const Administradores = () => {
   };
 
   const handleGuardarUsuario = (usuario) => {
+    console.log("Datos a guardar:", usuario); // Log the user data
+  
     if (modoAgregar) {
+<<<<<<< HEAD
       axios
         .post("http://localhost/backend/api/administradores.php", usuario)
         .then((response) => {
@@ -83,11 +113,26 @@ const Administradores = () => {
         .then(() => {
           setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
         });
+=======
+      axios.post("http://localhost/backend/api/administradores.php", usuario).then((response) => {
+        console.log("Respuesta del servidor (POST):", response.data); // Log the response
+        setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
+      }).catch(error => {
+        console.error("Error al agregar usuario:", error); // Log any errors
+      });
+    } else if (modoEditar) {
+      axios.put(`http://localhost/backend/api/administradores.php?id=${usuario.id}`, usuario).then(() => {
+        setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
+      }).catch(error => {
+        console.error("Error al editar usuario:", error); // Log any errors
+      });
+>>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
     }
     setUsuarioActual(null);
     setModoAgregar(false);
     setModoEditar(false);
   };
+  
 
   const usuariosFiltrados = usuarios.filter((usuario) =>
     usuario.name.toLowerCase().includes(busqueda.toLowerCase())
@@ -141,7 +186,6 @@ const Administradores = () => {
                 <th scope="col">Nombre</th>
                 <th scope="col">Apellidos</th>
                 <th scope="col">Correo</th>
-                <th scope="col">Estado</th>
                 <th scope="col">Acciones</th>
               </tr>
             </thead>
@@ -157,7 +201,6 @@ const Administradores = () => {
                   <td>{usuario.name}</td>
                   <td>{usuario.surname}</td>
                   <td>{usuario.email}</td>
-                  <td>{usuario.state}</td>
                   <td>
                     <button
                       className="btn btn-info"
@@ -216,7 +259,7 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
 
   return (
     <div>
-      <h3>{modoAgregar ? "Agregar Usuario" : "Editar Usuario"}</h3>
+      <h3>{modoAgregar ? "Agregar Administrador" : "Editar Administrador"}</h3>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="name" className="form-label">
@@ -300,85 +343,6 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="state" className="form-label">
-            Estado
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="state"
-            name="state"
-            value={usuarioEditado.state}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="municipality" className="form-label">
-            Municipio
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="municipality"
-            name="municipality"
-            value={usuarioEditado.municipality}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="colony" className="form-label">
-            Colonia
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="colony"
-            name="colony"
-            value={usuarioEditado.colony}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="street" className="form-label">
-            Calle
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="street"
-            name="street"
-            value={usuarioEditado.street}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="streetNumber" className="form-label">
-            Num de Calle
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="streetNumber"
-            name="streetNumber"
-            value={usuarioEditado.streetNumber}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="postalCode" className="form-label">
-            Código Postal
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="postalCode"
-            name="postalCode"
-            value={usuarioEditado.postalCode}
-            onChange={handleChange}
-          />
-        </div>
-
         <button type="submit" className="btn btn-success">
           Guardar
         </button>

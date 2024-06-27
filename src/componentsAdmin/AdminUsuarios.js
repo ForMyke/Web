@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+=======
+import{jwtDecode} from "jwt-decode";
+>>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
 
 const AdminUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -12,6 +16,27 @@ const AdminUsuarios = () => {
   const [usuarioActual, setUsuarioActual] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
   const [modoEditar, setModoEditar] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const decoded = jwtDecode(token);
+      const tipo = decoded.tipo;
+
+      if (tipo !== 1) {
+        navigate("../");
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      navigate("/login");
+    }
+  }, [navigate]);
 
   const navigate = useNavigate();
 
@@ -67,7 +92,9 @@ const AdminUsuarios = () => {
   };
 
   const handleGuardarUsuario = (usuario) => {
+    console.log("Datos a guardar:", usuario);
     if (modoAgregar) {
+<<<<<<< HEAD
       axios
         .post("http://localhost/backend/api/usuarios.php", usuario)
         .then((response) => {
@@ -82,11 +109,27 @@ const AdminUsuarios = () => {
         .then(() => {
           setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
         });
+=======
+      axios.post("http://localhost/backend/api/usuarios.php", usuario).then((response) => {
+        console.log("Respuesta del servidor (POST):", response.data);
+        setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
+      }).catch(error => {
+        console.error("Error al agregar usuario:", error);
+      });
+    } else if (modoEditar) {
+      axios.put(`http://localhost/backend/api/usuarios.php?id=${usuario.id}`, usuario).then((response) => {
+        console.log("Respuesta del servidor (PUT):", response.data);
+        setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
+      }).catch(error => {
+        console.error("Error al editar usuario:", error);
+      });
+>>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
     }
     setUsuarioActual(null);
     setModoAgregar(false);
     setModoEditar(false);
   };
+  
 
   const usuariosFiltrados = usuarios.filter((usuario) =>
     usuario.name.toLowerCase().includes(busqueda.toLowerCase())
@@ -299,84 +342,89 @@ const EditarAgregarUsuario = ({ usuario, onGuardar, modoAgregar }) => {
             onChange={handleChange}
           />
         </div>
-        <div className="mb-3">
-          <label htmlFor="state" className="form-label">
-            Estado
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="state"
-            name="state"
-            value={usuarioEditado.state}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="municipality" className="form-label">
-            Municipio
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="municipality"
-            name="municipality"
-            value={usuarioEditado.municipality}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="colony" className="form-label">
-            Colonia
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="colony"
-            name="colony"
-            value={usuarioEditado.colony}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="street" className="form-label">
-            Calle
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="street"
-            name="street"
-            value={usuarioEditado.street}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="streetNumber" className="form-label">
-            Num de Calle
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="streetNumber"
-            name="streetNumber"
-            value={usuarioEditado.streetNumber}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="mb-3">
-          <label htmlFor="postalCode" className="form-label">
-            Código Postal
-          </label>
-          <input
-            type="text"
-            className="form-control"
-            id="postalCode"
-            name="postalCode"
-            value={usuarioEditado.postalCode}
-            onChange={handleChange}
-          />
-        </div>
+
+        {modoAgregar && (
+          <>
+            <div className="mb-3">
+              <label htmlFor="state" className="form-label">
+                Estado
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="state"
+                name="state"
+                value={usuarioEditado.state}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="municipality" className="form-label">
+                Municipio
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="municipality"
+                name="municipality"
+                value={usuarioEditado.municipality}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="colony" className="form-label">
+                Colonia
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="colony"
+                name="colony"
+                value={usuarioEditado.colony}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="street" className="form-label">
+                Calle
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="street"
+                name="street"
+                value={usuarioEditado.street}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="streetNumber" className="form-label">
+                Num de Calle
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="streetNumber"
+                name="streetNumber"
+                value={usuarioEditado.streetNumber}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="postalCode" className="form-label">
+                Código Postal
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="postalCode"
+                name="postalCode"
+                value={usuarioEditado.postalCode}
+                onChange={handleChange}
+              />
+            </div>
+          </>
+        )}
         <div className="mb-3">
           <label htmlFor="preferences" className="form-label">
             Preferencias

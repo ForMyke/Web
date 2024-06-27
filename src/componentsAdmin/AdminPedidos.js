@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+=======
+import{jwtDecode} from "jwt-decode";
+>>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
 
 const AdminPedidos = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -12,6 +16,30 @@ const AdminPedidos = () => {
   const [pedidoActual, setPedidoActual] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
   const navigate = useNavigate();
+<<<<<<< HEAD
+=======
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+      return;
+    }
+
+    try {
+      const decoded = jwtDecode(token);
+      const tipo = decoded.tipo;
+
+      if (tipo !== 1) {
+        navigate("../");
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      navigate("/login");
+    }
+  }, [navigate]);
+  
+>>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
 
   // useEffect(() => {
   //   axios.get("http://localhost/backend/api/orders.php").then((response) => {
