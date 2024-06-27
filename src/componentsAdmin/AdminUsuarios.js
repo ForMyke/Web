@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-=======
-import{jwtDecode} from "jwt-decode";
->>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
+import { jwtDecode } from "jwt-decode";
 
 const AdminUsuarios = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -37,8 +32,6 @@ const AdminUsuarios = () => {
       navigate("/login");
     }
   }, [navigate]);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("http://localhost/backend/api/usuarios.php").then((response) => {
@@ -94,11 +87,14 @@ const AdminUsuarios = () => {
   const handleGuardarUsuario = (usuario) => {
     console.log("Datos a guardar:", usuario);
     if (modoAgregar) {
-<<<<<<< HEAD
       axios
         .post("http://localhost/backend/api/usuarios.php", usuario)
         .then((response) => {
+          console.log("Respuesta del servidor (POST):", response.data);
           setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
+        })
+        .catch((error) => {
+          console.error("Error al agregar usuario:", error);
         });
     } else if (modoEditar) {
       axios
@@ -106,30 +102,18 @@ const AdminUsuarios = () => {
           `http://localhost/backend/api/usuarios.php?id=${usuario.id}`,
           usuario
         )
-        .then(() => {
+        .then((response) => {
+          console.log("Respuesta del servidor (PUT):", response.data);
           setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
+        })
+        .catch((error) => {
+          console.error("Error al editar usuario:", error);
         });
-=======
-      axios.post("http://localhost/backend/api/usuarios.php", usuario).then((response) => {
-        console.log("Respuesta del servidor (POST):", response.data);
-        setUsuarios([...usuarios, { ...usuario, id: response.data.id }]);
-      }).catch(error => {
-        console.error("Error al agregar usuario:", error);
-      });
-    } else if (modoEditar) {
-      axios.put(`http://localhost/backend/api/usuarios.php?id=${usuario.id}`, usuario).then((response) => {
-        console.log("Respuesta del servidor (PUT):", response.data);
-        setUsuarios(usuarios.map((u) => (u.id === usuario.id ? usuario : u)));
-      }).catch(error => {
-        console.error("Error al editar usuario:", error);
-      });
->>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
     }
     setUsuarioActual(null);
     setModoAgregar(false);
     setModoEditar(false);
   };
-  
 
   const usuariosFiltrados = usuarios.filter((usuario) =>
     usuario.name.toLowerCase().includes(busqueda.toLowerCase())
@@ -137,12 +121,6 @@ const AdminUsuarios = () => {
 
   return (
     <div className="container mt-5">
-      <div className="d-flex justify-content-between align-items-center mb-5">
-        <h1 className="text-center mb-5">Usuarios</h1>
-        <button className="btn btn-dark" onClick={() => navigate("/admin")}>
-          <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> Volver
-        </button>
-      </div>
       <h1>Admininistrar Usuarios</h1>
       <div>
         <div className="d-flex flex-column w-100">

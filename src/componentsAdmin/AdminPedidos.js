@@ -2,12 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
-=======
-import{jwtDecode} from "jwt-decode";
->>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
+import { jwtDecode } from "jwt-decode";
 
 const AdminPedidos = () => {
   const [pedidos, setPedidos] = useState([]);
@@ -16,8 +11,6 @@ const AdminPedidos = () => {
   const [pedidoActual, setPedidoActual] = useState(null);
   const [modoAgregar, setModoAgregar] = useState(false);
   const navigate = useNavigate();
-<<<<<<< HEAD
-=======
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -38,8 +31,6 @@ const AdminPedidos = () => {
       navigate("/login");
     }
   }, [navigate]);
-  
->>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
 
   // useEffect(() => {
   //   axios.get("http://localhost/backend/api/orders.php").then((response) => {
@@ -94,12 +85,6 @@ const AdminPedidos = () => {
 
   return (
     <div className="container mt-5">
-      <div className="d-flex justify-content-between align-items-center mb-5">
-        <h1 className="text-center mb-5">Gráficas</h1>
-        <button className="btn btn-dark" onClick={() => navigate("/admin")}>
-          <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> Volver
-        </button>
-      </div>
       <h1>Admin Pedidos</h1>
       <div className="row">
         <div className="col-md-4">

@@ -1,17 +1,9 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import { Bar, Pie } from "react-chartjs-2";
+import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-=======
-import React, { useEffect, useState } from 'react';
-import { Bar, Pie } from 'react-chartjs-2';
-import { useNavigate } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
-import{jwtDecode} from "jwt-decode";
->>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
+import { jwtDecode } from "jwt-decode";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -22,8 +14,6 @@ import {
   Legend,
   ArcElement,
 } from "chart.js";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 // Registrar las escalas
 ChartJS.register(
@@ -41,8 +31,6 @@ const AdminGraficas = () => {
   const [dataTotales, setDataTotales] = useState(null);
   const [dataStock, setDataStock] = useState(null);
   const navigate = useNavigate();
-<<<<<<< HEAD
-=======
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -63,74 +51,69 @@ const AdminGraficas = () => {
       navigate("/login");
     }
   }, [navigate]);
->>>>>>> b3c1868e9d87e2aaff920e631dd1fa890805f44f
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const categorias = await axios.get(
-          "https://localhost/backend/api/comprasPorCategoria.php"
-        );
-        const totales = await axios.get(
-          "https://localhost/backend/api/comprasTotales.php"
-        );
-        const stock = await axios.get(
-          "https://localhost/backend/api/stockPorProducto.php"
-        );
+      const categorias = await axios.get(
+        "https://localhost/backend/api/comprasPorCategoria.php"
+      );
+      const totales = await axios.get(
+        "https://localhost/backend/api/comprasTotales.php"
+      );
+      const stock = await axios.get(
+        "https://localhost/backend/api/stockPorProducto.php"
+      );
 
-        setDataCategorias({
-          labels: categorias.data.labels,
-          datasets: [
-            {
-              label: "Compras por Categoría",
-              data: categorias.data.data,
-              backgroundColor: "rgba(75, 192, 192, 0.2)",
-              borderColor: "rgba(75, 192, 192, 1)",
-              borderWidth: 1,
-            },
-          ],
-        });
+      setDataCategorias({
+        labels: categorias.data.labels,
+        datasets: [
+          {
+            label: "Compras por Categoría",
+            data: categorias.data.data,
+            backgroundColor: "rgba(75, 192, 192, 0.2)",
+            borderColor: "rgba(75, 192, 192, 1)",
+            borderWidth: 1,
+          },
+        ],
+      });
 
-        setDataTotales({
-          labels: totales.data.labels,
-          datasets: [
-            {
-              label: "Ventas por Producto",
-              data: totales.data.data,
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 206, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-              ],
-              borderColor: [
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(75, 192, 192, 1)",
-                "rgba(153, 102, 255, 1)",
-              ],
-              borderWidth: 1,
-            },
-          ],
-        });
+      setDataTotales({
+        labels: totales.data.labels,
+        datasets: [
+          {
+            label: "Ventas por Producto",
+            data: totales.data.data,
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.2)",
+              "rgba(54, 162, 235, 0.2)",
+              "rgba(255, 206, 86, 0.2)",
+              "rgba(75, 192, 192, 0.2)",
+              "rgba(153, 102, 255, 0.2)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      });
 
-        setDataStock({
-          labels: stock.data.labels,
-          datasets: [
-            {
-              label: "Stock",
-              data: stock.data.data,
-              backgroundColor: "rgba(255, 159, 64, 0.2)",
-              borderColor: "rgba(255, 159, 64, 1)",
-              borderWidth: 1,
-            },
-          ],
-        });
-      } catch (error) {
-        console.error("Error fetching data", error);
-      }
+      setDataStock({
+        labels: stock.data.labels,
+        datasets: [
+          {
+            label: "Stock",
+            data: stock.data.data,
+            backgroundColor: "rgba(255, 159, 64, 0.2)",
+            borderColor: "rgba(255, 159, 64, 1)",
+            borderWidth: 1,
+          },
+        ],
+      });
     };
 
     fetchData();
@@ -142,12 +125,7 @@ const AdminGraficas = () => {
 
   return (
     <div className="container mt-5">
-      <div className="d-flex justify-content-between align-items-center mb-5">
-        <h1 className="text-center mb-5">Gráficas</h1>
-        <button className="btn btn-dark" onClick={() => navigate("/admin")}>
-          <FontAwesomeIcon icon={faArrowLeft} className="me-2" /> Volver
-        </button>
-      </div>
+      <h1 className="text-center mb-5">Gráficas</h1>
       <div className="row">
         <div className="col-12 mb-5">
           <h2 className="text-center">Compras por Categoría de Productos</h2>
