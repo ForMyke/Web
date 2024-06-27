@@ -206,8 +206,7 @@ const Pago = ({ cartItems }) => {
     doc.text("Tel. 1-800-555-1234", 105, 80, { align: "center" });
     doc.text("----------------------------------------", 105, 90, { align: "center" });
     doc.text("Fecha y hora de compra", 105, 100, { align: "center" });
-    doc.text("----------------------------------------", 105, 110, { align: "center" });
-    doc.text(formattedDate, 105, 120, { align: "center" });
+    doc.text(formattedDate, 105, 110, { align: "center" });
 
     const startY = 130;
     let currentY = startY;
