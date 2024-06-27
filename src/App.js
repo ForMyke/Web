@@ -21,12 +21,12 @@ import AdminUsuarios from "./componentsAdmin/AdminUsuarios";
 import AdminPedidos from "./componentsAdmin/AdminPedidos";
 import ForgotPassword from "./components/ForgotPassword";
 import ServicioCliente from "./components/ServicioCliente";
+import TerminosDeUso from "./components/TerminosDeUso";
 import Privacidad from "./components/Privacidad";
 import Seguridad from "./components/Seguridad";
 import LetraChica from "./components/LetraChica";
 import PreguntasFrecuentes from "./components/PreguntasFrecuentes";
 import Contacto from "./components/Contacto";
-import terminosDeuso from "./components/terminosDeuso";
 import { ToastContainer, toast } from "react-toastify";
 import "./css/toast.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -84,7 +84,6 @@ const AppContent = ({
           />
           <Route path="/letra-chica" element={<LetraChica />} />
           <Route path="/registro" element={<Registro />} />
-          <Route path="/terminosDeuso" element={<terminosDeuso />} />
           <Route path="/login" element={<Login />} />
           <Route path="/admin" element={<Admin />} />
           <Route path="/privacidad" element={<Privacidad />} />

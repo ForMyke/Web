@@ -1,7 +1,6 @@
 import React from "react";
-import "../css/letrachica.css";
 
-const terminosDeuso = () => {
+const TerminosDeUso = () => {
   return (
     <div className="container mt-5">
       <h1 className="text-center">
@@ -91,4 +90,4 @@ const terminosDeuso = () => {
   );
 };
 
-export default terminosDeuso;
+export default TerminosDeUso;
