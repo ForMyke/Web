@@ -12,12 +12,11 @@
   color: #333;
 }
 .im1 {
-  margin-right: 130px;
+  margin-right: 100px;
 }
 .im3 {
-  margin-left: 130px;
+  margin-left: 100px;
 }
-
 .image-row {
   display: flex;
   flex-wrap: wrap;
@@ -33,6 +32,11 @@
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease;
+}
+
+.image-item:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .middle-image {
