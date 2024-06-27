@@ -312,9 +312,6 @@ const Registro = () => {
             value={formData.nacimiento}
             onChange={handleChange}
           />
-          <Form.Text className="text-muted">
-            Consigue una recompensa de Xclusive Member por tu cumpleaños.
-          </Form.Text>
         </Form.Group>
         <Row className="mb-3">
           <Form.Group as={Col}>
