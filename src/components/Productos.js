@@ -61,18 +61,6 @@ const Productos = () => {
 
   return (
     <div className="productos-container">
-      <div className="header d-flex justify-content-between align-items-center py-3 mb-4">
-        <h1 className="fs-1 text-center">Xclusive Store</h1>
-        <div>
-          <button
-            className="btn btn-dark btn-lg"
-            onClick={handleAdminNavigation}
-          >
-            <FontAwesomeIcon icon={faUser} className="me-2" />
-            Admin
-          </button>
-        </div>
-      </div>
       <div className="mb-4 d-flex justify-content-center">
         <input
           type="text"
